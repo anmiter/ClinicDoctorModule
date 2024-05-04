@@ -30,38 +30,41 @@
         {
             this.tc_ModifyPrice = new System.Windows.Forms.TabControl();
             this.tp_Herb = new System.Windows.Forms.TabPage();
-            this.dgv_Herb = new System.Windows.Forms.DataGridView();
-            this.tp_Drug = new System.Windows.Forms.TabPage();
-            this.dgv_Drug = new System.Windows.Forms.DataGridView();
-            this.tp_Examine = new System.Windows.Forms.TabPage();
-            this.dgv_Examine = new System.Windows.Forms.DataGridView();
+            this.lbl_HerbPinyin = new System.Windows.Forms.Label();
+            this.txb_HerbPinyin = new System.Windows.Forms.TextBox();
+            this.lbl_Herb = new System.Windows.Forms.Label();
             this.txb_HerbKeyWord = new System.Windows.Forms.TextBox();
             this.btn_LoadHerb = new System.Windows.Forms.Button();
             this.btn_SearchHerbByName = new System.Windows.Forms.Button();
             this.txb_HerbName = new System.Windows.Forms.TextBox();
             this.btn_SearchHerbByNo = new System.Windows.Forms.Button();
             this.txb_HerbNo = new System.Windows.Forms.TextBox();
+            this.dgv_Herb = new System.Windows.Forms.DataGridView();
+            this.tp_Drug = new System.Windows.Forms.TabPage();
+            this.lbl_DrugPinyin = new System.Windows.Forms.Label();
+            this.txb_DrugPinyin = new System.Windows.Forms.TextBox();
+            this.lbl_Drug = new System.Windows.Forms.Label();
             this.txb_DrugKeyWord = new System.Windows.Forms.TextBox();
             this.btn_LoadDrug = new System.Windows.Forms.Button();
             this.btn_SearchDrugByName = new System.Windows.Forms.Button();
             this.txb_DrugName = new System.Windows.Forms.TextBox();
             this.btn_SearchDrugByNo = new System.Windows.Forms.Button();
             this.txb_DrugNo = new System.Windows.Forms.TextBox();
+            this.dgv_Drug = new System.Windows.Forms.DataGridView();
+            this.tp_Examine = new System.Windows.Forms.TabPage();
+            this.lbl_ExaminePinyin = new System.Windows.Forms.Label();
+            this.txb_ExaminePinyin = new System.Windows.Forms.TextBox();
+            this.lbl_Examine = new System.Windows.Forms.Label();
             this.txb_ExamineKeyWord = new System.Windows.Forms.TextBox();
             this.btn_LoadExamine = new System.Windows.Forms.Button();
             this.btn_SearchExamineByName = new System.Windows.Forms.Button();
             this.txb_ExamineName = new System.Windows.Forms.TextBox();
             this.btn_SearchExamineByNo = new System.Windows.Forms.Button();
             this.txb_ExamineNo = new System.Windows.Forms.TextBox();
-            this.lbl_Examine = new System.Windows.Forms.Label();
-            this.lbl_Drug = new System.Windows.Forms.Label();
-            this.lbl_Herb = new System.Windows.Forms.Label();
-            this.txb_HerbPinyin = new System.Windows.Forms.TextBox();
-            this.txb_DrugPinyin = new System.Windows.Forms.TextBox();
-            this.txb_ExaminePinyin = new System.Windows.Forms.TextBox();
-            this.lbl_HerbPinyin = new System.Windows.Forms.Label();
-            this.lbl_DrugPinyin = new System.Windows.Forms.Label();
-            this.lbl_ExaminePinyin = new System.Windows.Forms.Label();
+            this.dgv_Examine = new System.Windows.Forms.DataGridView();
+            this.lbl_Tip1 = new System.Windows.Forms.Label();
+            this.lbl_Tip2 = new System.Windows.Forms.Label();
+            this.lbl_Tip3 = new System.Windows.Forms.Label();
             this.tc_ModifyPrice.SuspendLayout();
             this.tp_Herb.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Herb)).BeginInit();
@@ -84,6 +87,7 @@
             // 
             // tp_Herb
             // 
+            this.tp_Herb.Controls.Add(this.lbl_Tip1);
             this.tp_Herb.Controls.Add(this.lbl_HerbPinyin);
             this.tp_Herb.Controls.Add(this.txb_HerbPinyin);
             this.tp_Herb.Controls.Add(this.lbl_Herb);
@@ -102,76 +106,37 @@
             this.tp_Herb.Text = "药材";
             this.tp_Herb.UseVisualStyleBackColor = true;
             // 
-            // dgv_Herb
+            // lbl_HerbPinyin
             // 
-            this.dgv_Herb.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_Herb.Location = new System.Drawing.Point(6, 6);
-            this.dgv_Herb.Name = "dgv_Herb";
-            this.dgv_Herb.RowHeadersWidth = 62;
-            this.dgv_Herb.RowTemplate.Height = 30;
-            this.dgv_Herb.Size = new System.Drawing.Size(1408, 570);
-            this.dgv_Herb.TabIndex = 0;
+            this.lbl_HerbPinyin.AutoSize = true;
+            this.lbl_HerbPinyin.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lbl_HerbPinyin.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_HerbPinyin.Location = new System.Drawing.Point(678, 700);
+            this.lbl_HerbPinyin.Name = "lbl_HerbPinyin";
+            this.lbl_HerbPinyin.Size = new System.Drawing.Size(134, 31);
+            this.lbl_HerbPinyin.TabIndex = 50;
+            this.lbl_HerbPinyin.Text = "根据拼音：";
             // 
-            // tp_Drug
+            // txb_HerbPinyin
             // 
-            this.tp_Drug.Controls.Add(this.lbl_DrugPinyin);
-            this.tp_Drug.Controls.Add(this.txb_DrugPinyin);
-            this.tp_Drug.Controls.Add(this.lbl_Drug);
-            this.tp_Drug.Controls.Add(this.txb_DrugKeyWord);
-            this.tp_Drug.Controls.Add(this.btn_LoadDrug);
-            this.tp_Drug.Controls.Add(this.btn_SearchDrugByName);
-            this.tp_Drug.Controls.Add(this.txb_DrugName);
-            this.tp_Drug.Controls.Add(this.btn_SearchDrugByNo);
-            this.tp_Drug.Controls.Add(this.txb_DrugNo);
-            this.tp_Drug.Controls.Add(this.dgv_Drug);
-            this.tp_Drug.Location = new System.Drawing.Point(4, 28);
-            this.tp_Drug.Name = "tp_Drug";
-            this.tp_Drug.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_Drug.Size = new System.Drawing.Size(1410, 803);
-            this.tp_Drug.TabIndex = 1;
-            this.tp_Drug.Text = "药品";
-            this.tp_Drug.UseVisualStyleBackColor = true;
-            this.tp_Drug.Click += new System.EventHandler(this.tp_Drug_Click);
+            this.txb_HerbPinyin.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.txb_HerbPinyin.Location = new System.Drawing.Point(819, 700);
+            this.txb_HerbPinyin.Margin = new System.Windows.Forms.Padding(4);
+            this.txb_HerbPinyin.Name = "txb_HerbPinyin";
+            this.txb_HerbPinyin.Size = new System.Drawing.Size(272, 39);
+            this.txb_HerbPinyin.TabIndex = 49;
+            this.txb_HerbPinyin.TextChanged += new System.EventHandler(this.txb_HerbPinyin_TextChanged);
             // 
-            // dgv_Drug
+            // lbl_Herb
             // 
-            this.dgv_Drug.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_Drug.Location = new System.Drawing.Point(6, 6);
-            this.dgv_Drug.Name = "dgv_Drug";
-            this.dgv_Drug.RowHeadersWidth = 62;
-            this.dgv_Drug.RowTemplate.Height = 30;
-            this.dgv_Drug.Size = new System.Drawing.Size(1408, 570);
-            this.dgv_Drug.TabIndex = 38;
-            // 
-            // tp_Examine
-            // 
-            this.tp_Examine.Controls.Add(this.lbl_ExaminePinyin);
-            this.tp_Examine.Controls.Add(this.txb_ExaminePinyin);
-            this.tp_Examine.Controls.Add(this.lbl_Examine);
-            this.tp_Examine.Controls.Add(this.txb_ExamineKeyWord);
-            this.tp_Examine.Controls.Add(this.btn_LoadExamine);
-            this.tp_Examine.Controls.Add(this.btn_SearchExamineByName);
-            this.tp_Examine.Controls.Add(this.txb_ExamineName);
-            this.tp_Examine.Controls.Add(this.btn_SearchExamineByNo);
-            this.tp_Examine.Controls.Add(this.txb_ExamineNo);
-            this.tp_Examine.Controls.Add(this.dgv_Examine);
-            this.tp_Examine.Location = new System.Drawing.Point(4, 28);
-            this.tp_Examine.Name = "tp_Examine";
-            this.tp_Examine.Padding = new System.Windows.Forms.Padding(3);
-            this.tp_Examine.Size = new System.Drawing.Size(1410, 803);
-            this.tp_Examine.TabIndex = 2;
-            this.tp_Examine.Text = "检查项目";
-            this.tp_Examine.UseVisualStyleBackColor = true;
-            // 
-            // dgv_Examine
-            // 
-            this.dgv_Examine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_Examine.Location = new System.Drawing.Point(6, 6);
-            this.dgv_Examine.Name = "dgv_Examine";
-            this.dgv_Examine.RowHeadersWidth = 62;
-            this.dgv_Examine.RowTemplate.Height = 30;
-            this.dgv_Examine.Size = new System.Drawing.Size(1408, 570);
-            this.dgv_Examine.TabIndex = 38;
+            this.lbl_Herb.AutoSize = true;
+            this.lbl_Herb.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lbl_Herb.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_Herb.Location = new System.Drawing.Point(678, 615);
+            this.lbl_Herb.Name = "lbl_Herb";
+            this.lbl_Herb.Size = new System.Drawing.Size(134, 31);
+            this.lbl_Herb.TabIndex = 48;
+            this.lbl_Herb.Text = "模糊查询：";
             // 
             // txb_HerbKeyWord
             // 
@@ -234,6 +199,70 @@
             this.txb_HerbNo.Size = new System.Drawing.Size(272, 39);
             this.txb_HerbNo.TabIndex = 41;
             // 
+            // dgv_Herb
+            // 
+            this.dgv_Herb.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Herb.Location = new System.Drawing.Point(6, 6);
+            this.dgv_Herb.Name = "dgv_Herb";
+            this.dgv_Herb.RowHeadersWidth = 62;
+            this.dgv_Herb.RowTemplate.Height = 30;
+            this.dgv_Herb.Size = new System.Drawing.Size(1408, 570);
+            this.dgv_Herb.TabIndex = 0;
+            // 
+            // tp_Drug
+            // 
+            this.tp_Drug.Controls.Add(this.lbl_Tip2);
+            this.tp_Drug.Controls.Add(this.lbl_DrugPinyin);
+            this.tp_Drug.Controls.Add(this.txb_DrugPinyin);
+            this.tp_Drug.Controls.Add(this.lbl_Drug);
+            this.tp_Drug.Controls.Add(this.txb_DrugKeyWord);
+            this.tp_Drug.Controls.Add(this.btn_LoadDrug);
+            this.tp_Drug.Controls.Add(this.btn_SearchDrugByName);
+            this.tp_Drug.Controls.Add(this.txb_DrugName);
+            this.tp_Drug.Controls.Add(this.btn_SearchDrugByNo);
+            this.tp_Drug.Controls.Add(this.txb_DrugNo);
+            this.tp_Drug.Controls.Add(this.dgv_Drug);
+            this.tp_Drug.Location = new System.Drawing.Point(4, 28);
+            this.tp_Drug.Name = "tp_Drug";
+            this.tp_Drug.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_Drug.Size = new System.Drawing.Size(1410, 803);
+            this.tp_Drug.TabIndex = 1;
+            this.tp_Drug.Text = "药品";
+            this.tp_Drug.UseVisualStyleBackColor = true;
+            this.tp_Drug.Click += new System.EventHandler(this.tp_Drug_Click);
+            // 
+            // lbl_DrugPinyin
+            // 
+            this.lbl_DrugPinyin.AutoSize = true;
+            this.lbl_DrugPinyin.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lbl_DrugPinyin.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_DrugPinyin.Location = new System.Drawing.Point(678, 700);
+            this.lbl_DrugPinyin.Name = "lbl_DrugPinyin";
+            this.lbl_DrugPinyin.Size = new System.Drawing.Size(134, 31);
+            this.lbl_DrugPinyin.TabIndex = 52;
+            this.lbl_DrugPinyin.Text = "根据拼音：";
+            // 
+            // txb_DrugPinyin
+            // 
+            this.txb_DrugPinyin.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.txb_DrugPinyin.Location = new System.Drawing.Point(819, 700);
+            this.txb_DrugPinyin.Margin = new System.Windows.Forms.Padding(4);
+            this.txb_DrugPinyin.Name = "txb_DrugPinyin";
+            this.txb_DrugPinyin.Size = new System.Drawing.Size(272, 39);
+            this.txb_DrugPinyin.TabIndex = 51;
+            this.txb_DrugPinyin.TextChanged += new System.EventHandler(this.txb_DrugPinyin_TextChanged);
+            // 
+            // lbl_Drug
+            // 
+            this.lbl_Drug.AutoSize = true;
+            this.lbl_Drug.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lbl_Drug.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_Drug.Location = new System.Drawing.Point(678, 615);
+            this.lbl_Drug.Name = "lbl_Drug";
+            this.lbl_Drug.Size = new System.Drawing.Size(134, 31);
+            this.lbl_Drug.TabIndex = 48;
+            this.lbl_Drug.Text = "模糊查询：";
+            // 
             // txb_DrugKeyWord
             // 
             this.txb_DrugKeyWord.Font = new System.Drawing.Font("微软雅黑", 12F);
@@ -294,6 +323,69 @@
             this.txb_DrugNo.Name = "txb_DrugNo";
             this.txb_DrugNo.Size = new System.Drawing.Size(272, 39);
             this.txb_DrugNo.TabIndex = 41;
+            // 
+            // dgv_Drug
+            // 
+            this.dgv_Drug.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Drug.Location = new System.Drawing.Point(6, 6);
+            this.dgv_Drug.Name = "dgv_Drug";
+            this.dgv_Drug.RowHeadersWidth = 62;
+            this.dgv_Drug.RowTemplate.Height = 30;
+            this.dgv_Drug.Size = new System.Drawing.Size(1408, 570);
+            this.dgv_Drug.TabIndex = 38;
+            // 
+            // tp_Examine
+            // 
+            this.tp_Examine.Controls.Add(this.lbl_Tip3);
+            this.tp_Examine.Controls.Add(this.lbl_ExaminePinyin);
+            this.tp_Examine.Controls.Add(this.txb_ExaminePinyin);
+            this.tp_Examine.Controls.Add(this.lbl_Examine);
+            this.tp_Examine.Controls.Add(this.txb_ExamineKeyWord);
+            this.tp_Examine.Controls.Add(this.btn_LoadExamine);
+            this.tp_Examine.Controls.Add(this.btn_SearchExamineByName);
+            this.tp_Examine.Controls.Add(this.txb_ExamineName);
+            this.tp_Examine.Controls.Add(this.btn_SearchExamineByNo);
+            this.tp_Examine.Controls.Add(this.txb_ExamineNo);
+            this.tp_Examine.Controls.Add(this.dgv_Examine);
+            this.tp_Examine.Location = new System.Drawing.Point(4, 28);
+            this.tp_Examine.Name = "tp_Examine";
+            this.tp_Examine.Padding = new System.Windows.Forms.Padding(3);
+            this.tp_Examine.Size = new System.Drawing.Size(1410, 803);
+            this.tp_Examine.TabIndex = 2;
+            this.tp_Examine.Text = "检查项目";
+            this.tp_Examine.UseVisualStyleBackColor = true;
+            // 
+            // lbl_ExaminePinyin
+            // 
+            this.lbl_ExaminePinyin.AutoSize = true;
+            this.lbl_ExaminePinyin.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lbl_ExaminePinyin.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_ExaminePinyin.Location = new System.Drawing.Point(678, 700);
+            this.lbl_ExaminePinyin.Name = "lbl_ExaminePinyin";
+            this.lbl_ExaminePinyin.Size = new System.Drawing.Size(134, 31);
+            this.lbl_ExaminePinyin.TabIndex = 52;
+            this.lbl_ExaminePinyin.Text = "根据拼音：";
+            // 
+            // txb_ExaminePinyin
+            // 
+            this.txb_ExaminePinyin.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.txb_ExaminePinyin.Location = new System.Drawing.Point(819, 700);
+            this.txb_ExaminePinyin.Margin = new System.Windows.Forms.Padding(4);
+            this.txb_ExaminePinyin.Name = "txb_ExaminePinyin";
+            this.txb_ExaminePinyin.Size = new System.Drawing.Size(272, 39);
+            this.txb_ExaminePinyin.TabIndex = 51;
+            this.txb_ExaminePinyin.TextChanged += new System.EventHandler(this.txb_ExaminePinyin_TextChanged);
+            // 
+            // lbl_Examine
+            // 
+            this.lbl_Examine.AutoSize = true;
+            this.lbl_Examine.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lbl_Examine.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbl_Examine.Location = new System.Drawing.Point(678, 615);
+            this.lbl_Examine.Name = "lbl_Examine";
+            this.lbl_Examine.Size = new System.Drawing.Size(134, 31);
+            this.lbl_Examine.TabIndex = 47;
+            this.lbl_Examine.Text = "模糊查询：";
             // 
             // txb_ExamineKeyWord
             // 
@@ -356,101 +448,48 @@
             this.txb_ExamineNo.Size = new System.Drawing.Size(272, 39);
             this.txb_ExamineNo.TabIndex = 41;
             // 
-            // lbl_Examine
+            // dgv_Examine
             // 
-            this.lbl_Examine.AutoSize = true;
-            this.lbl_Examine.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lbl_Examine.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_Examine.Location = new System.Drawing.Point(678, 615);
-            this.lbl_Examine.Name = "lbl_Examine";
-            this.lbl_Examine.Size = new System.Drawing.Size(134, 31);
-            this.lbl_Examine.TabIndex = 47;
-            this.lbl_Examine.Text = "模糊查询：";
+            this.dgv_Examine.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Examine.Location = new System.Drawing.Point(6, 6);
+            this.dgv_Examine.Name = "dgv_Examine";
+            this.dgv_Examine.RowHeadersWidth = 62;
+            this.dgv_Examine.RowTemplate.Height = 30;
+            this.dgv_Examine.Size = new System.Drawing.Size(1408, 570);
+            this.dgv_Examine.TabIndex = 38;
             // 
-            // lbl_Drug
+            // lbl_Tip1
             // 
-            this.lbl_Drug.AutoSize = true;
-            this.lbl_Drug.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lbl_Drug.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_Drug.Location = new System.Drawing.Point(678, 615);
-            this.lbl_Drug.Name = "lbl_Drug";
-            this.lbl_Drug.Size = new System.Drawing.Size(134, 31);
-            this.lbl_Drug.TabIndex = 48;
-            this.lbl_Drug.Text = "模糊查询：";
+            this.lbl_Tip1.AutoSize = true;
+            this.lbl_Tip1.Font = new System.Drawing.Font("微软雅黑", 8F);
+            this.lbl_Tip1.ForeColor = System.Drawing.Color.Red;
+            this.lbl_Tip1.Location = new System.Drawing.Point(815, 658);
+            this.lbl_Tip1.Name = "lbl_Tip1";
+            this.lbl_Tip1.Size = new System.Drawing.Size(170, 21);
+            this.lbl_Tip1.TabIndex = 54;
+            this.lbl_Tip1.Text = "名称、类型中的关键字";
             // 
-            // lbl_Herb
+            // lbl_Tip2
             // 
-            this.lbl_Herb.AutoSize = true;
-            this.lbl_Herb.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lbl_Herb.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_Herb.Location = new System.Drawing.Point(678, 615);
-            this.lbl_Herb.Name = "lbl_Herb";
-            this.lbl_Herb.Size = new System.Drawing.Size(134, 31);
-            this.lbl_Herb.TabIndex = 48;
-            this.lbl_Herb.Text = "模糊查询：";
+            this.lbl_Tip2.AutoSize = true;
+            this.lbl_Tip2.Font = new System.Drawing.Font("微软雅黑", 8F);
+            this.lbl_Tip2.ForeColor = System.Drawing.Color.Red;
+            this.lbl_Tip2.Location = new System.Drawing.Point(815, 658);
+            this.lbl_Tip2.Name = "lbl_Tip2";
+            this.lbl_Tip2.Size = new System.Drawing.Size(234, 21);
+            this.lbl_Tip2.TabIndex = 54;
+            this.lbl_Tip2.Text = "名称、英文名、主治中的关键字";
             // 
-            // txb_HerbPinyin
+            // lbl_Tip3
             // 
-            this.txb_HerbPinyin.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txb_HerbPinyin.Location = new System.Drawing.Point(819, 700);
-            this.txb_HerbPinyin.Margin = new System.Windows.Forms.Padding(4);
-            this.txb_HerbPinyin.Name = "txb_HerbPinyin";
-            this.txb_HerbPinyin.Size = new System.Drawing.Size(272, 39);
-            this.txb_HerbPinyin.TabIndex = 49;
-            this.txb_HerbPinyin.TextChanged += new System.EventHandler(this.txb_HerbPinyin_TextChanged);
-            // 
-            // txb_DrugPinyin
-            // 
-            this.txb_DrugPinyin.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txb_DrugPinyin.Location = new System.Drawing.Point(819, 700);
-            this.txb_DrugPinyin.Margin = new System.Windows.Forms.Padding(4);
-            this.txb_DrugPinyin.Name = "txb_DrugPinyin";
-            this.txb_DrugPinyin.Size = new System.Drawing.Size(272, 39);
-            this.txb_DrugPinyin.TabIndex = 51;
-            this.txb_DrugPinyin.TextChanged += new System.EventHandler(this.txb_DrugPinyin_TextChanged);
-            // 
-            // txb_ExaminePinyin
-            // 
-            this.txb_ExaminePinyin.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txb_ExaminePinyin.Location = new System.Drawing.Point(819, 700);
-            this.txb_ExaminePinyin.Margin = new System.Windows.Forms.Padding(4);
-            this.txb_ExaminePinyin.Name = "txb_ExaminePinyin";
-            this.txb_ExaminePinyin.Size = new System.Drawing.Size(272, 39);
-            this.txb_ExaminePinyin.TabIndex = 51;
-            this.txb_ExaminePinyin.TextChanged += new System.EventHandler(this.txb_ExaminePinyin_TextChanged);
-            // 
-            // lbl_HerbPinyin
-            // 
-            this.lbl_HerbPinyin.AutoSize = true;
-            this.lbl_HerbPinyin.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lbl_HerbPinyin.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_HerbPinyin.Location = new System.Drawing.Point(678, 700);
-            this.lbl_HerbPinyin.Name = "lbl_HerbPinyin";
-            this.lbl_HerbPinyin.Size = new System.Drawing.Size(134, 31);
-            this.lbl_HerbPinyin.TabIndex = 50;
-            this.lbl_HerbPinyin.Text = "根据拼音：";
-            // 
-            // lbl_DrugPinyin
-            // 
-            this.lbl_DrugPinyin.AutoSize = true;
-            this.lbl_DrugPinyin.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lbl_DrugPinyin.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_DrugPinyin.Location = new System.Drawing.Point(678, 700);
-            this.lbl_DrugPinyin.Name = "lbl_DrugPinyin";
-            this.lbl_DrugPinyin.Size = new System.Drawing.Size(134, 31);
-            this.lbl_DrugPinyin.TabIndex = 52;
-            this.lbl_DrugPinyin.Text = "根据拼音：";
-            // 
-            // lbl_ExaminePinyin
-            // 
-            this.lbl_ExaminePinyin.AutoSize = true;
-            this.lbl_ExaminePinyin.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lbl_ExaminePinyin.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbl_ExaminePinyin.Location = new System.Drawing.Point(678, 700);
-            this.lbl_ExaminePinyin.Name = "lbl_ExaminePinyin";
-            this.lbl_ExaminePinyin.Size = new System.Drawing.Size(134, 31);
-            this.lbl_ExaminePinyin.TabIndex = 52;
-            this.lbl_ExaminePinyin.Text = "根据拼音：";
+            this.lbl_Tip3.AutoSize = true;
+            this.lbl_Tip3.Font = new System.Drawing.Font("微软雅黑", 8F);
+            this.lbl_Tip3.ForeColor = System.Drawing.Color.Red;
+            this.lbl_Tip3.Location = new System.Drawing.Point(815, 658);
+            this.lbl_Tip3.Name = "lbl_Tip3";
+            this.lbl_Tip3.Size = new System.Drawing.Size(170, 21);
+            this.lbl_Tip3.TabIndex = 54;
+            this.lbl_Tip3.Text = "名称、类型中的关键字";
             // 
             // frm_SearchPrice
             // 
@@ -510,5 +549,8 @@
         private System.Windows.Forms.TextBox txb_DrugPinyin;
         private System.Windows.Forms.Label lbl_ExaminePinyin;
         private System.Windows.Forms.TextBox txb_ExaminePinyin;
+        private System.Windows.Forms.Label lbl_Tip1;
+        private System.Windows.Forms.Label lbl_Tip2;
+        private System.Windows.Forms.Label lbl_Tip3;
     }
 }

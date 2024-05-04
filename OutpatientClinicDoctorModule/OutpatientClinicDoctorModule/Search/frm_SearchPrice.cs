@@ -36,7 +36,7 @@ namespace OutpatientClinicDoctorModule.Search
             this.dgv_Examine.BackgroundColor = Color.White;//数据网格视图的背景色设为白色
             this.dgv_Examine.AutoSizeColumnsMode =
                 DataGridViewAutoSizeColumnsMode.AllCells;//数据网格视图的自动调整列宽模式设为显示所有单元格
-            LoadHerb();
+            LoadHerb();//载入药材
             LoadDrug();//载入药品
             LoadExamine();//载入检查项目
 
@@ -145,7 +145,7 @@ namespace OutpatientClinicDoctorModule.Search
 
             SqlCommand sqlCommand = sqlConnection.CreateCommand();//调用SQL连接的方法CreateCommand来创建SQL命令；该命令将绑定SQL连接；
             sqlCommand.Connection = sqlConnection;//将SQL命令的连接属性指向SQL连接
-            sqlCommand.CommandText = $@"SELECT E.No,E.Name,E.Price,T.Name AS Type,E.Introduction
+            sqlCommand.CommandText = $@"SELECT E.No,E.Name,E.Price,T.Name AS Type,E.Pinyin,E.Introduction
 	                                        FROM tb_ExamineItem AS E JOIN tb_ExamineType AS T ON E.TypeNo=T.No";//指定SQL命令的命令文本；该命令查询所有检查项目，以用作数据网格视图数据源
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();//声明并实例化SQL数据适配器
             sqlDataAdapter.SelectCommand = sqlCommand;//将SQL数据适配器的查询命令属性指向SQL命令
@@ -165,6 +165,7 @@ namespace OutpatientClinicDoctorModule.Search
             this.dgv_Examine.Columns["Name"].HeaderText = "名称";
             this.dgv_Examine.Columns["Price"].HeaderText = "价格";
             this.dgv_Examine.Columns["Type"].HeaderText = "类型";
+            this.dgv_Examine.Columns["Pinyin"].HeaderText = "拼音";
             this.dgv_Examine.Columns["Introduction"].HeaderText = "简介";
         }
         /// <summary>
@@ -219,14 +220,17 @@ namespace OutpatientClinicDoctorModule.Search
         /// <param name="e"></param>
         private void btn_SearchHerbByName_Click(object sender, EventArgs e)
         {
-            DataRowView[] searchResultRowViews =
-                this._HerbViewByName.FindRows(this.txb_HerbName.Text.Trim());//借助本窗体的按名称排序的药材数据视图的方法FindRows，根据排序列（即药材名称）快速查找相应药材；由于该列并非主键，可能返回多行查询结果，故返回数据行视图数组；数据行视图数组不能直接作为数据源，需转为列表后方可作为数据源；
-            DataTable searchResultTable = this._HerbTable.Clone();//借助本窗体的药材数据表的方法Clone，创建相同架构的空表，用于保存搜索结果所在数据行；
-            foreach (DataRowView dataRowView in searchResultRowViews)//遍历搜索结果所在数据行视图数组；
+            if (this.txb_HerbName.Text.Trim() != "")
             {
-                searchResultTable.ImportRow(dataRowView.Row);//通过每条数据行视图的属性Row获取相应的数据行，并导入数据表；
+                DataRowView[] searchResultRowViews =
+                    this._HerbViewByName.FindRows(this.txb_HerbName.Text.Trim());//借助本窗体的按名称排序的药材数据视图的方法FindRows，根据排序列（即药材名称）快速查找相应药材；由于该列并非主键，可能返回多行查询结果，故返回数据行视图数组；数据行视图数组不能直接作为数据源，需转为列表后方可作为数据源；
+                DataTable searchResultTable = this._HerbTable.Clone();//借助本窗体的药材数据表的方法Clone，创建相同架构的空表，用于保存搜索结果所在数据行；
+                foreach (DataRowView dataRowView in searchResultRowViews)//遍历搜索结果所在数据行视图数组；
+                {
+                    searchResultTable.ImportRow(dataRowView.Row);//通过每条数据行视图的属性Row获取相应的数据行，并导入数据表；
+                }
+                this.dgv_Herb.DataSource = searchResultTable;//将数据网格视图的数据源设为搜索结果数据表；
             }
-            this.dgv_Herb.DataSource = searchResultTable;//将数据网格视图的数据源设为搜索结果数据表；
         }
         /// <summary>
         /// 单击根据名称搜索按钮搜索药品
@@ -235,14 +239,17 @@ namespace OutpatientClinicDoctorModule.Search
         /// <param name="e"></param>
         private void btn_SearchDrugByName_Click(object sender, EventArgs e)
         {
-            DataRowView[] searchResultRowViews =
-                this._DrugViewByName.FindRows(this.txb_DrugName.Text.Trim());//借助本窗体的按名称排序的药品数据视图的方法FindRows，根据排序列（即药品名称）快速查找相应药品；由于该列并非主键，可能返回多行查询结果，故返回数据行视图数组；数据行视图数组不能直接作为数据源，需转为列表后方可作为数据源；
-            DataTable searchResultTable = this._DrugTable.Clone();//借助本窗体的药品数据表的方法Clone，创建相同架构的空表，用于保存搜索结果所在数据行；
-            foreach (DataRowView dataRowView in searchResultRowViews)//遍历搜索结果所在数据行视图数组；
+            if (this.txb_DrugName.Text.Trim() != "")
             {
-                searchResultTable.ImportRow(dataRowView.Row);//通过每条数据行视图的属性Row获取相应的数据行，并导入数据表；
+                DataRowView[] searchResultRowViews =
+                    this._DrugViewByName.FindRows(this.txb_DrugName.Text.Trim());//借助本窗体的按名称排序的药品数据视图的方法FindRows，根据排序列（即药品名称）快速查找相应药品；由于该列并非主键，可能返回多行查询结果，故返回数据行视图数组；数据行视图数组不能直接作为数据源，需转为列表后方可作为数据源；
+                DataTable searchResultTable = this._DrugTable.Clone();//借助本窗体的药品数据表的方法Clone，创建相同架构的空表，用于保存搜索结果所在数据行；
+                foreach (DataRowView dataRowView in searchResultRowViews)//遍历搜索结果所在数据行视图数组；
+                {
+                    searchResultTable.ImportRow(dataRowView.Row);//通过每条数据行视图的属性Row获取相应的数据行，并导入数据表；
+                }
+                this.dgv_Drug.DataSource = searchResultTable;//将数据网格视图的数据源设为搜索结果数据表；
             }
-            this.dgv_Drug.DataSource = searchResultTable;//将数据网格视图的数据源设为搜索结果数据表；
         }
         /// <summary>
         /// 单击根据名称搜索按钮搜索检查项目
@@ -251,14 +258,17 @@ namespace OutpatientClinicDoctorModule.Search
         /// <param name="e"></param>
         private void btn_SearchExamineByName_Click(object sender, EventArgs e)
         {
-            DataRowView[] searchResultRowViews =
-                this._ExamineViewByName.FindRows(this.txb_ExamineName.Text.Trim());//借助本窗体的按名称排序的检查项目数据视图的方法FindRows，根据排序列（即项目名称）快速查找相应检查项目；由于该列并非主键，可能返回多行查询结果，故返回数据行视图数组；数据行视图数组不能直接作为数据源，需转为列表后方可作为数据源；
-            DataTable searchResultTable = this._ExamineTable.Clone();//借助本窗体的检查项目数据表的方法Clone，创建相同架构的空表，用于保存搜索结果所在数据行；
-            foreach (DataRowView dataRowView in searchResultRowViews)//遍历搜索结果所在数据行视图数组；
+            if (this.txb_ExamineName.Text.Trim() != "")
             {
-                searchResultTable.ImportRow(dataRowView.Row);//通过每条数据行视图的属性Row获取相应的数据行，并导入数据表；
+                DataRowView[] searchResultRowViews =
+                this._ExamineViewByName.FindRows(this.txb_ExamineName.Text.Trim());//借助本窗体的按名称排序的检查项目数据视图的方法FindRows，根据排序列（即项目名称）快速查找相应检查项目；由于该列并非主键，可能返回多行查询结果，故返回数据行视图数组；数据行视图数组不能直接作为数据源，需转为列表后方可作为数据源；
+                DataTable searchResultTable = this._ExamineTable.Clone();//借助本窗体的检查项目数据表的方法Clone，创建相同架构的空表，用于保存搜索结果所在数据行；
+                foreach (DataRowView dataRowView in searchResultRowViews)//遍历搜索结果所在数据行视图数组；
+                {
+                    searchResultTable.ImportRow(dataRowView.Row);//通过每条数据行视图的属性Row获取相应的数据行，并导入数据表；
+                }
+                this.dgv_Examine.DataSource = searchResultTable;//将数据网格视图的数据源设为搜索结果数据表；
             }
-            this.dgv_Examine.DataSource = searchResultTable;//将数据网格视图的数据源设为搜索结果数据表；
         }
         /// <summary>
         /// 单击根据关键字搜索按钮搜索药材
@@ -267,37 +277,18 @@ namespace OutpatientClinicDoctorModule.Search
         /// <param name="e"></param>
         private void txb_HerbKeyWord_TextChanged(object sender, EventArgs e)
         {
-            SqlConnection sqlConnection = new SqlConnection(); //声明并实例化SQL连接；
-            sqlConnection.ConnectionString =
-                ConfigurationManager.ConnectionStrings["Sql"].ConnectionString; //配置管理器从配置文件读取连接字符串，并将之赋予SQL连接的连接字符串属性
-
-            SqlCommand sqlCommand = sqlConnection.CreateCommand();//调用SQL连接的方法CreateCommand来创建SQL命令；该命令将绑定SQL连接
-            sqlCommand.Connection = sqlConnection;//将SQL命令的连接属性指向SQL连接
-
-            sqlCommand.CommandText = @"SELECT H.No,H.Name,H.Price,T.Type,H.Pinyin,H.Effect 
-	                                    FROM tb_Herb AS H JOIN tb_HerbType AS T ON H.TypeNo=T.No
-	                                    WHERE H.Name LIKE '%' + @KeyWord + '%' OR T.Type LIKE '%' + @KeyWord + '%'";//指定SQL命令的命令文本；该命令查询所有药品，以用作数据网格视图数据源
-            sqlCommand.Parameters.Add("@KeyWord", SqlDbType.VarChar).Value = this.txb_HerbKeyWord.Text.Trim();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();//声明并实例化SQL数据适配器
-            sqlDataAdapter.SelectCommand = sqlCommand;//将SQL数据适配器的查询命令属性指向SQL命令
-            DataTable HerbTable = new DataTable("HerbTable"); // 设置DataTable的名称  
-            sqlDataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;//设置SQL数据适配器在缺少架构时的动作为追加主键，从而获取数据库中定义的主键，否则无法根据编号搜索药品
-            sqlConnection.Open();//打开SQL连接
-            sqlDataAdapter.Fill(HerbTable);//SQL数据适配器读取数据，并填充药品数据表
-            sqlConnection.Close();//关闭SQL连接
-            this._HerbTable = HerbTable;
-            this._HerbViewByName = new DataView();//实例化本窗体的药品数据视图，用于按照名称进行快速查询
-            this._HerbViewByName.Table = HerbTable;//设置药品数据视图对应的数据表
-            this._HerbViewByName.Sort = "Name ASC";//设置药品数据视图的排序条件，即查询所覆盖的列
-            this.dgv_Herb.Columns.Clear();//数据网格视图的列集合清空
-            this.dgv_Herb.DataSource = HerbTable;//将数据网格视图的数据源设为药材数据表
-            this.dgv_Herb.Columns["No"].ReadOnly = true;
-            this.dgv_Herb.Columns["No"].HeaderText = "编号";//将数据网格视图的指定列的表头文本设为中文
-            this.dgv_Herb.Columns["Name"].HeaderText = "名称";
-            this.dgv_Herb.Columns["Price"].HeaderText = "售价/g";
-            this.dgv_Herb.Columns["Type"].HeaderText = "类别";
-            this.dgv_Herb.Columns["Pinyin"].HeaderText = "拼音";
-            this.dgv_Herb.Columns["Effect"].HeaderText = "功效";
+            if (this.txb_HerbKeyWord.Text.Trim() != "")
+            {
+                DataRow[] searchResultRows =
+               this._HerbTable.Select($"Name LIKE '%{this.txb_HerbKeyWord.Text.Trim()}%' OR Type LIKE '%{this.txb_HerbKeyWord.Text.Trim()}%'");//借助本窗体的药材数据表的方法Select，并提供与SQL类似的谓词表达式作为查询条件，根据关键字进行模糊查询（仅支持%通配符）；
+                                                                                                                                                                                                    //查询将返回数据行数组；
+                DataTable searchResultTable = this._HerbTable.Clone();//借助本窗体的药材数据表的方法Clone，创建相同架构的空表，用于保存搜索结果所在数据行；
+                foreach (DataRow row in searchResultRows)//遍历搜索结果所在数据行数组；
+                {
+                    searchResultTable.ImportRow(row);//数据行导入数据表；
+                }
+                this.dgv_Herb.DataSource = searchResultTable;//将数据网格视图的数据源设为搜索结果数据表；
+            }
         }
         /// <summary>
         /// 单击根据关键字搜索按钮搜索药品
@@ -306,38 +297,18 @@ namespace OutpatientClinicDoctorModule.Search
         /// <param name="e"></param>
         private void txb_DrugKeyWord_TextChanged(object sender, EventArgs e)
         {
-            SqlConnection sqlConnection = new SqlConnection(); //声明并实例化SQL连接；
-            sqlConnection.ConnectionString =
-                ConfigurationManager.ConnectionStrings["Sql"].ConnectionString; //配置管理器从配置文件读取连接字符串，并将之赋予SQL连接的连接字符串属性
-
-            SqlCommand sqlCommand = sqlConnection.CreateCommand();//调用SQL连接的方法CreateCommand来创建SQL命令；该命令将绑定SQL连接
-            sqlCommand.Connection = sqlConnection;//将SQL命令的连接属性指向SQL连接
-
-            sqlCommand.CommandText = @"SELECT D.No,D.ChineseName,D.Price,U.Name,D.Treat,D.Pinyin,D.EnglishName
-	                                    FROM tb_Drug AS D JOIN tb_Unit AS U ON D.UnitNo=U.No
-	                                    WHERE D.ChineseName LIKE '%' + @KeyWord + '%' OR D.Treat LIKE '%' + @KeyWord + '%'";//指定SQL命令的命令文本；该命令查询所有药品，以用作数据网格视图数据源
-            sqlCommand.Parameters.Add("@KeyWord", SqlDbType.VarChar).Value = this.txb_DrugKeyWord.Text.Trim();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();//声明并实例化SQL数据适配器
-            sqlDataAdapter.SelectCommand = sqlCommand;//将SQL数据适配器的查询命令属性指向SQL命令
-            DataTable DrugTable = new DataTable("DrugTable"); // 设置DataTable的名称  
-            sqlDataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;//设置SQL数据适配器在缺少架构时的动作为追加主键，从而获取数据库中定义的主键，否则无法根据编号搜索药品
-            sqlConnection.Open();//打开SQL连接
-            sqlDataAdapter.Fill(DrugTable);//SQL数据适配器读取数据，并填充药品数据表
-            sqlConnection.Close();//关闭SQL连接
-            this._DrugTable = DrugTable;
-            this._DrugViewByName = new DataView();//实例化本窗体的药品数据视图，用于按照名称进行快速查询
-            this._DrugViewByName.Table = DrugTable;//设置药品数据视图对应的数据表
-            this._DrugViewByName.Sort = "ChineseName ASC";//设置药品数据视图的排序条件，即查询所覆盖的列
-            this.dgv_Drug.Columns.Clear();//数据网格视图的列集合清空
-            this.dgv_Drug.DataSource = DrugTable;//将数据网格视图的数据源设为药品数据表
-            this.dgv_Drug.Columns["No"].ReadOnly = true;
-            this.dgv_Drug.Columns["No"].HeaderText = "编号";//将数据网格视图的指定列的表头文本设为中文
-            this.dgv_Drug.Columns["ChineseName"].HeaderText = "名称";
-            this.dgv_Drug.Columns["Price"].HeaderText = "售价";
-            this.dgv_Drug.Columns["Name"].HeaderText = "单位";
-            this.dgv_Drug.Columns["Treat"].HeaderText = "主治";
-            this.dgv_Drug.Columns["Pinyin"].HeaderText = "拼音";
-            this.dgv_Drug.Columns["EnglishName"].HeaderText = "英文名";
+            if (this.txb_DrugKeyWord.Text.Trim() != "")
+            {
+                DataRow[] searchResultRows =
+               this._DrugTable.Select($"ChineseName LIKE '%{this.txb_DrugKeyWord.Text.Trim()}%' OR EnglishName LIKE '%{this.txb_DrugKeyWord.Text.Trim()}%' OR Treat LIKE '%{this.txb_DrugKeyWord.Text.Trim()}%'");//借助本窗体的药品数据表的方法Select，并提供与SQL类似的谓词表达式作为查询条件，根据关键字进行模糊查询（仅支持%通配符）；
+                                                                                                                                                                                                                  //查询将返回数据行数组；
+                DataTable searchResultTable = this._DrugTable.Clone();//借助本窗体的药品数据表的方法Clone，创建相同架构的空表，用于保存搜索结果所在数据行；
+                foreach (DataRow row in searchResultRows)//遍历搜索结果所在数据行数组；
+                {
+                    searchResultTable.ImportRow(row);//数据行导入数据表；
+                }
+                this.dgv_Drug.DataSource = searchResultTable;//将数据网格视图的数据源设为搜索结果数据表；
+            }
         }
         /// <summary>
         /// 单击根据关键字搜索按钮搜索检查项目
@@ -346,35 +317,75 @@ namespace OutpatientClinicDoctorModule.Search
         /// <param name="e"></param>
         private void txb_ExamineKeyWord_TextChanged(object sender, EventArgs e)
         {
-            SqlConnection sqlConnection = new SqlConnection(); //声明并实例化SQL连接；
-            sqlConnection.ConnectionString =
-                ConfigurationManager.ConnectionStrings["Sql"].ConnectionString; //配置管理器从配置文件读取连接字符串，并将之赋予SQL连接的连接字符串属性；
-
-            SqlCommand sqlCommand = sqlConnection.CreateCommand();//调用SQL连接的方法CreateCommand来创建SQL命令；该命令将绑定SQL连接；
-            sqlCommand.Connection = sqlConnection;//将SQL命令的连接属性指向SQL连接
-            sqlCommand.CommandText = @"SELECT E.No,E.Name,E.Price,T.Name AS Type,E.Introduction
-	                                    FROM tb_ExamineItem AS E JOIN tb_ExamineType AS T ON E.TypeNo=T.No
-                                        WHERE E.Name LIKE '%' + @KeyWord + '%' OR T.Name LIKE '%' + @KeyWord + '%'";//指定SQL命令的命令文本；该命令查询所有检查项目，以用作数据网格视图数据源
-            sqlCommand.Parameters.Add("@KeyWord", SqlDbType.VarChar).Value = this.txb_ExamineKeyWord.Text.Trim();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();//声明并实例化SQL数据适配器
-            sqlDataAdapter.SelectCommand = sqlCommand;//将SQL数据适配器的查询命令属性指向SQL命令
-            DataTable ExamineTable = new DataTable("ExamineTable");
-            sqlDataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;//设置SQL数据适配器在缺少架构时的动作为追加主键，从而获取数据库中定义的主键，否则无法根据编号搜索检查项目
-            sqlConnection.Open();//打开SQL连接
-            sqlDataAdapter.Fill(ExamineTable);//SQL数据适配器读取数据，并填充检查项目数据表
-            sqlConnection.Close();//关闭SQL连接
-            this._ExamineTable = ExamineTable;
-            this._ExamineViewByName = new DataView();//实例化本窗体的检查项目数据视图，用于按照名称进行快速查询
-            this._ExamineViewByName.Table = ExamineTable;//设置检查项目数据视图对应的数据表
-            this._ExamineViewByName.Sort = "Name ASC";//设置检查项目数据视图的排序条件，即查询所覆盖的列
-            this.dgv_Examine.Columns.Clear();//数据网格视图的列集合清空
-            this.dgv_Examine.DataSource = ExamineTable;//将数据网格视图的数据源设为检查项目数据表
-            this.dgv_Examine.Columns["No"].ReadOnly = true;
-            this.dgv_Examine.Columns["No"].HeaderText = "编号";//将数据网格视图的指定列的表头文本设为中文
-            this.dgv_Examine.Columns["Name"].HeaderText = "名称";
-            this.dgv_Examine.Columns["Price"].HeaderText = "价格";
-            this.dgv_Examine.Columns["Type"].HeaderText = "类型";
-            this.dgv_Examine.Columns["Introduction"].HeaderText = "简介";
+            if (this.txb_ExamineKeyWord.Text.Trim() != "")
+            {
+                DataRow[] searchResultRows =
+               this._ExamineTable.Select($"Name LIKE '%{this.txb_ExamineKeyWord.Text.Trim()}%' OR Type LIKE '%{this.txb_ExamineKeyWord.Text.Trim()}%'");//借助本窗体的检查项目数据表的方法Select，并提供与SQL类似的谓词表达式作为查询条件，根据关键字进行模糊查询（仅支持%通配符）；
+                                                                                                                                                        //查询将返回数据行数组；
+                DataTable searchResultTable = this._ExamineTable.Clone();//借助本窗体的检查项目数据表的方法Clone，创建相同架构的空表，用于保存搜索结果所在数据行；
+                foreach (DataRow row in searchResultRows)//遍历搜索结果所在数据行数组；
+                {
+                    searchResultTable.ImportRow(row);//数据行导入数据表；
+                }
+                this.dgv_Examine.DataSource = searchResultTable;//将数据网格视图的数据源设为搜索结果数据表；
+            }
+        }
+        /// <summary>
+        /// 根据拼音搜索药材
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txb_HerbPinyin_TextChanged(object sender, EventArgs e)
+        {
+            if (this.txb_HerbPinyin.Text.Trim() != "")
+            {
+                DataRow[] searchResultRows =
+                this._HerbTable.Select($"Pinyin LIKE '%{this.txb_HerbPinyin.Text.Trim()}%'");//借助本窗体的药材数据表的方法Select，并提供与SQL类似的谓词表达式作为查询条件，根据拼音缩写进行模糊查询（仅支持%通配符）；查询将返回数据行数组；
+                DataTable searchResultTable = this._HerbTable.Clone();//借助本窗体的药材数据表的方法Clone，创建相同架构的空表，用于保存搜索结果所在数据行；
+                foreach (DataRow row in searchResultRows)//遍历搜索结果所在数据行数组；
+                {
+                    searchResultTable.ImportRow(row);//数据行导入数据表；
+                }
+                this.dgv_Herb.DataSource = searchResultTable;//将数据网格视图的数据源设为搜索结果数据表；
+            }
+        }
+        /// <summary>
+        /// 根据拼音搜索药品
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txb_DrugPinyin_TextChanged(object sender, EventArgs e)
+        {
+            if (this.txb_DrugPinyin.Text.Trim() != "")
+            {
+                DataRow[] searchResultRows =
+                this._DrugTable.Select($"Pinyin LIKE '%{this.txb_DrugPinyin.Text.Trim()}%'");//借助本窗体的药品数据表的方法Select，并提供与SQL类似的谓词表达式作为查询条件，根据拼音缩写进行模糊查询（仅支持%通配符）；查询将返回数据行数组；
+                DataTable searchResultTable = this._DrugTable.Clone();//借助本窗体的药品数据表的方法Clone，创建相同架构的空表，用于保存搜索结果所在数据行；
+                foreach (DataRow row in searchResultRows)//遍历搜索结果所在数据行数组；
+                {
+                    searchResultTable.ImportRow(row);//数据行导入数据表；
+                }
+                this.dgv_Drug.DataSource = searchResultTable;//将数据网格视图的数据源设为搜索结果数据表；
+            }
+        }
+        /// <summary>
+        /// 根据拼音搜索检查项目
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txb_ExaminePinyin_TextChanged(object sender, EventArgs e)
+        {
+            if (this.txb_ExaminePinyin.Text.Trim() != "")
+            {
+                DataRow[] searchResultRows =
+                this._ExamineTable.Select($"Pinyin LIKE '%{this.txb_ExaminePinyin.Text.Trim()}%'");//借助本窗体的检查项目数据表的方法Select，并提供与SQL类似的谓词表达式作为查询条件，根据拼音缩写进行模糊查询（仅支持%通配符）；查询将返回数据行数组；
+                DataTable searchResultTable = this._ExamineTable.Clone();//借助本窗体的检查项目数据表的方法Clone，创建相同架构的空表，用于保存搜索结果所在数据行；
+                foreach (DataRow row in searchResultRows)//遍历搜索结果所在数据行数组；
+                {
+                    searchResultTable.ImportRow(row);//数据行导入数据表；
+                }
+                this.dgv_Examine.DataSource = searchResultTable;//将数据网格视图的数据源设为搜索结果数据表；
+            }
         }
         /// <summary>
         /// 单击重新载入按钮载入药材
@@ -411,33 +422,6 @@ namespace OutpatientClinicDoctorModule.Search
             this.txb_ExamineName.Clear();
             this.txb_ExamineNo.Clear();
             this.txb_ExamineKeyWord.Clear();
-        }
-        /// <summary>
-        /// 根据拼音搜索药材
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txb_HerbPinyin_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        /// <summary>
-        /// 根据拼音搜索药品
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txb_DrugPinyin_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        /// <summary>
-        /// 根据拼音搜索检查项目
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txb_ExaminePinyin_TextChanged(object sender, EventArgs e)
-        {
-
         }
         private void tp_Drug_Click(object sender, EventArgs e)
         {
