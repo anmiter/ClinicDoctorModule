@@ -20,31 +20,35 @@ namespace OutpatientClinicDoctorModule
         /// <summary>
         /// 医生编号
         /// </summary>
-        string DoctorNo;
+        string _DoctorNo;
         /// <summary>
-        /// 传参
+        /// 医保卡号
+        /// </summary>
+        string _PatientIDCard;
+        /// <summary>
+        /// 载入医生函数
         /// </summary>
         /// <param name="doctorNo"></param>
-        public frm_Home(string doctorNo) : this()
+        public void LoadDoctor(string doctorNo)
         {
-            this.DoctorNo = doctorNo;
+            this._DoctorNo = doctorNo;
             SqlConnection sqlConnection = new SqlConnection(); //声明并实例化SQL连接；
             sqlConnection.ConnectionString =
                 ConfigurationManager.ConnectionStrings["Sql"].ConnectionString; //配置管理器从配置文件读取连接字符串，并将之赋予SQL连接的连接字符串属性；
 
             SqlCommand sqlCommand = sqlConnection.CreateCommand();//调用SQL连接的方法CreateCommand来创建SQL命令；该命令将绑定SQL连接；
             sqlCommand.Connection = sqlConnection;
-            sqlCommand.CommandText = $@"SELECT * FROM tb_Doctor WHERE No='{this.DoctorNo}'";
+            sqlCommand.CommandText = $@"SELECT * FROM tb_Doctor WHERE No='{this._DoctorNo}'";
 
             sqlConnection.Open();
             SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
             if (sqlDataReader.Read())
             {
-                this.lbl_DoctorNo.Text = this.DoctorNo;
+                this.lbl_DoctorNo.Text = this._DoctorNo;
                 this.lbl_Name.Text = sqlDataReader["Name"].ToString();
                 if (sqlDataReader["Telephone"] == DBNull.Value || sqlDataReader["Name"] == DBNull.Value || sqlDataReader["QQEmail"] == DBNull.Value || sqlDataReader["Identification"] == DBNull.Value || sqlDataReader["Avatar"] == DBNull.Value)
                 {
-                    Personal.frm_PersonalCenter frm_PersonalCenter = new Personal.frm_PersonalCenter(this.DoctorNo);
+                    Personal.frm_PersonalCenter frm_PersonalCenter = new Personal.frm_PersonalCenter(this._DoctorNo);
                     MessageBox.Show("请完善个人信息！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     frm_PersonalCenter.ShowDialog();
                 }
@@ -58,13 +62,32 @@ namespace OutpatientClinicDoctorModule
             sqlDataReader.Close();
         }
         /// <summary>
+        /// 传参
+        /// </summary>
+        /// <param name="doctorNo"></param>
+        public frm_Home(string doctorNo) : this()
+        {
+            this.LoadDoctor(doctorNo);
+        }
+        /// <summary>
+        /// 载入就诊病人医保卡号
+        /// </summary>
+        /// <param name="doctorNo"></param>
+        /// <param name="patientIDCard"></param>
+        public frm_Home(string doctorNo, string patientIDCard) : this()
+        {
+            this.LoadDoctor(doctorNo);
+            this._PatientIDCard = patientIDCard;
+            this.lbl_PatientIDCard.Text = this._PatientIDCard;
+        }
+        /// <summary>
         /// 单击个人中心按钮
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btn_PersonalCenter_Click(object sender, EventArgs e)
         {
-            Personal.frm_PersonalCenter frm_PersonalCenter = new Personal.frm_PersonalCenter(this.DoctorNo);
+            Personal.frm_PersonalCenter frm_PersonalCenter = new Personal.frm_PersonalCenter(this._DoctorNo);
             frm_PersonalCenter.ShowDialog();
         }
         /// <summary>
@@ -74,7 +97,7 @@ namespace OutpatientClinicDoctorModule
         /// <param name="e"></param>
         private void btn_CallNumber_Click(object sender, EventArgs e)
         {
-            Consultation.frm_CallNumber frm_CallNumber = new Consultation.frm_CallNumber();
+            Consultation.frm_CallNumber frm_CallNumber = new Consultation.frm_CallNumber(this._DoctorNo);
             frm_CallNumber.ShowDialog();
         }
         /// <summary>
@@ -84,7 +107,14 @@ namespace OutpatientClinicDoctorModule
         /// <param name="e"></param>
         private void btn_ReadCard_Click(object sender, EventArgs e)
         {
-
+            if (this.lbl_PatientNo.Text != "")
+            {
+                MessageBox.Show("读卡成功！");
+            }
+            else
+            {
+                MessageBox.Show("请叫号！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         /// <summary>
         /// 单击病历按钮
@@ -97,23 +127,13 @@ namespace OutpatientClinicDoctorModule
             frm_MedicalRecord.ShowDialog();
         }
         /// <summary>
-        /// 单击病情登记按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btn_Condition_Click(object sender, EventArgs e)
-        {
-            Consultation.frm_Condition frm_Condition = new Consultation.frm_Condition();
-            frm_Condition.ShowDialog();
-        }
-        /// <summary>
-        /// 单击按钮诊断
+        /// 单击诊断按钮
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btn_Diagnosis_Click(object sender, EventArgs e)
         {
-            Consultation.frm_Diagnosis frm_Diagnosis = new Consultation.frm_Diagnosis();
+            Consultation.frm_Diagnosis frm_Diagnosis = new Consultation.frm_Diagnosis(this._DoctorNo, this._PatientIDCard);
             frm_Diagnosis.ShowDialog();
         }
         /// <summary>
@@ -135,15 +155,6 @@ namespace OutpatientClinicDoctorModule
         {
             Consultation.frm_Examination frm_Examination = new Consultation.frm_Examination();
             frm_Examination.ShowDialog();
-        }
-        /// <summary>
-        /// 确认
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btn_Sure_Click(object sender, EventArgs e)
-        {
-
         }
         /// <summary>
         /// 单击修改价目按钮
@@ -176,6 +187,16 @@ namespace OutpatientClinicDoctorModule
             Search.frm_SearchPrice frm_SearchPrice = new Search.frm_SearchPrice();
             frm_SearchPrice.ShowDialog();
         }
+        /// <summary>
+        /// 单击确认按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_Sure_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void frm_Home_Load(object sender, EventArgs e)
         {
 

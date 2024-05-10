@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.1.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -48,17 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckFunction.cs" />
+    <Compile Include="ConsultationInfo.cs" />
     <Compile Include="Consultation\frm_CallNumber.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Consultation\frm_CallNumber.Designer.cs">
       <DependentUpon>frm_CallNumber.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Consultation\frm_Condition.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Consultation\frm_Condition.Designer.cs">
-      <DependentUpon>frm_Condition.cs</DependentUpon>
     </Compile>
     <Compile Include="Consultation\frm_Diagnosis.cs">
       <SubType>Form</SubType>
@@ -137,9 +133,6 @@
     <Compile Include="SendFunction.cs" />
     <EmbeddedResource Include="Consultation\frm_CallNumber.resx">
       <DependentUpon>frm_CallNumber.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Consultation\frm_Condition.resx">
-      <DependentUpon>frm_Condition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Consultation\frm_Diagnosis.resx">
       <DependentUpon>frm_Diagnosis.cs</DependentUpon>
