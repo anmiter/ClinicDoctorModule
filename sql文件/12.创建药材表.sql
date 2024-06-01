@@ -9,23 +9,23 @@ CREATE TABLE tb_Herb
 	CONSTRAINT pk_Herb_No
 		PRIMARY KEY(No)
 	,Name
-		VARCHAR(100)
+		VARCHAR(50)
 	,Pinyin
-		VARCHAR(100)
-	,TypeNo
+		VARCHAR(50)
+	,CategoryNo
 		INT
-		CONSTRAINT fk_Herb_TypeNo
-		FOREIGN KEY (TypeNo)
-		REFERENCES tb_HerbType(No)
+		CONSTRAINT fk_Herb_CategoryNo
+		FOREIGN KEY (CategoryNo)
+		REFERENCES tb_HerbCategory(No)
 		ON DELETE NO ACTION
 		ON UPDATE CASCADE
-	,Effect
-		VARCHAR(1000)
+	,Efficacy
+		VARCHAR(250)
 	,Price
 		DECIMAL(18,2))
 		
 INSERT INTO tb_Herb
-	(Name,Pinyin,TypeNo,Effect,Price)
+	(Name,Pinyin,CategoryNo,Efficacy,Price)
 	VALUES
 	('麻黄','mahuang',1,'性味辛微苦温，归肺、膀胱经，具有发汗散寒、宣肺平喘、利水消肿的功效',0.05),
 	('薄荷','bohe',2,'性味辛凉，归肝肺经，具有疏散风热、清利头目、利咽、透疹的功效',0.01),
@@ -59,4 +59,5 @@ INSERT INTO tb_Herb
 	('麦冬','maidong',24,'性味甘微苦微寒，归心、肺、胃经，具有养阴润肺、益胃生津、清心除烦的功效',0.32),
 	('朱砂','zhusha',25,'性味甘，性微寒，有毒，归心经，具有清心镇惊、安神明目、解毒的功效',0.45),
 	('远志','yuanzhi',25,'性味苦辛温，归心、肾、肺经，具有安神益智、祛痰、消肿的功效',0.36)
+
 SELECT * FROM tb_Herb

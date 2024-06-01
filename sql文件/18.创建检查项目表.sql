@@ -1,22 +1,22 @@
 USE OutpatientClinicDoctorDB
-IF OBJECT_ID('tb_ExamineItem') IS NOT NULL
-DROP TABLE tb_ExamineItem;
+IF OBJECT_ID('tb_Examination') IS NOT NULL
+DROP TABLE tb_Examination;
 GO
-CREATE TABLE tb_ExamineItem
+CREATE TABLE tb_Examination
 	(No
 		INT IDENTITY(1,1)/*IDENTITY(1,1)：自增长，起始值1，增量1*/
 		NOT NULL
-	CONSTRAINT pk_ExamineItem_No
+	CONSTRAINT pk_Examination_No
 		PRIMARY KEY(No)
 	,Name
-		VARCHAR(100)
+		VARCHAR(50)
 	,Pinyin
-		VARCHAR(100)
+		VARCHAR(50)
 	,TypeNo
 		INT
-		CONSTRAINT fk_ExamineItem_TypeNo
+		CONSTRAINT fk_Examination_TypeNo
 		FOREIGN KEY (TypeNo)
-		REFERENCES tb_ExamineType(No)
+		REFERENCES tb_ExaminationType(No)
 		ON DELETE NO ACTION
 		ON UPDATE CASCADE
 	,Price
@@ -24,7 +24,7 @@ CREATE TABLE tb_ExamineItem
 	,Introduction
 		VARCHAR(1000))
 
-INSERT INTO tb_ExamineItem
+INSERT INTO tb_Examination
 	(Name,Pinyin,TypeNo,Price,Introduction)
 	VALUES
 	('血常规','xuechanggui',1,45,'包括红细胞计数、白细胞计数、血红蛋白浓度等，用于评估贫血、感染、白血病等血液相关疾病'),
@@ -45,4 +45,4 @@ INSERT INTO tb_ExamineItem
 	('骨密度检查','gudumingdujiancha',7,300,'评估骨骼健康状况，常用于骨质疏松的诊断'),
 	('基因检查','jiyinjiancha',7,1500,'通过检测基因序列，预测患某种疾病的风险，或用于遗传性疾病的诊断')
 
-SELECT * FROM tb_ExamineItem
+SELECT * FROM tb_Examination

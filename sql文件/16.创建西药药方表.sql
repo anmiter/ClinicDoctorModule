@@ -7,17 +7,18 @@ CREATE TABLE tb_Prescription
 		VARCHAR(50)
 	,DrugNo
 		INT
-	,Type
-		VARCHAR(50)
+		CONSTRAINT fk_Prescription_DrugNo
+		FOREIGN KEY (DrugNo)
+		REFERENCES tb_Drug(No)
+		ON DELETE NO ACTION
+		ON UPDATE CASCADE
 	,Number
 		INT
-	,Unit
-		VARCHAR(50)
-	,Usage
-		VARCHAR(50)
-	,Dosage
-		VARCHAR(50)
-	,Times
+	,Frequency
 		INT
-	,DAYS
-		INT)
+	,Days
+		INT
+	,Usage
+		INT
+	,Price
+		DECIMAL(18,2))

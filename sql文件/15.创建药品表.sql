@@ -9,13 +9,13 @@ CREATE TABLE tb_Drug
 	CONSTRAINT pk_Drug_No
 		PRIMARY KEY(No)
 	,ChineseName
-		VARCHAR(100)
+		VARCHAR(50)
 	,EnglishName
-		VARCHAR(100)
+		VARCHAR(50)
 	,Pinyin
 		VARCHAR(50)
 	,Treat
-		VARCHAR(1000)
+		VARCHAR(250)
 	,UnitNo
 		INT
 		CONSTRAINT fk_Drug_UnitNo

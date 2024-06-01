@@ -3,13 +3,13 @@ IF OBJECT_ID('tb_PrescriptionList') IS NOT NULL
 DROP TABLE tb_PrescriptionList;
 GO
 CREATE TABLE tb_PrescriptionList
-	(PrescriptionNo
+	(No
 		VARCHAR(50)
-	,PatientIDCard
+	,HealthCardNo
 		VARCHAR(50)
-		CONSTRAINT fk_PrescriptionList_PatientIDCard
-		FOREIGN KEY (PatientIDCard)
-		REFERENCES tb_Patient(PatientIDCard)
+		CONSTRAINT fk_PrescriptionList_HealthCardNo
+		FOREIGN KEY (HealthCardNo)
+		REFERENCES tb_Patient(HealthCardNo)
 		ON DELETE NO ACTION
 		ON UPDATE CASCADE
 	,DoctorNo
@@ -19,5 +19,7 @@ CREATE TABLE tb_PrescriptionList
 		REFERENCES tb_Doctor(No)
 		ON DELETE NO ACTION
 		ON UPDATE CASCADE
-	,DATE
-		DATE)
+	,Date
+		DATE
+	,Price
+		DECIMAL(18,2))

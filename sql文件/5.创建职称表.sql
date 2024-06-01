@@ -9,16 +9,16 @@ CREATE TABLE tb_Title
 	CONSTRAINT pk_Title_No
 		PRIMARY KEY(No)
 	,Name
-		VARCHAR(100)
-	,ConsultationFee
+		VARCHAR(50)
+	,CounselingCost
 		DECIMAL(18,2))
 
 INSERT INTO tb_Title
-	(Name,ConsultationFee)
+	(Name,CounselingCost)
 	VALUES
-	('住院医师',30),
-	('主治医师',35),
+	('主任医师',50),
 	('副主任医师',40),
-	('主任医师',50);
+	('主治医师',35),
+	('住院医师',30);
 
 SELECT * FROM tb_Title

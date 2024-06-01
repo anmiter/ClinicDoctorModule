@@ -1,18 +1,18 @@
 USE OutpatientClinicDoctorDB
-IF OBJECT_ID('tb_HerbType') IS NOT NULL
-DROP TABLE tb_HerbType;
+IF OBJECT_ID('tb_HerbCategory') IS NOT NULL
+DROP TABLE tb_HerbCategory;
 GO
-CREATE TABLE tb_HerbType
+CREATE TABLE tb_HerbCategory
 	(No
 		INT IDENTITY(1,1)/*IDENTITY(1,1)：自增长，起始值1，增量1*/
 		NOT NULL
-		CONSTRAINT pk_HerbType_No
+		CONSTRAINT pk_tb_HerbCategory_No
 		PRIMARY KEY(No)
-	,Type
+	,Category
 		VARCHAR(50))
 
-INSERT INTO tb_HerbType
-	(Type)
+INSERT INTO tb_HerbCategory
+	(Category)
 	VALUES
 	('辛温解表药'),
 	('辛凉解表药'),
@@ -41,4 +41,4 @@ INSERT INTO tb_HerbType
 	('重镇安神药'),
 	('养心安神药')
 
-SELECT * FROM tb_CTDrugType
+SELECT * FROM tb_HerbCategory

@@ -1,0 +1,18 @@
+USE OutpatientClinicDoctorDB
+IF OBJECT_ID('tb_TCM') IS NOT NULL
+DROP TABLE tb_TCM;
+GO
+CREATE TABLE tb_TCM
+	(No
+		VARCHAR(50)
+	,HerbNo
+		INT
+		CONSTRAINT fk_TCM_HerbNo
+		FOREIGN KEY (HerbNo)
+		REFERENCES tb_Herb(No)
+		ON DELETE NO ACTION
+		ON UPDATE CASCADE
+	,Usage
+		INT
+	,Price
+		DECIMAL(18,2))

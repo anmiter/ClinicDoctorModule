@@ -1,0 +1,40 @@
+USE OutpatientClinicDoctorDB
+IF OBJECT_ID('tb_Queue') IS NOT NULL
+DROP TABLE tb_Queue;
+GO
+CREATE TABLE tb_Queue
+	(DoctorNo
+		VARCHAR(50)
+		CONSTRAINT fk_Queue_DoctorNo
+		FOREIGN KEY (DoctorNo)
+		REFERENCES tb_Doctor(No)
+		ON DELETE NO ACTION
+		ON UPDATE CASCADE
+	,HealthCardNo
+		VARCHAR(50)
+		CONSTRAINT fk_Queue_HealthCardNo
+		FOREIGN KEY (HealthCardNo)
+		REFERENCES tb_Patient(HealthCardNo)
+		ON DELETE NO ACTION
+		ON UPDATE CASCADE
+	,Date
+		DATE
+	,Number
+		INT
+	,StateNo
+		INT
+		DEFAULT 1
+		CONSTRAINT fk_Queue_StateNo
+		FOREIGN KEY (StateNo)
+		REFERENCES tb_QueueState(No)
+		ON DELETE NO ACTION
+		ON UPDATE CASCADE)
+
+INSERT INTO tb_Queue
+	(DoctorNo,HealthCardNo,Date,Number)
+	VALUES
+	('1989001','350273847261983763','2024-6-2',1),
+	('1989001','350283722938401934','2024-6-2',2),
+	('1989001','350427200401214025','2024-6-2',3)
+
+SELECT * FROM tb_Queue

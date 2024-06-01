@@ -1,17 +1,17 @@
 USE OutpatientClinicDoctorDB
-IF OBJECT_ID('tb_ComeFrom') IS NOT NULL
-DROP TABLE tb_ComeFrom;
+IF OBJECT_ID('tb_Provenance') IS NOT NULL
+DROP TABLE tb_Provenance;
 GO
-CREATE TABLE tb_ComeFrom
+CREATE TABLE tb_Provenance
 	(No
 		INT IDENTITY(1,1)/*IDENTITY(1,1)：自增长，起始值1，增量1*/
 		NOT NULL
-	CONSTRAINT pk_ComeFrom_No
+	CONSTRAINT pk_Provenance_No
 		PRIMARY KEY(No)
 	,Name
-		VARCHAR(100))
+		VARCHAR(50))
 
-INSERT INTO tb_ComeFrom
+INSERT INTO tb_Provenance
 	(Name)
 	VALUES
 	('河北'),
@@ -49,4 +49,4 @@ INSERT INTO tb_ComeFrom
 	('香港'),
 	('澳门')
 
-SELECT * FROM tb_ComeFrom
+SELECT * FROM tb_Provenance
