@@ -16,8 +16,8 @@ namespace OutpatientClinicDoctorModule
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            frm_Login frm_Login = new frm_Login();
-            frm_Login.ShowDialog();
+            frm_LogIn frm_LogIn = new frm_LogIn();
+            frm_LogIn.ShowDialog();
             Application.Run();
         }
     }

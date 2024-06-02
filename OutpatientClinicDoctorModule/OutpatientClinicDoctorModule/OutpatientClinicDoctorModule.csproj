@@ -48,123 +48,116 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CheckFunction.cs" />
-    <Compile Include="ConsultationInfo.cs" />
-    <Compile Include="Consultation\frm_CallNumber.cs">
+    <Compile Include="BusinessLogicLayer\DoctorBll.cs" />
+    <Compile Include="BusinessLogicLayer\EnCrypt.cs" />
+    <Compile Include="BusinessLogicLayer\IDoctorBll.cs" />
+    <Compile Include="DataAccessLayer\DoctorDal.cs" />
+    <Compile Include="DataAccessLayer\IDoctorDal.cs" />
+    <Compile Include="BusinessLogicLayer\SendEmail.cs" />
+    <Compile Include="DataAccessLayer\SqlHelper.cs" />
+    <Compile Include="Model\Doctor.cs" />
+    <Compile Include="PresentationLayer\Consultation\frm_CallNumber.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Consultation\frm_CallNumber.Designer.cs">
+    <Compile Include="PresentationLayer\Consultation\frm_CallNumber.Designer.cs">
       <DependentUpon>frm_CallNumber.cs</DependentUpon>
     </Compile>
-    <Compile Include="Consultation\frm_Diagnosis.cs">
+    <Compile Include="PresentationLayer\Consultation\frm_Diagnosis.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Consultation\frm_Diagnosis.Designer.cs">
+    <Compile Include="PresentationLayer\Consultation\frm_Diagnosis.Designer.cs">
       <DependentUpon>frm_Diagnosis.cs</DependentUpon>
     </Compile>
-    <Compile Include="Consultation\frm_Examination.cs">
+    <Compile Include="PresentationLayer\Consultation\frm_Examination.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Consultation\frm_Examination.Designer.cs">
+    <Compile Include="PresentationLayer\Consultation\frm_Examination.Designer.cs">
       <DependentUpon>frm_Examination.cs</DependentUpon>
     </Compile>
-    <Compile Include="Consultation\frm_MedicalRecord.cs">
+    <Compile Include="PresentationLayer\Consultation\frm_Prescription.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Consultation\frm_MedicalRecord.Designer.cs">
-      <DependentUpon>frm_MedicalRecord.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Consultation\frm_Prescription.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Consultation\frm_Prescription.Designer.cs">
+    <Compile Include="PresentationLayer\Consultation\frm_Prescription.Designer.cs">
       <DependentUpon>frm_Prescription.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_Home.cs">
+    <Compile Include="PresentationLayer\Consultation\frm_ReadCard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_Home.Designer.cs">
+    <Compile Include="PresentationLayer\Consultation\frm_ReadCard.Designer.cs">
+      <DependentUpon>frm_ReadCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Consultation\frm_TreatRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Consultation\frm_TreatRecord.Designer.cs">
+      <DependentUpon>frm_TreatRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\frm_Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\frm_Home.Designer.cs">
       <DependentUpon>frm_Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_Login.cs">
+    <Compile Include="PresentationLayer\frm_LogIn.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_Login.Designer.cs">
-      <DependentUpon>frm_Login.cs</DependentUpon>
+    <Compile Include="PresentationLayer\frm_LogIn.Designer.cs">
+      <DependentUpon>frm_LogIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_Register.cs">
+    <Compile Include="PresentationLayer\frm_RetrievePassword.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_Register.Designer.cs">
-      <DependentUpon>frm_Register.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_RetrievePassword.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_RetrievePassword.Designer.cs">
+    <Compile Include="PresentationLayer\frm_RetrievePassword.Designer.cs">
       <DependentUpon>frm_RetrievePassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Personal\frm_ModifyPassword.cs">
+    <Compile Include="PresentationLayer\frm_SignUp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Personal\frm_ModifyPassword.Designer.cs">
+    <Compile Include="PresentationLayer\frm_SignUp.Designer.cs">
+      <DependentUpon>frm_SignUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Personal\frm_ModifyPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Personal\frm_ModifyPassword.Designer.cs">
       <DependentUpon>frm_ModifyPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Personal\frm_ModifyPrice.cs">
+    <Compile Include="PresentationLayer\Personal\frm_ModifyPrice.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Personal\frm_ModifyPrice.Designer.cs">
+    <Compile Include="PresentationLayer\Personal\frm_ModifyPrice.Designer.cs">
       <DependentUpon>frm_ModifyPrice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Personal\frm_PersonalCenter.cs">
+    <Compile Include="PresentationLayer\Personal\frm_PersonalCenter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Personal\frm_PersonalCenter.Designer.cs">
+    <Compile Include="PresentationLayer\Personal\frm_PersonalCenter.Designer.cs">
       <DependentUpon>frm_PersonalCenter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Search\frm_SearchPrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Search\frm_SearchPrice.Designer.cs">
+      <DependentUpon>frm_SearchPrice.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Search\frm_SearchPrice.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Search\frm_SearchPrice.Designer.cs">
-      <DependentUpon>frm_SearchPrice.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SendFunction.cs" />
-    <EmbeddedResource Include="Consultation\frm_CallNumber.resx">
-      <DependentUpon>frm_CallNumber.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Consultation\frm_Diagnosis.resx">
-      <DependentUpon>frm_Diagnosis.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Consultation\frm_Examination.resx">
-      <DependentUpon>frm_Examination.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Consultation\frm_MedicalRecord.resx">
-      <DependentUpon>frm_MedicalRecord.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Consultation\frm_Prescription.resx">
-      <DependentUpon>frm_Prescription.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_Home.resx">
+    <EmbeddedResource Include="PresentationLayer\frm_Home.resx">
       <DependentUpon>frm_Home.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_Login.resx">
-      <DependentUpon>frm_Login.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\frm_LogIn.resx">
+      <DependentUpon>frm_LogIn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_Register.resx">
-      <DependentUpon>frm_Register.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frm_RetrievePassword.resx">
+    <EmbeddedResource Include="PresentationLayer\frm_RetrievePassword.resx">
       <DependentUpon>frm_RetrievePassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Personal\frm_ModifyPassword.resx">
+    <EmbeddedResource Include="PresentationLayer\frm_SignUp.resx">
+      <DependentUpon>frm_SignUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Personal\frm_ModifyPassword.resx">
       <DependentUpon>frm_ModifyPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Personal\frm_ModifyPrice.resx">
-      <DependentUpon>frm_ModifyPrice.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Personal\frm_PersonalCenter.resx">
+    <EmbeddedResource Include="PresentationLayer\Personal\frm_PersonalCenter.resx">
       <DependentUpon>frm_PersonalCenter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -176,9 +169,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Search\frm_SearchPrice.resx">
-      <DependentUpon>frm_SearchPrice.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
