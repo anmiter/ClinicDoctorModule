@@ -3,60 +3,24 @@
   "WorkspaceRootPath": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\presentationlayer\\personal\\frm_personalcenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\presentationlayer\\personal\\frm_personalcenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\presentationlayer\\consultation\\frm_diagnosis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\presentationlayer\\consultation\\frm_diagnosis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\presentationlayer\\personal\\frm_personalcenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\presentationlayer\\personal\\frm_personalcenter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\model\\consultationinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\model\\consultationinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\presentationlayer\\personal\\frm_modifypassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\presentationlayer\\personal\\frm_modifypassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\presentationlayer\\frm_login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\presentationlayer\\frm_login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\presentationlayer\\personal\\frm_modifypassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\presentationlayer\\personal\\frm_modifypassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\presentationlayer\\consultation\\frm_diagnosis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\presentationlayer\\consultation\\frm_diagnosis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\businesslogiclayer\\doctorbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\businesslogiclayer\\doctorbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\businesslogiclayer\\idoctorbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\businesslogiclayer\\idoctorbll.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\presentationlayer\\frm_signup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\presentationlayer\\frm_signup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\presentationlayer\\frm_signup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\presentationlayer\\frm_signup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\presentationlayer\\frm_retrievepassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\presentationlayer\\frm_retrievepassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\presentationlayer\\frm_retrievepassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\presentationlayer\\frm_retrievepassword.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\presentationlayer\\frm_home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\presentationlayer\\frm_home.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\dataaccesslayer\\doctordal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\dataaccesslayer\\doctordal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\dataaccesslayer\\sqlhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\dataaccesslayer\\sqlhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\model\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\model\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|d:\\outpatientclinicdoctor\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\outpatientclinicdoctormodule\\presentationlayer\\frm_login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{E153F43B-92A2-4DBB-B701-CEEEC960A3AE}|OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule.csproj|solutionrelative:outpatientclinicdoctormodule\\presentationlayer\\frm_login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -69,187 +33,71 @@
           "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "frm_Home.cs",
-              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\frm_Home.cs",
-              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\PresentationLayer\\frm_Home.cs",
-              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\frm_Home.cs",
-              "RelativeToolTip": "OutpatientClinicDoctorModule\\PresentationLayer\\frm_Home.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAABAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T11:27:19.656Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "frm_PersonalCenter.cs",
-              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\Personal\\frm_PersonalCenter.cs",
-              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\PresentationLayer\\Personal\\frm_PersonalCenter.cs",
-              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\Personal\\frm_PersonalCenter.cs",
-              "RelativeToolTip": "OutpatientClinicDoctorModule\\PresentationLayer\\Personal\\frm_PersonalCenter.cs",
-              "ViewState": "AQIAAAgBAAAAAAAAAAA4wBwBAAAqAAAA",
+              "DocumentIndex": 1,
+              "Title": "ConsultationInfo.cs",
+              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\Model\\ConsultationInfo.cs",
+              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\Model\\ConsultationInfo.cs",
+              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\Model\\ConsultationInfo.cs",
+              "RelativeToolTip": "OutpatientClinicDoctorModule\\Model\\ConsultationInfo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T11:49:32.83Z",
+              "WhenOpened": "2024-06-03T13:57:29.927Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "frm_Diagnosis.cs",
+              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\Consultation\\frm_Diagnosis.cs",
+              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\PresentationLayer\\Consultation\\frm_Diagnosis.cs",
+              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\Consultation\\frm_Diagnosis.cs",
+              "RelativeToolTip": "OutpatientClinicDoctorModule\\PresentationLayer\\Consultation\\frm_Diagnosis.cs",
+              "ViewState": "AQIAAI4AAAAAAAAAAAAqwJMAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-03T13:46:09.978Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "frm_ModifyPassword.cs",
-              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\Personal\\frm_ModifyPassword.cs",
-              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\PresentationLayer\\Personal\\frm_ModifyPassword.cs",
-              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\Personal\\frm_ModifyPassword.cs",
-              "RelativeToolTip": "OutpatientClinicDoctorModule\\PresentationLayer\\Personal\\frm_ModifyPassword.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAyAAAA",
+              "Title": "frm_Diagnosis.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\Consultation\\frm_Diagnosis.cs",
+              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\PresentationLayer\\Consultation\\frm_Diagnosis.cs",
+              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\Consultation\\frm_Diagnosis.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "OutpatientClinicDoctorModule\\PresentationLayer\\Consultation\\frm_Diagnosis.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T13:18:41.751Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-03T13:46:08.482Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "frm_ModifyPassword.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\Personal\\frm_ModifyPassword.cs",
-              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\PresentationLayer\\Personal\\frm_ModifyPassword.cs",
-              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\Personal\\frm_ModifyPassword.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "OutpatientClinicDoctorModule\\PresentationLayer\\Personal\\frm_ModifyPassword.cs [\u8BBE\u8BA1]",
+              "Title": "frm_LogIn.cs",
+              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\frm_LogIn.cs",
+              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\PresentationLayer\\frm_LogIn.cs",
+              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\frm_LogIn.cs",
+              "RelativeToolTip": "OutpatientClinicDoctorModule\\PresentationLayer\\frm_LogIn.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAA2wBwAAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T13:18:40.352Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frm_PersonalCenter.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\Personal\\frm_PersonalCenter.cs",
-              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\PresentationLayer\\Personal\\frm_PersonalCenter.cs",
-              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\Personal\\frm_PersonalCenter.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "OutpatientClinicDoctorModule\\PresentationLayer\\Personal\\frm_PersonalCenter.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T11:49:31.254Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "frm_SignUp.cs",
-              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\frm_SignUp.cs",
-              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\PresentationLayer\\frm_SignUp.cs",
-              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\frm_SignUp.cs",
-              "RelativeToolTip": "OutpatientClinicDoctorModule\\PresentationLayer\\frm_SignUp.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAxwDQAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T13:01:00.216Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "frm_SignUp.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\frm_SignUp.cs",
-              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\PresentationLayer\\frm_SignUp.cs",
-              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\frm_SignUp.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "OutpatientClinicDoctorModule\\PresentationLayer\\frm_SignUp.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T13:00:58.709Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IDoctorBll.cs",
-              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\BusinessLogicLayer\\IDoctorBll.cs",
-              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\BusinessLogicLayer\\IDoctorBll.cs",
-              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\BusinessLogicLayer\\IDoctorBll.cs",
-              "RelativeToolTip": "OutpatientClinicDoctorModule\\BusinessLogicLayer\\IDoctorBll.cs",
-              "ViewState": "AQIAAEQAAAAAAAAAAAAAwGAAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T12:04:45.524Z",
+              "WhenOpened": "2024-06-03T13:42:47.172Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "DoctorBll.cs",
-              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\BusinessLogicLayer\\DoctorBll.cs",
-              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\BusinessLogicLayer\\DoctorBll.cs",
-              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\BusinessLogicLayer\\DoctorBll.cs",
-              "RelativeToolTip": "OutpatientClinicDoctorModule\\BusinessLogicLayer\\DoctorBll.cs",
-              "ViewState": "AQIAAAUBAAAAAAAAAAAuwBUBAAAsAAAA",
+              "Title": "frm_LogIn.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\frm_LogIn.cs",
+              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\PresentationLayer\\frm_LogIn.cs",
+              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\frm_LogIn.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "OutpatientClinicDoctorModule\\PresentationLayer\\frm_LogIn.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T12:17:13.816Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "frm_RetrievePassword.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\frm_RetrievePassword.cs",
-              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\PresentationLayer\\frm_RetrievePassword.cs",
-              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\frm_RetrievePassword.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "OutpatientClinicDoctorModule\\PresentationLayer\\frm_RetrievePassword.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T12:59:12.438Z",
+              "WhenOpened": "2024-06-03T13:42:45.501Z",
               "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "frm_RetrievePassword.cs",
-              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\frm_RetrievePassword.cs",
-              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\PresentationLayer\\frm_RetrievePassword.cs",
-              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\PresentationLayer\\frm_RetrievePassword.cs",
-              "RelativeToolTip": "OutpatientClinicDoctorModule\\PresentationLayer\\frm_RetrievePassword.cs",
-              "ViewState": "AQIAAIIAAAAAAAAAAAA5wCoAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T12:59:13.832Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "DoctorDal.cs",
-              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\DataAccessLayer\\DoctorDal.cs",
-              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\DataAccessLayer\\DoctorDal.cs",
-              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\DataAccessLayer\\DoctorDal.cs",
-              "RelativeToolTip": "OutpatientClinicDoctorModule\\DataAccessLayer\\DoctorDal.cs",
-              "ViewState": "AQIAAGsAAAAAAAAAAAAswIUAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T12:17:15.345Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Doctor.cs",
-              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\Model\\Doctor.cs",
-              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\Model\\Doctor.cs",
-              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\Model\\Doctor.cs",
-              "RelativeToolTip": "OutpatientClinicDoctorModule\\Model\\Doctor.cs",
-              "ViewState": "AQIAACUAAAAAAAAAAAAkwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T11:55:05.421Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "SqlHelper.cs",
-              "DocumentMoniker": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\DataAccessLayer\\SqlHelper.cs",
-              "RelativeDocumentMoniker": "OutpatientClinicDoctorModule\\DataAccessLayer\\SqlHelper.cs",
-              "ToolTip": "D:\\OutpatientClinicDoctor\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\OutpatientClinicDoctorModule\\DataAccessLayer\\SqlHelper.cs",
-              "RelativeToolTip": "OutpatientClinicDoctorModule\\DataAccessLayer\\SqlHelper.cs",
-              "ViewState": "AQIAAKgAAAAAAAAAAAAwwMQAAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T12:17:59.157Z",
-              "EditorCaption": ""
             }
           ]
         }

@@ -51,12 +51,17 @@ namespace OutpatientClinicDoctorModule
             bool isEmpty = string.IsNullOrEmpty(password);
             if (isEmpty)
             {
-                this.ErrorProvider.SetError(this.txb_Password, "密码不能为空");
+                this.ErrorProvider.SetError(this.txb_Password, "密码不能为空！");
                 return;
             }
             this.ErrorProvider.SetError(this.txb_Password, "");
+            bool IsVaild = this.DoctorBll.CheckPassword(password);
+            if (!IsVaild)
+            {
+                this.ErrorProvider.SetError(this.txb_Password, "密码错误！");
+                return;
+            }
         }
-
         /// <summary>
         /// 验证工号
         /// </summary>

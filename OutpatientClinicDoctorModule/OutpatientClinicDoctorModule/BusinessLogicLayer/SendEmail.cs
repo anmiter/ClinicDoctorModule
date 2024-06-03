@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
 using System.Net;
+using System.Net.Mail;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OutpatientClinicDoctorModule
@@ -15,7 +12,6 @@ namespace OutpatientClinicDoctorModule
     internal class SendEmail
     {
         private static readonly Random rnd = new Random(); // 静态只读字段，确保只创建一个Random实例  
-
         /// <summary>  
         /// 生成随机验证码  
         /// </summary>  

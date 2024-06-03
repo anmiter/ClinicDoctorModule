@@ -145,10 +145,10 @@
             // btn_OpenPhoto
             // 
             this.btn_OpenPhoto.Font = new System.Drawing.Font("宋体", 10F);
-            this.btn_OpenPhoto.Location = new System.Drawing.Point(148, 415);
+            this.btn_OpenPhoto.Location = new System.Drawing.Point(129, 410);
             this.btn_OpenPhoto.Margin = new System.Windows.Forms.Padding(4);
             this.btn_OpenPhoto.Name = "btn_OpenPhoto";
-            this.btn_OpenPhoto.Size = new System.Drawing.Size(112, 34);
+            this.btn_OpenPhoto.Size = new System.Drawing.Size(141, 34);
             this.btn_OpenPhoto.TabIndex = 179;
             this.btn_OpenPhoto.Text = "*打开照片";
             this.btn_OpenPhoto.UseVisualStyleBackColor = true;
@@ -240,6 +240,7 @@
             this.txb_QQEmail.Name = "txb_QQEmail";
             this.txb_QQEmail.Size = new System.Drawing.Size(393, 44);
             this.txb_QQEmail.TabIndex = 171;
+            this.txb_QQEmail.TextChanged += new System.EventHandler(this.txb_QQEmail_TextChanged);
             // 
             // lbl_QQEmail
             // 
@@ -305,6 +306,7 @@
             this.txb_Telephone.Name = "txb_Telephone";
             this.txb_Telephone.Size = new System.Drawing.Size(393, 44);
             this.txb_Telephone.TabIndex = 165;
+            this.txb_Telephone.TextChanged += new System.EventHandler(this.txb_Telephone_TextChanged);
             // 
             // lbl_No
             // 

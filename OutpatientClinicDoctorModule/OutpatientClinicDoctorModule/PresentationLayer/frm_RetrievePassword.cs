@@ -107,7 +107,6 @@ namespace OutpatientClinicDoctorModule
             }
             this.ErrorProvider.SetError(this.txb_No, "");
         }
-
         /// <summary>
         /// 单击重置密码按钮
         /// </summary>

@@ -61,7 +61,6 @@ namespace OutpatientClinicDoctorModule
             }
             this.ErrorProvider.SetError(this.txb_Telephone, "");
         }
-
         /// <summary>
         /// 验证工号
         /// </summary>

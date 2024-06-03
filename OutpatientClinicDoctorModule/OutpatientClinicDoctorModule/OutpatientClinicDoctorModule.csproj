@@ -51,11 +51,23 @@
     <Compile Include="BusinessLogicLayer\DoctorBll.cs" />
     <Compile Include="BusinessLogicLayer\EnCrypt.cs" />
     <Compile Include="BusinessLogicLayer\IDoctorBll.cs" />
+    <Compile Include="BusinessLogicLayer\IPatientBll.cs" />
+    <Compile Include="BusinessLogicLayer\PatientBll.cs" />
     <Compile Include="DataAccessLayer\DoctorDal.cs" />
     <Compile Include="DataAccessLayer\IDoctorDal.cs" />
     <Compile Include="BusinessLogicLayer\SendEmail.cs" />
+    <Compile Include="DataAccessLayer\IPatientDal.cs" />
+    <Compile Include="DataAccessLayer\IQueueDal.cs" />
+    <Compile Include="DataAccessLayer\ITreatRecordDal.cs" />
+    <Compile Include="DataAccessLayer\PatientDal.cs" />
+    <Compile Include="DataAccessLayer\QueueDal.cs" />
     <Compile Include="DataAccessLayer\SqlHelper.cs" />
+    <Compile Include="DataAccessLayer\TreatRecordDal.cs" />
+    <Compile Include="Model\ConsultationInfo.cs" />
     <Compile Include="Model\Doctor.cs" />
+    <Compile Include="Model\Patient.cs" />
+    <Compile Include="Model\Queue.cs" />
+    <Compile Include="Model\TreatRecord.cs" />
     <Compile Include="PresentationLayer\Consultation\frm_CallNumber.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +154,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="PresentationLayer\Consultation\frm_CallNumber.resx">
+      <DependentUpon>frm_CallNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Consultation\frm_Diagnosis.resx">
+      <DependentUpon>frm_Diagnosis.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\frm_Home.resx">
       <DependentUpon>frm_Home.cs</DependentUpon>
     </EmbeddedResource>

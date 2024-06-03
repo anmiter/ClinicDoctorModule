@@ -44,7 +44,7 @@
             this.btn_Prescription = new System.Windows.Forms.Button();
             this.btn_Diagnosis = new System.Windows.Forms.Button();
             this.lbl_HealthCardNo = new System.Windows.Forms.Label();
-            this.lbl_PatientNo = new System.Windows.Forms.Label();
+            this.lbl_HealthCardNo1 = new System.Windows.Forms.Label();
             this.btn_PersonalCenter = new System.Windows.Forms.Button();
             this.lbl_Name = new System.Windows.Forms.Label();
             this.lbl_DoctorNo1 = new System.Windows.Forms.Label();
@@ -228,15 +228,15 @@
             this.lbl_HealthCardNo.Size = new System.Drawing.Size(0, 39);
             this.lbl_HealthCardNo.TabIndex = 172;
             // 
-            // lbl_PatientNo
+            // lbl_HealthCardNo1
             // 
-            this.lbl_PatientNo.AutoSize = true;
-            this.lbl_PatientNo.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.lbl_PatientNo.Location = new System.Drawing.Point(637, 143);
-            this.lbl_PatientNo.Name = "lbl_PatientNo";
-            this.lbl_PatientNo.Size = new System.Drawing.Size(264, 39);
-            this.lbl_PatientNo.TabIndex = 171;
-            this.lbl_PatientNo.Text = "现就诊的病人编号:";
+            this.lbl_HealthCardNo1.AutoSize = true;
+            this.lbl_HealthCardNo1.Font = new System.Drawing.Font("微软雅黑", 15F);
+            this.lbl_HealthCardNo1.Location = new System.Drawing.Point(637, 143);
+            this.lbl_HealthCardNo1.Name = "lbl_HealthCardNo1";
+            this.lbl_HealthCardNo1.Size = new System.Drawing.Size(264, 39);
+            this.lbl_HealthCardNo1.TabIndex = 171;
+            this.lbl_HealthCardNo1.Text = "现就诊的病人编号:";
             // 
             // btn_PersonalCenter
             // 
@@ -305,7 +305,7 @@
             this.Controls.Add(this.btn_Prescription);
             this.Controls.Add(this.btn_Diagnosis);
             this.Controls.Add(this.lbl_HealthCardNo);
-            this.Controls.Add(this.lbl_PatientNo);
+            this.Controls.Add(this.lbl_HealthCardNo1);
             this.Controls.Add(this.btn_PersonalCenter);
             this.Controls.Add(this.lbl_Name);
             this.Controls.Add(this.lbl_DoctorNo1);
@@ -339,7 +339,7 @@
         private System.Windows.Forms.Button btn_Prescription;
         private System.Windows.Forms.Button btn_Diagnosis;
         private System.Windows.Forms.Label lbl_HealthCardNo;
-        private System.Windows.Forms.Label lbl_PatientNo;
+        private System.Windows.Forms.Label lbl_HealthCardNo1;
         private System.Windows.Forms.Button btn_PersonalCenter;
         private System.Windows.Forms.Label lbl_Name;
         private System.Windows.Forms.Label lbl_DoctorNo1;

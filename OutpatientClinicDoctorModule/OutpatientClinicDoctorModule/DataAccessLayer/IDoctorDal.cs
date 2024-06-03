@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-namespace OutpatientClinicDoctorModule
+﻿namespace OutpatientClinicDoctorModule
 {
     /// <summary>
     ///  医生（数据访问层）接口

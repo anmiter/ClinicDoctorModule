@@ -4,7 +4,7 @@ using System.Data;
 namespace OutpatientClinicDoctorModule
 {
     /// <summary>
-    /// 用户（数据访问层）
+    /// 医生（数据访问层）
     /// </summary>
     public class DoctorDal : IDoctorDal
     {
@@ -13,15 +13,37 @@ namespace OutpatientClinicDoctorModule
 		/// </summary>
 		private SqlHelper SqlHelper { get; set; }
         /// <summary>
-        /// 查询医生计数
+        /// 插入
         /// </summary>
-        /// <param name="no">工号</param>
-        /// <returns>计数</returns>
-        public int SelectCount(string no)
-            => this.SqlHelper
-            .NewCommand("SELECT COUNT(*) FROM tb_Doctor WHERE No=@No")
-            .NewParameter("@No", no)
-            .GetScalar<int>();
+        /// <param name="doctor">医生</param>
+        /// <returns>受影响行数</returns>
+        public int Insert(Doctor doctor)
+        {
+            int rowAffected = 0;
+            try
+            {
+                rowAffected =
+                    this.SqlHelper
+                    .NewCommand($@"INSERT INTO tb_Doctor
+	                                    (No,Password,Telephone,IsFreeze)
+	                                    VALUES
+	                                    (@No,@Password,@Telephone,@IsFreeze)")
+                    .NewParameter("@No", doctor.No)
+                    .NewParameter("@Password", doctor.Password)
+                    .NewParameter("@Telephone", doctor.Telephone)
+                    .NewParameter("@IsFreeze", doctor.IsFreeze)
+                    .NonQuery();
+            }
+            catch (NotUniqueException)
+            {
+                throw new ApplicationException("您提交的工号已存在");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return rowAffected;
+        }
         /// <summary>
         /// 查询医生
         /// </summary>
@@ -57,6 +79,16 @@ namespace OutpatientClinicDoctorModule
             }
             return doctor;
         }
+        /// <summary>
+        /// 查询医生计数
+        /// </summary>
+        /// <param name="no">工号</param>
+        /// <returns>计数</returns>
+        public int SelectCount(string no)
+            => this.SqlHelper
+            .NewCommand("SELECT COUNT(*) FROM tb_Doctor WHERE No=@No")
+            .NewParameter("@No", no)
+            .GetScalar<int>();
         /// <summary>
 		/// 更新
 		/// </summary>
@@ -95,45 +127,6 @@ namespace OutpatientClinicDoctorModule
             .NewParameter("@IsFreeze", doctor.IsFreeze)
             .NonQuery();
         /// <summary>
-        /// 插入
-        /// </summary>
-        /// <param name="doctor">医生</param>
-        /// <returns>受影响行数</returns>
-        public int Insert(Doctor doctor)
-        {
-            int rowAffected = 0;
-            try
-            {
-                rowAffected =
-                    this.SqlHelper
-                    .NewCommand($@"INSERT INTO tb_Doctor
-	                                    (No,Password,Telephone,IsFreeze)
-	                                    VALUES
-	                                    (@No,@Password,@Telephone,@IsFreeze)")
-                    .NewParameter("@No", doctor.No)
-                    .NewParameter("@Password", doctor.Password)
-                    .NewParameter("@Telephone", doctor.Telephone)
-                    .NewParameter("@IsFreeze", doctor.IsFreeze)
-                    .NonQuery();
-            }
-            catch (NotUniqueException)
-            {
-                throw new ApplicationException("您提交的工号已存在");
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            return rowAffected;
-        }
-        /// <summary>
-		/// 构造函数；
-		/// </summary>
-		public DoctorDal()
-        {
-            this.SqlHelper = new SqlHelper();
-        }
-        /// <summary>
         /// 查询电话号码计数
         /// </summary>
         /// <param name="telephone"></param>
@@ -153,5 +146,12 @@ namespace OutpatientClinicDoctorModule
             .NewCommand("SELECT COUNT(*) FROM tb_Doctor WHERE QQEmail=@QQEmail")
             .NewParameter("@QQEmail", mail)
             .GetScalar<int>();
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public DoctorDal()
+        {
+            this.SqlHelper = new SqlHelper();
+        }
     }
 }

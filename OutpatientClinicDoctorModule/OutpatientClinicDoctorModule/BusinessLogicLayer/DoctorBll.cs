@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.Net.Mail;
-using System.Net;
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using OutpatientClinicDoctorModule;
 
 namespace OutpatientClinicDoctorModule
 {
@@ -207,7 +201,7 @@ namespace OutpatientClinicDoctorModule
             return doctor;
         }
         /// <summary>
-        /// 检查电话号码是否正确
+        /// 检查电话号码格式是否正确
         /// </summary>
         /// <param name="telephone"></param>
         /// <returns></returns>

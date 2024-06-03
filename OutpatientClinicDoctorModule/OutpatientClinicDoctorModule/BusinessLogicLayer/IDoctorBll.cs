@@ -1,7 +1,7 @@
 ﻿namespace OutpatientClinicDoctorModule
 {
     /// <summary>
-    /// 用户(业务逻辑层)接口
+    /// 医生(业务逻辑层)接口
     /// </summary>
     public interface IDoctorBll
     {

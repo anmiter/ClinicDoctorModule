@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Environment;
 
@@ -103,8 +97,6 @@ namespace OutpatientClinicDoctorModule
             this.dtp_Birthdate.Validating += Dtp_Birthdate_Validating;
             this.txb_Introduction.Validating += Txb_Introduction_Validating;
             this.txb_IDCardNo.Validating += Txb_IDCardNo_Validating;
-            this.txb_Telephone.Validating += Txb_Telephone_Validating;
-            this.txb_QQEmail.Validating += Txb_QQEmail_Validating;
         }
         /// <summary>
         /// 验证QQ邮箱
@@ -261,7 +253,6 @@ namespace OutpatientClinicDoctorModule
         /// <param name="e"></param>
         private void btn_Update_Click(object sender, EventArgs e)
         {
-
             if (this.txb_Telephone.Text.Trim() != "" && this.txb_Name.Text.Trim() != "" && this.txb_IDCardNo.Text.Trim() != "" && this.txb_QQEmail.Text.Trim() != "" && this.ptb_Avatar.Image != null)
             {
                 if (IsValidated == true)
@@ -320,6 +311,24 @@ namespace OutpatientClinicDoctorModule
                 string fileName = openPhotoDialog.FileName;
                 this.ptb_Avatar.Image = Image.FromFile(fileName);
             }
+        }
+        /// <summary>
+        /// QQ邮箱更改
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txb_QQEmail_TextChanged(object sender, EventArgs e)
+        {
+            this.txb_QQEmail.Validating += Txb_QQEmail_Validating;
+        }
+        /// <summary>
+        /// 电话号码更改
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txb_Telephone_TextChanged(object sender, EventArgs e)
+        {
+            this.txb_Telephone.Validating += Txb_Telephone_Validating;
         }
     }
 }
