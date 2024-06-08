@@ -33,10 +33,59 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.8.0.0\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.1.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="Npgsql, Version=8.0.3.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.8.0.3\lib\netstandard2.0\Npgsql.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.8.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.0\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.0\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Channels, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Channels.8.0.0\lib\net462\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,25 +98,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogicLayer\DoctorBll.cs" />
-    <Compile Include="BusinessLogicLayer\EnCrypt.cs" />
     <Compile Include="BusinessLogicLayer\IDoctorBll.cs" />
     <Compile Include="BusinessLogicLayer\IPatientBll.cs" />
     <Compile Include="BusinessLogicLayer\PatientBll.cs" />
-    <Compile Include="DataAccessLayer\DoctorDal.cs" />
+    <Compile Include="DataAccessLayer\DalFactory.cs" />
     <Compile Include="DataAccessLayer\IDoctorDal.cs" />
-    <Compile Include="BusinessLogicLayer\SendEmail.cs" />
     <Compile Include="DataAccessLayer\IPatientDal.cs" />
-    <Compile Include="DataAccessLayer\IQueueDal.cs" />
-    <Compile Include="DataAccessLayer\ITreatRecordDal.cs" />
     <Compile Include="DataAccessLayer\PatientDal.cs" />
-    <Compile Include="DataAccessLayer\QueueDal.cs" />
-    <Compile Include="DataAccessLayer\SqlHelper.cs" />
-    <Compile Include="DataAccessLayer\TreatRecordDal.cs" />
+    <Compile Include="DataAccessLayer\PgSql\DoctorDalPgsql.cs" />
+    <Compile Include="DataAccessLayer\PgSql\PgsqlHelper.cs" />
+    <Compile Include="DataAccessLayer\SqlServer\DoctorDalSql.cs" />
+    <Compile Include="DataAccessLayer\SqlServer\SqlHelper.cs" />
     <Compile Include="Model\ConsultationInfo.cs" />
     <Compile Include="Model\Doctor.cs" />
     <Compile Include="Model\Patient.cs" />
-    <Compile Include="Model\Queue.cs" />
-    <Compile Include="Model\TreatRecord.cs" />
     <Compile Include="PresentationLayer\Consultation\frm_CallNumber.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,18 +136,6 @@
     <Compile Include="PresentationLayer\Consultation\frm_Prescription.Designer.cs">
       <DependentUpon>frm_Prescription.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Consultation\frm_ReadCard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Consultation\frm_ReadCard.Designer.cs">
-      <DependentUpon>frm_ReadCard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Consultation\frm_TreatRecord.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Consultation\frm_TreatRecord.Designer.cs">
-      <DependentUpon>frm_TreatRecord.cs</DependentUpon>
-    </Compile>
     <Compile Include="PresentationLayer\frm_Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,12 +147,6 @@
     </Compile>
     <Compile Include="PresentationLayer\frm_LogIn.Designer.cs">
       <DependentUpon>frm_LogIn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\frm_RetrievePassword.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\frm_RetrievePassword.Designer.cs">
-      <DependentUpon>frm_RetrievePassword.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\frm_SignUp.cs">
       <SubType>Form</SubType>
@@ -134,23 +160,11 @@
     <Compile Include="PresentationLayer\Personal\frm_ModifyPassword.Designer.cs">
       <DependentUpon>frm_ModifyPassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Personal\frm_ModifyPrice.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Personal\frm_ModifyPrice.Designer.cs">
-      <DependentUpon>frm_ModifyPrice.cs</DependentUpon>
-    </Compile>
     <Compile Include="PresentationLayer\Personal\frm_PersonalCenter.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Personal\frm_PersonalCenter.Designer.cs">
       <DependentUpon>frm_PersonalCenter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Search\frm_SearchPrice.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Search\frm_SearchPrice.Designer.cs">
-      <DependentUpon>frm_SearchPrice.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -160,14 +174,17 @@
     <EmbeddedResource Include="PresentationLayer\Consultation\frm_Diagnosis.resx">
       <DependentUpon>frm_Diagnosis.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Consultation\frm_Examination.resx">
+      <DependentUpon>frm_Examination.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Consultation\frm_Prescription.resx">
+      <DependentUpon>frm_Prescription.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\frm_Home.resx">
       <DependentUpon>frm_Home.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\frm_LogIn.resx">
       <DependentUpon>frm_LogIn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\frm_RetrievePassword.resx">
-      <DependentUpon>frm_RetrievePassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\frm_SignUp.resx">
       <DependentUpon>frm_SignUp.cs</DependentUpon>
@@ -187,6 +204,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

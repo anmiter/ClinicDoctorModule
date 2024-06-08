@@ -5,6 +5,9 @@ using System.Windows.Forms;
 
 namespace OutpatientClinicDoctorModule
 {
+    /// <summary>
+    /// 叫号窗体
+    /// </summary>
     public partial class frm_CallNumber : Form
     {
         /// <summary>
@@ -19,10 +22,6 @@ namespace OutpatientClinicDoctorModule
         /// 患者（业务逻辑层）
         /// </summary>
         private IPatientBll PatientBll { get; set; }
-        /// <summary>
-        /// 排号（数据访问层）
-        /// </summary>
-        private IQueueDal QueueDal { get; set; }
         /// <summary>
 		/// SQL助手
 		/// </summary>
@@ -54,7 +53,6 @@ namespace OutpatientClinicDoctorModule
         {
             this.Doctor = doctor;
             this.PatientBll = new PatientBll();
-            this.QueueDal = new QueueDal();
             this.SqlHelper = new SqlHelper();
             this.QueueTable = new DataTable();
             this.QueueTable = SqlHelper.GetTable($@"SELECT Q.DoctorNo,Q.HealthCardNo,Q.Date,Q.Number,QS.State AS State,P.Name
@@ -83,14 +81,20 @@ namespace OutpatientClinicDoctorModule
         /// <param name="e"></param>
         private void btn_Call_Click(object sender, EventArgs e)
         {
-            if (this.Patient == null) 
+            if (this.Patient == null)
             {
                 MessageBox.Show("请选择病人！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
+                this.SqlHelper.NewCommand($@"UPDATE tb_Queue SET StateNo=2 WHERE HealthCardNo=@HealthCardNo");
+                this.SqlHelper.NewParameter("@HealthCardNo", Patient.HealthCardNo);
+                int rowAffected = this.SqlHelper.NonQuery();
+                if (rowAffected == 1)
+                {
+                    MessageBox.Show("叫号成功！");
+                }
                 this.KeyNo = this.PatientBll.KeyNo(this.Doctor, this.Patient);
-                this.QueueDal.Update(2, this.Doctor, this.Patient);
                 frm_Home frm_Home = new frm_Home(this.Doctor, this.Patient, this.KeyNo);
                 frm_Home.ShowDialog();
             }
@@ -110,7 +114,7 @@ namespace OutpatientClinicDoctorModule
             DataRow currentPatientRow = currentPatientRowView.Row;
             string HealthCardNo = currentPatientRow["HealthCardNo"].ToString();
             this.Patient = this.PatientBll.Select(HealthCardNo);
-            if (this.Patient != null) 
+            if (this.Patient != null)
             {
                 this.txb_Name.Text = this.Patient.Name;
                 this.dtp_Birthdate.Value = this.Patient.Birthdate;

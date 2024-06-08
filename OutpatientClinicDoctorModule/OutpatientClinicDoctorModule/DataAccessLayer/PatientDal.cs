@@ -1,5 +1,5 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
+using System;
 
 namespace OutpatientClinicDoctorModule
 {
@@ -9,9 +9,9 @@ namespace OutpatientClinicDoctorModule
     public class PatientDal : IPatientDal
     {
         /// <summary>
-		/// SQL助手
-		/// </summary>
-		private SqlHelper SqlHelper { get; set; }
+        /// SQL助手
+        /// </summary>
+        private SqlHelper SqlHelper { get; set; }
         /// <summary>
         /// 查询患者
         /// </summary>

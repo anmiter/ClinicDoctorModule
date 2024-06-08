@@ -48,7 +48,7 @@
             this.lbl_Telephone.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_Telephone.Name = "lbl_Telephone";
             this.lbl_Telephone.Size = new System.Drawing.Size(167, 39);
-            this.lbl_Telephone.TabIndex = 54;
+            this.lbl_Telephone.TabIndex = 61;
             this.lbl_Telephone.Text = "电话号码：";
             // 
             // txb_Telephone
@@ -58,7 +58,7 @@
             this.txb_Telephone.Margin = new System.Windows.Forms.Padding(4);
             this.txb_Telephone.Name = "txb_Telephone";
             this.txb_Telephone.Size = new System.Drawing.Size(320, 47);
-            this.txb_Telephone.TabIndex = 53;
+            this.txb_Telephone.TabIndex = 60;
             // 
             // lbl_No
             // 
@@ -68,7 +68,7 @@
             this.lbl_No.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_No.Name = "lbl_No";
             this.lbl_No.Size = new System.Drawing.Size(107, 39);
-            this.lbl_No.TabIndex = 52;
+            this.lbl_No.TabIndex = 59;
             this.lbl_No.Text = "工号：";
             // 
             // txb_No
@@ -78,7 +78,7 @@
             this.txb_No.Margin = new System.Windows.Forms.Padding(4);
             this.txb_No.Name = "txb_No";
             this.txb_No.Size = new System.Drawing.Size(320, 47);
-            this.txb_No.TabIndex = 51;
+            this.txb_No.TabIndex = 58;
             // 
             // btn_SignUp
             // 
@@ -86,7 +86,7 @@
             this.btn_SignUp.Location = new System.Drawing.Point(716, 530);
             this.btn_SignUp.Name = "btn_SignUp";
             this.btn_SignUp.Size = new System.Drawing.Size(121, 66);
-            this.btn_SignUp.TabIndex = 50;
+            this.btn_SignUp.TabIndex = 57;
             this.btn_SignUp.Text = "注册";
             this.btn_SignUp.UseVisualStyleBackColor = true;
             this.btn_SignUp.Click += new System.EventHandler(this.btn_SignUp_Click);
@@ -99,7 +99,7 @@
             this.lbl_Password.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_Password.Name = "lbl_Password";
             this.lbl_Password.Size = new System.Drawing.Size(107, 39);
-            this.lbl_Password.TabIndex = 49;
+            this.lbl_Password.TabIndex = 56;
             this.lbl_Password.Text = "密码：";
             // 
             // txb_Password
@@ -110,7 +110,7 @@
             this.txb_Password.Name = "txb_Password";
             this.txb_Password.PasswordChar = '*';
             this.txb_Password.Size = new System.Drawing.Size(320, 47);
-            this.txb_Password.TabIndex = 48;
+            this.txb_Password.TabIndex = 55;
             // 
             // ErrorProvider
             // 

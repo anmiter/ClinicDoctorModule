@@ -13,15 +13,23 @@ namespace OutpatientClinicDoctorModule
         /// <summary>
         /// 医生
         /// </summary>
-        Doctor Doctor { get; set; }
+        private Doctor Doctor { get; set; }
         /// <summary>
         /// 患者
         /// </summary>
-        Patient Patient { get; set; }
+        private Patient Patient { get; set; }
+        /// <summary>
+        /// 数据库类型
+        /// </summary>
+        private string DBType;
         /// <summary>
         /// 重要编码
         /// </summary>
-        string KeyNo;
+        private string KeyNo;
+        /// <summary>
+        /// 是否已读卡
+        /// </summary>
+        private bool IsReadCard;
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -29,23 +37,25 @@ namespace OutpatientClinicDoctorModule
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+            this.IsReadCard = false;
         }
         /// <summary>
         /// 传参
         /// </summary>
         /// <param name="doctor"></param>
-        public frm_Home(Doctor doctor) : this()
+        public frm_Home(Doctor doctor, string dbType) : this()
         {
             this.Doctor = doctor;
+            this.DBType = dbType;
             this.lbl_Name.Text = this.Doctor.Name;
             this.lbl_No.Text = this.Doctor.No;
-            if (this.Doctor.Telephone == null || this.Doctor.Name == null || this.Doctor.QQEmail == null || this.Doctor.IDCardNo == null || this.Doctor.Avatar == null) 
+            if (this.Doctor.Telephone == null || this.Doctor.Name == null || this.Doctor.QQEmail == null || this.Doctor.IDCardNo == null || this.Doctor.Avatar == null)
             {
-                frm_PersonalCenter frm_PersonalCenter = new frm_PersonalCenter(this.Doctor);
+                frm_PersonalCenter frm_PersonalCenter = new frm_PersonalCenter(this.Doctor, this.DBType);
                 MessageBox.Show("请完善个人信息！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 frm_PersonalCenter.ShowDialog();
             }
-            if (Doctor.Avatar.Length > 10) 
+            if (Doctor.Avatar.Length != 0)
             {
                 byte[] photoBytes = Doctor.Avatar;
                 MemoryStream memoryStream = new MemoryStream(photoBytes);//内存流
@@ -63,7 +73,7 @@ namespace OutpatientClinicDoctorModule
             this.lbl_Name.Text = this.Doctor.Name;
             this.lbl_No.Text = this.Doctor.No;
             byte[] photoBytes = Doctor.Avatar;
-            MemoryStream memoryStream = new MemoryStream(photoBytes);//内存流
+            MemoryStream memoryStream = new MemoryStream(photoBytes);
             this.ptb_Avatar.Image = Image.FromStream(memoryStream);
             this.Patient = patient;
             this.KeyNo = keyNo;
@@ -76,19 +86,8 @@ namespace OutpatientClinicDoctorModule
         /// <param name="e"></param>
         private void btn_PersonalCenter_Click(object sender, EventArgs e)
         {
-            frm_PersonalCenter frm_PersonalCenter = new frm_PersonalCenter(this.Doctor);
+            frm_PersonalCenter frm_PersonalCenter = new frm_PersonalCenter(this.Doctor, this.DBType);
             frm_PersonalCenter.ShowDialog();
-        }
-        /// <summary>
-        /// 单击退出登录按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btn_LogOut_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            frm_LogIn frm_LogIn = new frm_LogIn();
-            frm_LogIn.ShowDialog();
         }
         /// <summary>
         /// 单击叫号按钮
@@ -107,28 +106,14 @@ namespace OutpatientClinicDoctorModule
         /// <param name="e"></param>
         private void btn_ReadCard_Click(object sender, EventArgs e)
         {
-            if (this.Patient != null) 
+            if (this.Patient != null)
             {
+                this.IsReadCard = true;
                 MessageBox.Show("读卡成功！");
             }
             else
             {
                 MessageBox.Show("请叫号！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-        /// <summary>
-        /// 单击病历按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btn_TreatRecord_Click(object sender, EventArgs e)
-        {
-            if (this.Patient == null)
-            {
-                MessageBox.Show("请先读卡！");
-            }
-            else
-            {
             }
         }
         /// <summary>
@@ -138,13 +123,13 @@ namespace OutpatientClinicDoctorModule
         /// <param name="e"></param>
         private void btn_Diagnosis_Click(object sender, EventArgs e)
         {
-            if (this.Patient == null)
+            if (!this.IsReadCard)
             {
                 MessageBox.Show("请先读卡！");
             }
             else
             {
-                frm_Diagnosis frm_Diagnosis = new frm_Diagnosis(this.Doctor, this.Patient);
+                frm_Diagnosis frm_Diagnosis = new frm_Diagnosis(this.Doctor, this.Patient, this.KeyNo);
                 frm_Diagnosis.ShowDialog();              
             }
         }
@@ -155,12 +140,14 @@ namespace OutpatientClinicDoctorModule
         /// <param name="e"></param>
         private void btn_Prescription_Click(object sender, EventArgs e)
         {
-            if (this.Patient == null)
+            if (!this.IsReadCard)
             {
                 MessageBox.Show("请先读卡！");
             }
             else
             {
+                frm_Prescription frm_Prescription = new frm_Prescription(this.Doctor, this.Patient, this.KeyNo);
+                frm_Prescription.ShowDialog();
             }
         }
         /// <summary>
@@ -170,46 +157,46 @@ namespace OutpatientClinicDoctorModule
         /// <param name="e"></param>
         private void btn_Examination_Click(object sender, EventArgs e)
         {
-            if (this.Patient == null)
+            if (!this.IsReadCard)
             {
                 MessageBox.Show("请先读卡！");
             }
             else
             {
+                frm_Examination frm_Examination = new frm_Examination(this.Doctor, this.Patient, this.KeyNo);
+                frm_Examination.ShowDialog();
             }
         }
-        /// <summary>
-        /// 单击修改价目按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
+        private void btn_TreatRecord_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_Sure_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btn_ModifyPrice_Click(object sender, EventArgs e)
         {
 
         }
-        /// <summary>
-        /// 单击查询价目按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void btn_SearchPrice_Click(object sender, EventArgs e)
         {
 
         }
         /// <summary>
-        /// 单击确认按钮
+        /// 单击退出登录按钮
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_Sure_Click(object sender, EventArgs e)
+        private void btn_LogOut_Click(object sender, EventArgs e)
         {
-            if (this.Patient == null)
-            {
-                MessageBox.Show("请先读卡！");
-            }
-            else
-            {
-            }
+            this.Close();
+            frm_LogIn frm_LogIn = new frm_LogIn();
+            frm_LogIn.ShowDialog();
         }
     }
 }

@@ -46,7 +46,7 @@
             this.lbl_ConfirmPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_ConfirmPassword.Name = "lbl_ConfirmPassword";
             this.lbl_ConfirmPassword.Size = new System.Drawing.Size(167, 39);
-            this.lbl_ConfirmPassword.TabIndex = 155;
+            this.lbl_ConfirmPassword.TabIndex = 160;
             this.lbl_ConfirmPassword.Text = "确认密码：";
             // 
             // lbl_NewPassword
@@ -57,7 +57,7 @@
             this.lbl_NewPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_NewPassword.Name = "lbl_NewPassword";
             this.lbl_NewPassword.Size = new System.Drawing.Size(137, 39);
-            this.lbl_NewPassword.TabIndex = 154;
+            this.lbl_NewPassword.TabIndex = 159;
             this.lbl_NewPassword.Text = "新密码：";
             // 
             // txb_ConfirmPassword
@@ -68,7 +68,7 @@
             this.txb_ConfirmPassword.Name = "txb_ConfirmPassword";
             this.txb_ConfirmPassword.PasswordChar = '*';
             this.txb_ConfirmPassword.Size = new System.Drawing.Size(320, 47);
-            this.txb_ConfirmPassword.TabIndex = 153;
+            this.txb_ConfirmPassword.TabIndex = 158;
             // 
             // txb_NewPassword
             // 
@@ -78,7 +78,7 @@
             this.txb_NewPassword.Name = "txb_NewPassword";
             this.txb_NewPassword.PasswordChar = '*';
             this.txb_NewPassword.Size = new System.Drawing.Size(320, 47);
-            this.txb_NewPassword.TabIndex = 152;
+            this.txb_NewPassword.TabIndex = 157;
             // 
             // btn_Save
             // 
@@ -87,7 +87,7 @@
             this.btn_Save.Location = new System.Drawing.Point(731, 487);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(121, 66);
-            this.btn_Save.TabIndex = 151;
+            this.btn_Save.TabIndex = 156;
             this.btn_Save.Text = "保存";
             this.btn_Save.UseVisualStyleBackColor = true;
             this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);

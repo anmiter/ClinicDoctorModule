@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace OutpatientClinicDoctorModule
@@ -18,14 +17,28 @@ namespace OutpatientClinicDoctorModule
         /// </summary>
         private IDoctorBll DoctorBll;
         /// <summary>
+        /// 数据库类型
+        /// </summary>
+        string DBType;
+        /// <summary>
         /// 构造函数
         /// </summary>
         public frm_LogIn()
         {
             InitializeComponent();
+            DialogResult result = MessageBox.Show("是否选择Pgsql数据库？", "确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            switch (result)
+            {
+                case DialogResult.Yes:
+                    this.DBType = "Pgsql";
+                    break;
+                case DialogResult.No:
+                    this.DBType = "Sql";
+                    break;
+            }
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.DoctorBll = new DoctorBll();
-            this.txb_No.Validating += Txb_DoctorNo_Validating;
+            this.DoctorBll = new DoctorBll(this.DBType);
+            this.txb_No.Validating += Txb_No_Validating;
             this.txb_Password.Validating += Txb_Password_Validating;
             this.ErrorProvider.BlinkRate = 500;
             this.AcceptButton = this.btn_LogIn;
@@ -44,7 +57,7 @@ namespace OutpatientClinicDoctorModule
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <exception cref="NotImplementedException"></exception>
-        private void Txb_Password_Validating(object sender, CancelEventArgs e)
+        private void Txb_Password_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string password = this.txb_Password.Text;
             this.ErrorProvider.SetError(this.txb_Password, "");
@@ -58,7 +71,7 @@ namespace OutpatientClinicDoctorModule
             bool IsVaild = this.DoctorBll.CheckPassword(password);
             if (!IsVaild)
             {
-                this.ErrorProvider.SetError(this.txb_Password, "密码错误！");
+                this.ErrorProvider.SetError(this.txb_Password, "密码格式错误！");
                 return;
             }
         }
@@ -67,7 +80,8 @@ namespace OutpatientClinicDoctorModule
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Txb_DoctorNo_Validating(object sender, CancelEventArgs e)
+        /// <exception cref="NotImplementedException"></exception>
+        private void Txb_No_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string No = this.txb_No.Text;
             this.ErrorProvider.SetError(this.txb_No, "");
@@ -94,6 +108,16 @@ namespace OutpatientClinicDoctorModule
         }
 
         /// <summary>
+        /// 单击注册按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_Register_Click(object sender, EventArgs e)
+        {
+            frm_SignUp frm_SignUp = new frm_SignUp();
+            frm_SignUp.ShowDialog();
+        }
+        /// <summary>
         /// 单击登录按钮
         /// </summary>
         /// <param name="sender"></param>
@@ -110,20 +134,9 @@ namespace OutpatientClinicDoctorModule
                 this.txb_Password.SelectAll();
                 return;
             }
-            MessageBox.Show($"即将打开医生 {this.Doctor.Name} 的主界面。");
-            frm_Home frm_Home = new frm_Home(this.Doctor);
+            MessageBox.Show($"即将打开医生 {this.Doctor.No} 的主界面。");
+            frm_Home frm_Home = new frm_Home(this.Doctor, this.DBType);
             frm_Home.ShowDialog();
-        }
-        /// <summary>
-        /// 单击注册按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btn_Register_Click(object sender, EventArgs e)
-        {
-            frm_SignUp frm_SignUp = new frm_SignUp();
-            frm_SignUp.ShowDialog();
-            this.Close();
         }
         /// <summary>
         /// 单击找回密码按钮
@@ -132,9 +145,7 @@ namespace OutpatientClinicDoctorModule
         /// <param name="e"></param>
         private void btn_RetrievePassword_Click(object sender, EventArgs e)
         {
-            frm_RetrievePassword frm_RetrievePassword = new frm_RetrievePassword();
-            frm_RetrievePassword.ShowDialog();
-            this.Close();
+
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace OutpatientClinicDoctorModule
@@ -10,11 +12,11 @@ namespace OutpatientClinicDoctorModule
     public class DoctorBll : IDoctorBll
     {
         /// <summary>
-        /// 医生（数据访问层）
-        /// </summary>
-        private IDoctorDal DoctorDal { get; set; }
+		/// 医生（数据访问层）
+		/// </summary>
+		private IDoctorDal DoctorDal { get; set; }
         /// <summary>
-        /// 失败次数上限
+        /// 登录失败次数上限
         /// </summary>
         private int MaxErrorNumber => 3;
         /// <summary>
@@ -22,19 +24,19 @@ namespace OutpatientClinicDoctorModule
         /// </summary>
         public int NoLength => 7;
         /// <summary>
-		/// 密码最小长度
-		/// </summary>
-		public int PasswordMinLength => 8;
+        /// 密码最小长度
+        /// </summary>
+        public int PasswordMinLength => 4;
         /// <summary>
         /// 密码最大长度
         /// </summary>
         public int PasswordMaxLength => 20;
         /// <summary>
-        /// 是否已成功登录
+        /// 是否完成登录
         /// </summary>
         public bool HasLoggedIn { get; private set; }
         /// <summary>
-        /// 是否已注册
+        /// 是否完成注册
         /// </summary>
         public bool HasSignedUp { get; private set; }
         /// <summary>
@@ -42,18 +44,34 @@ namespace OutpatientClinicDoctorModule
         /// </summary>
         public string Message { get; private set; }
         /// <summary>
-		/// MD5值是否相等；
-		/// </summary>
-		/// <param name="md5">MD5值</param>
-		/// <param name="otherPlainText">另一明文</param>
-		/// <returns>是否相等</returns>
-		private bool Md5Equal(byte[] md5, string otherPlainText)
-        => md5.SequenceEqual(EnCrypt.Md5Encrypt(otherPlainText));
+        /// 数据库类型
+        /// </summary>
+        public string DBType { get; private set; }
+        /// <summary>
+        /// MD5加密
+        /// </summary>
+        /// <param name="plainText">明文</param>
+        /// <returns>密文</returns>
+        public byte[] Encrypt(string plainText)
+        {
+            byte[] plainBytes = Encoding.Default.GetBytes(plainText);
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] cryptedBytes = md5.ComputeHash(plainBytes);
+            return cryptedBytes;
+        }
+        /// <summary>
+        /// MD5值是否相等；
+        /// </summary>
+        /// <param name="md5">MD5值</param>
+        /// <param name="otherPlainText">另一明文</param>
+        /// <returns>是否相等</returns>
+        private bool Md5Equal(byte[] md5, string otherPlainText)
+        => md5.SequenceEqual(this.Encrypt(otherPlainText));
         /// <summary>
         /// 处理工号不存在
         /// </summary>
         /// <param name="doctor">医生</param>
-        private void HandleNotExist(Doctor doctor)
+        private void HandleDoctorNotExist(Doctor doctor)
         {
             if (doctor == null)
             {
@@ -65,7 +83,7 @@ namespace OutpatientClinicDoctorModule
         /// 处理账号被冻结
         /// </summary>
         /// <param name="doctor">医生</param>
-        private void HandleFreeze(Doctor doctor)
+        private void HandleDoctorFreeze(Doctor doctor)
         {
             if (doctor.IsFreeze)
             {
@@ -77,7 +95,7 @@ namespace OutpatientClinicDoctorModule
         /// 处理登录失败次数过多
         /// </summary>
         /// <param name="doctor">医生</param>
-        private void HandleLogInFailTooManyTimes(Doctor doctor)
+        private void HandleDoctorLoginFailTooManyTimes(Doctor doctor)
         {
             if (doctor.ErrorNumber >= this.MaxErrorNumber)
             {
@@ -89,7 +107,7 @@ namespace OutpatientClinicDoctorModule
         /// 处理登录失败
         /// </summary>
         /// <param name="doctor">医生</param>
-        private void HandleLogInFail(Doctor doctor)
+        private void HandleDoctorLoginFail(Doctor doctor)
         {
             doctor.ErrorNumber++;
             this.DoctorDal.Update(doctor);
@@ -99,13 +117,13 @@ namespace OutpatientClinicDoctorModule
         /// </summary>
         /// <param name="doctor">医生</param>
         /// <param name="password">密码</param>
-        private void HandlePasswordNotMatch(Doctor doctor, string password)
+        private void HandleDoctorPasswordNotMatch(Doctor doctor, string password)
         {
             bool isPasswordMatch = this.Md5Equal(doctor.Password, password);
             if (!isPasswordMatch)
             {
-                this.HandleLogInFail(doctor);
-                this.HandleLogInFailTooManyTimes(doctor);
+                this.HandleDoctorLoginFail(doctor);
+                this.HandleDoctorLoginFailTooManyTimes(doctor);
                 string errorMessage =
                     !doctor.IsFreeze ?
                     $"密码错误，请重新输入！\n您还有{this.MaxErrorNumber - doctor.ErrorNumber}次机会！"
@@ -114,10 +132,10 @@ namespace OutpatientClinicDoctorModule
             }
         }
         /// <summary>
-        /// 处理登录成功；
+        /// 处理登录成功
         /// </summary>
         /// <param name="doctor">医生</param>
-        private void HandleLogInOk(Doctor doctor)
+        private void HandleDoctorLoginOk(Doctor doctor)
         {
             if (doctor.ErrorNumber != 0)
             {
@@ -135,7 +153,7 @@ namespace OutpatientClinicDoctorModule
         public bool CheckExist(string no)
             => this.DoctorDal.SelectCount(no) == 1;
         /// <summary>
-        /// 检查工号是否不存在；
+        /// 检查工号是否不存在
         /// </summary>
         /// <param name="no">工号</param>
         /// <returns>是否不存在</returns>
@@ -153,10 +171,10 @@ namespace OutpatientClinicDoctorModule
             Doctor doctor = this.DoctorDal.Select(no);
             try
             {
-                this.HandleNotExist(doctor);
-                this.HandleFreeze(doctor);
-                this.HandlePasswordNotMatch(doctor, password);
-                this.HandleLogInOk(doctor);
+                this.HandleDoctorNotExist(doctor);
+                this.HandleDoctorFreeze(doctor);
+                this.HandleDoctorPasswordNotMatch(doctor, password);
+                this.HandleDoctorLoginOk(doctor);
             }
             catch (ApplicationException ex)
             {
@@ -180,8 +198,8 @@ namespace OutpatientClinicDoctorModule
             Doctor doctor = new Doctor()
             {
                 No = no,
+                Password = this.Encrypt(password),
                 Telephone = telephone,
-                Password = EnCrypt.Md5Encrypt(password),
                 IsFreeze = false
             };
             try
@@ -201,23 +219,13 @@ namespace OutpatientClinicDoctorModule
             return doctor;
         }
         /// <summary>
-        /// 检查电话号码格式是否正确
+        /// 构造函数
         /// </summary>
-        /// <param name="telephone"></param>
-        /// <returns></returns>
-        public bool CheckTelephone(string telephone)
+        public DoctorBll(string dbType)
         {
-            string pattern = "^1[34578]\\d{9}$"; // 正则表达式模式  
-            bool isValid = Regex.IsMatch(telephone, pattern);
-            return isValid;
+            this.DBType = dbType;
+            this.DoctorDal = DalFactory.Create(this.DBType);
         }
-        /// <summary>
-        /// 检查电话号码是否已被绑定
-        /// </summary>
-        /// <param name="telephone"></param>
-        /// <returns></returns>
-        public bool CheckExistTelephone(string telephone)
-             => this.DoctorDal.SelectCountTelephone(telephone) == 1;
         /// <summary>
         /// 检查密码格式是否正确
         /// </summary>
@@ -227,6 +235,17 @@ namespace OutpatientClinicDoctorModule
         {
             string pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*]).{8,20}$"; // 正则表达式模式  
             bool isValid = Regex.IsMatch(password, pattern);
+            return isValid;
+        }
+        /// <summary>
+        /// 验证身份证号格式是否正确
+        /// </summary>
+        /// <param name="iD"></param>
+        /// <returns></returns>
+        public bool CheckIDCardNo(string iD)
+        {
+            string pattern = "^\\d{18}$";
+            bool isValid = Regex.IsMatch(iD, pattern);
             return isValid;
         }
         /// <summary>
@@ -252,35 +271,22 @@ namespace OutpatientClinicDoctorModule
         public bool CheckExistQQEmail(string mail)
             => this.DoctorDal.SelectCountQQEmail(mail) == 1;
         /// <summary>
-        /// 重置密码
+        /// 检查电话号码格式是否正确
         /// </summary>
-        /// <param name="no"></param>
-        /// <param name="mail"></param>
-        public Doctor RetrievePassword(string no, string mail)
-        {
-            Doctor doctor = this.DoctorDal.Select(no);
-            if (doctor.QQEmail == mail)
-                return doctor;
-            else
-                return null;
-        }
-        /// <summary>
-        /// 验证身份证号格式是否正确
-        /// </summary>
-        /// <param name="iD"></param>
+        /// <param name="telephone"></param>
         /// <returns></returns>
-        public bool CheckIDCardNo(string iD)
+        public bool CheckTelephone(string telephone)
         {
-            string pattern = "^\\d{18}$";  
-            bool isValid = Regex.IsMatch(iD, pattern);
+            string pattern = "^1[34578]\\d{9}$"; // 正则表达式模式  
+            bool isValid = Regex.IsMatch(telephone, pattern);
             return isValid;
         }
         /// <summary>
-        /// 构造函数
+        /// 检查电话号码是否已被绑定
         /// </summary>
-        public DoctorBll()
-        {
-            this.DoctorDal = new DoctorDal();
-        }
+        /// <param name="telephone"></param>
+        /// <returns></returns>
+        public bool CheckExistTelephone(string telephone)
+             => this.DoctorDal.SelectCountTelephone(telephone) == 1;
     }
 }

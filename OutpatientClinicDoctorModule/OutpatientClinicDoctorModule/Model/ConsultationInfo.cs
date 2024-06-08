@@ -1,8 +1,5 @@
 ﻿namespace OutpatientClinicDoctorModule
 {
-    /// <summary>
-    /// 病历信息
-    /// </summary>
     public class ConsultationInfo
     {
         /// <summary>

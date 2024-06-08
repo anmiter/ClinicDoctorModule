@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Data;
 using System.Windows.Forms;
 
 namespace OutpatientClinicDoctorModule
@@ -10,13 +10,14 @@ namespace OutpatientClinicDoctorModule
     public partial class frm_SignUp : Form
     {
         /// <summary>
-		/// 医生
-		/// </summary>
-		private Doctor Doctor { get; set; }
+        /// 医生
+        /// </summary>
+        private Doctor Doctor { get; set; }
         /// <summary>
         /// 医生（业务逻辑层）
         /// </summary>
         private IDoctorBll DoctorBll { get; set; }
+        private string DBType;
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -25,7 +26,7 @@ namespace OutpatientClinicDoctorModule
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Doctor = new Doctor();
-            this.DoctorBll = new DoctorBll();
+            this.DoctorBll = new DoctorBll(this.DBType);
             this.txb_No.Validating += Txb_No_Validating;
             this.txb_Password.Validating += Txb_Password_Validating;
             this.txb_Telephone.Validating += Txb_Telephone_Validating;
@@ -37,7 +38,8 @@ namespace OutpatientClinicDoctorModule
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Txb_Telephone_Validating(object sender, CancelEventArgs e)
+        /// <exception cref="NotImplementedException"></exception>
+        private void Txb_Telephone_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string Telephone = this.txb_Telephone.Text;
             this.ErrorProvider.SetError(this.txb_Telephone, "");
@@ -47,19 +49,32 @@ namespace OutpatientClinicDoctorModule
                 this.ErrorProvider.SetError(this.txb_Telephone, "电话号码不能为空");
                 return;
             }
-            bool isValid = this.DoctorBll.CheckTelephone(Telephone);
-            if (!isValid)
-            {
-                this.ErrorProvider.SetError(this.txb_Telephone, $"电话号码格式不正确!");
-                return;
-            }
-            bool isExisting = this.DoctorBll.CheckExistTelephone(Telephone);
-            if (isExisting)
-            {
-                this.ErrorProvider.SetError(this.txb_Telephone, "该电话号码已被绑定");
-                return;
-            }
             this.ErrorProvider.SetError(this.txb_Telephone, "");
+        }
+        /// <summary>
+        /// 验证密码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void Txb_Password_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string password = this.txb_Password.Text;
+            this.ErrorProvider.SetError(this.txb_Password, "");
+            bool isEmpty = string.IsNullOrEmpty(password);
+            if (isEmpty)
+            {
+                this.ErrorProvider.SetError(this.txb_Password, "密码不能为空");
+                return;
+            }
+            bool IsVaild = this.DoctorBll.CheckPassword(password);
+            if (!IsVaild)
+            {
+                this.ErrorProvider.SetError
+                    (this.txb_Password, $"密码必须至少{this.DoctorBll.PasswordMinLength}个字符，最多{this.DoctorBll.PasswordMaxLength}个字符，并且至少一个大写字母，一个小写字母，一个数字和一个特殊字符！");
+                return;
+            }
+            this.ErrorProvider.SetError(this.txb_Password, "");
         }
         /// <summary>
         /// 验证工号
@@ -67,7 +82,7 @@ namespace OutpatientClinicDoctorModule
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <exception cref="NotImplementedException"></exception>
-        private void Txb_Password_Validating(object sender, CancelEventArgs e)
+        private void Txb_No_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             string No = this.txb_No.Text;
             this.ErrorProvider.SetError(this.txb_No, "");
@@ -90,33 +105,8 @@ namespace OutpatientClinicDoctorModule
                 this.ErrorProvider.SetError(this.txb_No, "工号已存在");
                 return;
             }
-            this.ErrorProvider.SetError(this.txb_No, "");
         }
-        /// <summary>
-        /// 验证密码
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        private void Txb_No_Validating(object sender, CancelEventArgs e)
-        {
-            string password = this.txb_Password.Text;
-            this.ErrorProvider.SetError(this.txb_Password, "");
-            bool isEmpty = string.IsNullOrEmpty(password);
-            if (isEmpty)
-            {
-                this.ErrorProvider.SetError(this.txb_Password, "密码不能为空");
-                return;
-            }
-            bool IsVaild = this.DoctorBll.CheckPassword(password);
-            if (!IsVaild)
-            {
-                this.ErrorProvider.SetError
-                    (this.txb_Password, $"密码必须至少{this.DoctorBll.PasswordMinLength}个字符，最多{this.DoctorBll.PasswordMaxLength}个字符，并且至少一个大写字母，一个小写字母，一个数字和一个特殊字符！");
-                return;
-            }
-            this.ErrorProvider.SetError(this.txb_Password, "");
-        }
+
         /// <summary>
         /// 点击注册按钮
         /// </summary>

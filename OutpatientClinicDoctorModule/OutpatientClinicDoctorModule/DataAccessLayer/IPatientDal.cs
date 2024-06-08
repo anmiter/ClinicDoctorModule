@@ -1,8 +1,5 @@
 ﻿namespace OutpatientClinicDoctorModule
 {
-    /// <summary>
-    /// 患者（数据访问层）接口
-    /// </summary>
     public interface IPatientDal
     {
         /// <summary>
