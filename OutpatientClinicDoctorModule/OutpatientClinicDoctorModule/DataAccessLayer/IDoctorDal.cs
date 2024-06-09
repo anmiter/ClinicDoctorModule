@@ -42,5 +42,12 @@
         /// <param name="telephone"></param>
         /// <returns></returns>
         int SelectCountTelephone(string telephone);
+        /// <summary>
+        /// 更新密码
+        /// </summary>
+        /// <param name="doctor"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        int UpdatePassword(Doctor doctor, byte[] password);
     }
 }

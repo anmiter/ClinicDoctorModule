@@ -95,5 +95,18 @@
         /// <param name="telephone"></param>
         /// <returns></returns>
         bool CheckExistTelephone(string telephone);
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <param name="no"></param>
+        /// <param name="mail"></param>
+        /// <returns></returns>
+        Doctor RetrievePassword(string no, string mail);
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        int ModifyPassword(Doctor doctor, string password);
     }
 }

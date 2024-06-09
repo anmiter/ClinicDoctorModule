@@ -111,7 +111,7 @@ namespace OutpatientClinicDoctorModule
             bool isEmpty = string.IsNullOrEmpty(ID);
             if (isEmpty)
             {
-                this.ErrorProvider.SetError(this.txb_IDCardNo, "身份证号不能为空");
+                this.ErrorProvider.SetError(this.txb_IDCardNo, "身份证号不能为空!");
                 return;
             }
             bool isValid = this.DoctorBll.CheckIDCardNo(ID);
@@ -210,7 +210,7 @@ namespace OutpatientClinicDoctorModule
         /// <param name="e"></param>
         private void btn_ModifyPassword_Click(object sender, EventArgs e)
         {
-            frm_ModifyPassword frm_ModifyPassword = new frm_ModifyPassword(this.Doctor);
+            frm_ModifyPassword frm_ModifyPassword = new frm_ModifyPassword(this.Doctor, this.DBType);
             frm_ModifyPassword.ShowDialog();
         }
         /// <summary>
@@ -223,9 +223,9 @@ namespace OutpatientClinicDoctorModule
             OpenFileDialog openPhotoDialog = new OpenFileDialog()
             {
                 Title = "打开照片文件"
-    ,
+                ,
                 Filter = "图像文件|*.bmp;*.jpg;*png;*gif"
-    ,
+                ,
                 InitialDirectory = GetFolderPath(SpecialFolder.MyPictures)
             };
             if (openPhotoDialog.ShowDialog() == DialogResult.OK)
@@ -256,7 +256,7 @@ namespace OutpatientClinicDoctorModule
             bool isEmpty = string.IsNullOrEmpty(QQEmail);
             if (isEmpty)
             {
-                this.ErrorProvider.SetError(this.txb_QQEmail, "QQ邮箱不能为空");
+                this.ErrorProvider.SetError(this.txb_QQEmail, "QQ邮箱不能为空!");
                 return;
             }
             bool isValid = this.DoctorBll.CheckQQEmail(QQEmail);
@@ -268,7 +268,7 @@ namespace OutpatientClinicDoctorModule
             bool isExisting = this.DoctorBll.CheckExistQQEmail(QQEmail);
             if (isExisting)
             {
-                this.ErrorProvider.SetError(this.txb_QQEmail, "该QQ邮箱已被绑定");
+                this.ErrorProvider.SetError(this.txb_QQEmail, "该QQ邮箱已被绑定!");
                 return;
             }
             this.ErrorProvider.SetError(this.txb_QQEmail, "");
@@ -296,7 +296,7 @@ namespace OutpatientClinicDoctorModule
             bool isEmpty = string.IsNullOrEmpty(Telephone);
             if (isEmpty)
             {
-                this.ErrorProvider.SetError(this.txb_Telephone, "电话号码不能为空");
+                this.ErrorProvider.SetError(this.txb_Telephone, "电话号码不能为空!");
                 return;
             }
             bool isValid = this.DoctorBll.CheckTelephone(Telephone);
@@ -308,7 +308,7 @@ namespace OutpatientClinicDoctorModule
             bool isExisting = this.DoctorBll.CheckExistTelephone(Telephone);
             if (isExisting)
             {
-                this.ErrorProvider.SetError(this.txb_Telephone, "该电话号码已被绑定");
+                this.ErrorProvider.SetError(this.txb_Telephone, "该电话号码已被绑定!");
                 return;
             }
             this.ErrorProvider.SetError(this.txb_Telephone, "");

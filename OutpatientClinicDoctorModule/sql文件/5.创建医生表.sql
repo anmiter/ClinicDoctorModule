@@ -40,6 +40,7 @@ CREATE TABLE tb_Doctor
 		VARCHAR(1500)
 	,Avatar
 		VARBINARY(MAX)
+		DEFAULT 0x
 	,ErrorNumber
 		INT
 		DEFAULT 0

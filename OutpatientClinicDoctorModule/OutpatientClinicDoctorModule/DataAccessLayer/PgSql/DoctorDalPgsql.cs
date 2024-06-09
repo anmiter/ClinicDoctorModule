@@ -51,8 +51,8 @@ namespace OutpatientClinicDoctorModule
                     TitleNo = dataReader["title_no"] == DBNull.Value ? 1 : (int)dataReader["title_no"],
                     Introduction = dataReader["introduction"] == DBNull.Value ? null : (string)dataReader["introduction"],
                     Avatar = dataReader["avatar"] == DBNull.Value ? null : (byte[])dataReader["avatar"],
-                    ErrorNumber = dataReader["error_number"] == DBNull.Value ? 1 : (int)dataReader["error_number"],
-                    IsFreeze = false
+                    ErrorNumber = dataReader["error_number"] == DBNull.Value ? 0 : (int)dataReader["error_number"],
+                    IsFreeze = dataReader["is_freeze"] == DBNull.Value ? false : (bool)dataReader["is_freeze"]
                 };
             }
             return doctor;
@@ -106,9 +106,9 @@ namespace OutpatientClinicDoctorModule
             {
                 rowAffected =
                     this.PgsqlHelper.NewCommand($@"INSERT INTO tb_doctor
-	                                                (no,password,telephone)
+	                                                (no,password,telephone,avatar)
 	                                                VALUES
-	                                                (:no,:password,:telephone)")
+	                                                (:no,:password,:telephone,''::BYTEA)")
                     .NewParameter(":no", doctor.No)
                     .NewParameter(":password", doctor.Password)
                     .NewParameter(":telephone", doctor.Telephone)
@@ -124,6 +124,20 @@ namespace OutpatientClinicDoctorModule
             }
             return rowAffected;
         }
+        /// <summary>
+        /// 更新密码
+        /// </summary>
+        /// <param name="doctor"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public int UpdatePassword(Doctor doctor, byte[] password)
+        => this.PgsqlHelper
+            .NewCommand($@"UPDATE tb_doctor
+	                            SET password=:password,
+	                            WHERE no=:no")
+            .NewParameter(":no", doctor.No)
+            .NewParameter(":password", doctor.Password)
+            .NonQuery();
         /// <summary>
         /// 查询QQ邮箱计数
         /// </summary>

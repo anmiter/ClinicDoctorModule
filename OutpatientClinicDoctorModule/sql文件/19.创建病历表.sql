@@ -29,7 +29,11 @@ CREATE TABLE tb_TreatRecord
 		VARCHAR(50)
 	,ExaminationsNo
 		VARCHAR(50)
-	,Price
+	,TCMPrice
+		DECIMAL(18,2)
+	,PrescriptionPrice
+		DECIMAL(18,2)
+	,ExaminationPrice
 		DECIMAL(18,2)
 	,IsPaid
 		BIT

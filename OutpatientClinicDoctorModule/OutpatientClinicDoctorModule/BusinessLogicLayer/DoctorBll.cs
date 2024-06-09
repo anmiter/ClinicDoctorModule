@@ -87,7 +87,7 @@ namespace OutpatientClinicDoctorModule
         {
             if (doctor.IsFreeze)
             {
-                string errorMessage = "工号已被冻结，需要邮箱验证！";
+                string errorMessage = "工号已被冻结，请求助管理员！";
                 throw new ApplicationException(errorMessage);
             }
         }
@@ -143,7 +143,7 @@ namespace OutpatientClinicDoctorModule
                 this.DoctorDal.Update(doctor);
             }
             this.HasLoggedIn = true;
-            this.Message = "登录成功。";
+            this.Message = "登录成功！";
         }
         /// <summary>
         /// 检查工号是否存在
@@ -206,7 +206,7 @@ namespace OutpatientClinicDoctorModule
             {
                 this.DoctorDal.Insert(doctor);
                 this.HasSignedUp = true;
-                this.Message = "注册成功。";
+                this.Message = "注册成功！";
             }
             catch (ApplicationException ex)
             {
@@ -218,6 +218,14 @@ namespace OutpatientClinicDoctorModule
             }
             return doctor;
         }
+        /// <summary>
+        /// 修改密码
+        /// </summary>
+        /// <param name="doctor"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public int ModifyPassword(Doctor doctor, string password)
+            => this.DoctorDal.UpdatePassword(doctor, this.Encrypt(password));
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -236,6 +244,19 @@ namespace OutpatientClinicDoctorModule
             string pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*]).{8,20}$"; // 正则表达式模式  
             bool isValid = Regex.IsMatch(password, pattern);
             return isValid;
+        }
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <param name="no"></param>
+        /// <param name="mail"></param>
+        public Doctor RetrievePassword(string no, string mail)
+        {
+            Doctor doctor = this.DoctorDal.Select(no);
+            if (doctor.QQEmail == mail)
+                return doctor;
+            else
+                return null;
         }
         /// <summary>
         /// 验证身份证号格式是否正确

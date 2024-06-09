@@ -38,7 +38,6 @@
             this.btn_ReadCard = new System.Windows.Forms.Button();
             this.btn_CallNumber = new System.Windows.Forms.Button();
             this.ptb_Avatar = new System.Windows.Forms.PictureBox();
-            this.btn_ModifyPrice = new System.Windows.Forms.Button();
             this.btn_TreatRecord = new System.Windows.Forms.Button();
             this.btn_Examination = new System.Windows.Forms.Button();
             this.btn_Prescription = new System.Windows.Forms.Button();
@@ -50,6 +49,7 @@
             this.lbl_DoctorNo1 = new System.Windows.Forms.Label();
             this.lbl_Name1 = new System.Windows.Forms.Label();
             this.lbl_No = new System.Windows.Forms.Label();
+            this.lbl_Tip = new System.Windows.Forms.Label();
             this.gpb_State.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_Avatar)).BeginInit();
             this.SuspendLayout();
@@ -114,7 +114,7 @@
             // btn_SearchPrice
             // 
             this.btn_SearchPrice.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.btn_SearchPrice.Location = new System.Drawing.Point(872, 631);
+            this.btn_SearchPrice.Location = new System.Drawing.Point(634, 622);
             this.btn_SearchPrice.Name = "btn_SearchPrice";
             this.btn_SearchPrice.Size = new System.Drawing.Size(169, 66);
             this.btn_SearchPrice.TabIndex = 201;
@@ -163,17 +163,6 @@
             this.ptb_Avatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ptb_Avatar.TabIndex = 197;
             this.ptb_Avatar.TabStop = false;
-            // 
-            // btn_ModifyPrice
-            // 
-            this.btn_ModifyPrice.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.btn_ModifyPrice.Location = new System.Drawing.Point(634, 631);
-            this.btn_ModifyPrice.Name = "btn_ModifyPrice";
-            this.btn_ModifyPrice.Size = new System.Drawing.Size(169, 66);
-            this.btn_ModifyPrice.TabIndex = 196;
-            this.btn_ModifyPrice.Text = "修改价目";
-            this.btn_ModifyPrice.UseVisualStyleBackColor = true;
-            this.btn_ModifyPrice.Click += new System.EventHandler(this.btn_ModifyPrice_Click);
             // 
             // btn_TreatRecord
             // 
@@ -287,11 +276,22 @@
             this.lbl_No.Size = new System.Drawing.Size(0, 39);
             this.lbl_No.TabIndex = 188;
             // 
+            // lbl_Tip
+            // 
+            this.lbl_Tip.AutoSize = true;
+            this.lbl_Tip.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.lbl_Tip.ForeColor = System.Drawing.Color.Red;
+            this.lbl_Tip.Location = new System.Drawing.Point(1199, 577);
+            this.lbl_Tip.Name = "lbl_Tip";
+            this.lbl_Tip.Size = new System.Drawing.Size(0, 27);
+            this.lbl_Tip.TabIndex = 204;
+            // 
             // frm_Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1428, 840);
+            this.Controls.Add(this.lbl_Tip);
             this.Controls.Add(this.btn_Sure);
             this.Controls.Add(this.gpb_State);
             this.Controls.Add(this.btn_SearchPrice);
@@ -299,7 +299,6 @@
             this.Controls.Add(this.btn_ReadCard);
             this.Controls.Add(this.btn_CallNumber);
             this.Controls.Add(this.ptb_Avatar);
-            this.Controls.Add(this.btn_ModifyPrice);
             this.Controls.Add(this.btn_TreatRecord);
             this.Controls.Add(this.btn_Examination);
             this.Controls.Add(this.btn_Prescription);
@@ -333,7 +332,6 @@
         private System.Windows.Forms.Button btn_ReadCard;
         private System.Windows.Forms.Button btn_CallNumber;
         private System.Windows.Forms.PictureBox ptb_Avatar;
-        private System.Windows.Forms.Button btn_ModifyPrice;
         private System.Windows.Forms.Button btn_TreatRecord;
         private System.Windows.Forms.Button btn_Examination;
         private System.Windows.Forms.Button btn_Prescription;
@@ -345,5 +343,6 @@
         private System.Windows.Forms.Label lbl_DoctorNo1;
         private System.Windows.Forms.Label lbl_Name1;
         private System.Windows.Forms.Label lbl_No;
+        private System.Windows.Forms.Label lbl_Tip;
     }
 }

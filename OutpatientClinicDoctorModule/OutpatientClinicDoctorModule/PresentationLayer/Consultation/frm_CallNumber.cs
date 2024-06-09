@@ -13,11 +13,11 @@ namespace OutpatientClinicDoctorModule
         /// <summary>
         /// 医生
         /// </summary>
-        Doctor Doctor { get; set; }
+        private Doctor Doctor { get; set; }
         /// <summary>
         /// 患者
         /// </summary>
-        Patient Patient { get; set; }
+        private Patient Patient { get; set; }
         /// <summary>
         /// 患者（业务逻辑层）
         /// </summary>
@@ -87,12 +87,17 @@ namespace OutpatientClinicDoctorModule
             }
             else
             {
-                this.SqlHelper.NewCommand($@"UPDATE tb_Queue SET StateNo=2 WHERE HealthCardNo=@HealthCardNo");
-                this.SqlHelper.NewParameter("@HealthCardNo", Patient.HealthCardNo);
+                this.SqlHelper.NewCommand($@"UPDATE tb_Queue SET StateNo=2
+                                                    WHERE DoctorNo=@DoctorNo
+                                                    AND HealthCardNo=@HealthCardNo
+                                                    AND Date=@Date");
+                this.SqlHelper.NewParameter("@DoctorNo", this.Doctor.No);
+                this.SqlHelper.NewParameter("@HealthCardNo", this.Patient.HealthCardNo);
+                this.SqlHelper.NewParameter("@Date", DateTime.Now.Date);
                 int rowAffected = this.SqlHelper.NonQuery();
                 if (rowAffected == 1)
                 {
-                    MessageBox.Show("叫号成功！");
+                    MessageBox.Show("叫号成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 this.KeyNo = this.PatientBll.KeyNo(this.Doctor, this.Patient);
                 frm_Home frm_Home = new frm_Home(this.Doctor, this.Patient, this.KeyNo);

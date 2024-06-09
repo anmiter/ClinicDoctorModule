@@ -114,7 +114,7 @@ namespace OutpatientClinicDoctorModule
         /// <param name="e"></param>
         private void btn_Register_Click(object sender, EventArgs e)
         {
-            frm_SignUp frm_SignUp = new frm_SignUp();
+            frm_SignUp frm_SignUp = new frm_SignUp(this.DBType);
             frm_SignUp.ShowDialog();
         }
         /// <summary>
@@ -134,7 +134,7 @@ namespace OutpatientClinicDoctorModule
                 this.txb_Password.SelectAll();
                 return;
             }
-            MessageBox.Show($"即将打开医生 {this.Doctor.No} 的主界面。");
+            MessageBox.Show($"即将打开医生 {this.Doctor.No} 的主界面！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             frm_Home frm_Home = new frm_Home(this.Doctor, this.DBType);
             frm_Home.ShowDialog();
         }
@@ -145,7 +145,8 @@ namespace OutpatientClinicDoctorModule
         /// <param name="e"></param>
         private void btn_RetrievePassword_Click(object sender, EventArgs e)
         {
-
+            frm_RetrievePassword frm_RetrievePassword = new frm_RetrievePassword(this.DBType);
+            frm_RetrievePassword.ShowDialog();
         }
     }
 }

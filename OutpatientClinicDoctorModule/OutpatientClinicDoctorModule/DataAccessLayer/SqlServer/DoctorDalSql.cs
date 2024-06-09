@@ -23,7 +23,7 @@ namespace OutpatientClinicDoctorModule
             .NewParameter("@No", no)
             .GetScalar<int>();
         /// <summary>
-        /// 查询用户；
+        /// 查询医生
         /// </summary>
         /// <param name="no">工号</param>
         /// <returns>医生</returns>
@@ -40,19 +40,19 @@ namespace OutpatientClinicDoctorModule
                 doctor = new Doctor()
                 {
                     No = no,
-                    Password = (byte[])dataReader["Password"],
-                    Name = (string)dataReader["Name"],
-                    Gender = (bool)dataReader["Gender"],
-                    Birthdate = (DateTime)dataReader["BirthDate"],
-                    IDCardNo = (string)dataReader["IDCardNo"],
-                    Telephone = (string)dataReader["Telephone"],
-                    QQEmail = (string)dataReader["QQEmail"],
-                    DepartmentNo = (int)dataReader["DepartmentNo"],
-                    TitleNo = (int)dataReader["TitleNo"],
-                    Introduction = (string)dataReader["Introduction"],
-                    Avatar = (byte[])dataReader["Avatar"],
-                    ErrorNumber = (int)dataReader["ErrorNumber"],
-                    IsFreeze = (bool)dataReader["IsFreeze"]
+                    Password = dataReader["Password"] == DBNull.Value ? null : (byte[])dataReader["Password"],
+                    Name = dataReader["Name"] == DBNull.Value ? null : (string)dataReader["Name"],
+                    Gender = dataReader["Gender"] == DBNull.Value ? default(bool) : (bool)dataReader["Gender"],
+                    Birthdate = dataReader["BirthDate"] == DBNull.Value ? DateTime.Now : (DateTime)dataReader["BirthDate"],
+                    IDCardNo = dataReader["IDCardNo"] == DBNull.Value ? null : (string)dataReader["IDCardNo"],
+                    Telephone = dataReader["Telephone"] == DBNull.Value ? null : (string)dataReader["Telephone"],
+                    QQEmail = dataReader["QQEmail"] == DBNull.Value ? null : (string)dataReader["QQEmail"],
+                    DepartmentNo = dataReader["DepartmentNo"] == DBNull.Value ? 1 : (int)dataReader["DepartmentNo"],
+                    TitleNo = dataReader["TitleNo"] == DBNull.Value ? 1 : (int)dataReader["TitleNo"],
+                    Introduction = dataReader["Introduction"] == DBNull.Value ? null : (string)dataReader["Introduction"],
+                    Avatar = dataReader["Avatar"] == DBNull.Value ? null : (byte[])dataReader["Avatar"],
+                    ErrorNumber = dataReader["ErrorNumber"] == DBNull.Value ? 0 : (int)dataReader["ErrorNumber"],
+                    IsFreeze = dataReader["IsFreeze"] == DBNull.Value ? false : (bool)dataReader["IsFreeze"]
                 };
             }
             return doctor;
@@ -126,6 +126,20 @@ namespace OutpatientClinicDoctorModule
             }
             return rowAffected;
         }
+        /// <summary>
+        /// 更新密码
+        /// </summary>
+        /// <param name="doctor"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public int UpdatePassword(Doctor doctor, byte[] password)
+            =>this.SqlHelper
+                .NewCommand($@"UPDATE tb_Doctor
+                                SET Password=@Password
+                                WHERE No=@No")
+                .NewParameter("@No", doctor.No)
+                .NewParameter("@Password", password)
+                .NonQuery();
         /// <summary>
         /// 查询QQ邮箱计数
         /// </summary>

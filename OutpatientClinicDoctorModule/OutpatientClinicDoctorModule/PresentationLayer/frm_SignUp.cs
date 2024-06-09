@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Windows.Forms;
 
 namespace OutpatientClinicDoctorModule
@@ -17,6 +16,9 @@ namespace OutpatientClinicDoctorModule
         /// 医生（业务逻辑层）
         /// </summary>
         private IDoctorBll DoctorBll { get; set; }
+        /// <summary>
+        /// 数据库类型
+        /// </summary>
         private string DBType;
         /// <summary>
         /// 构造函数
@@ -25,6 +27,14 @@ namespace OutpatientClinicDoctorModule
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+        }
+        /// <summary>
+        /// 传参
+        /// </summary>
+        /// <param name="dbType"></param>
+        public frm_SignUp(string dbType) : this()
+        {
+            this.DBType = dbType;
             this.Doctor = new Doctor();
             this.DoctorBll = new DoctorBll(this.DBType);
             this.txb_No.Validating += Txb_No_Validating;
@@ -46,7 +56,19 @@ namespace OutpatientClinicDoctorModule
             bool isEmpty = string.IsNullOrEmpty(Telephone);
             if (isEmpty)
             {
-                this.ErrorProvider.SetError(this.txb_Telephone, "电话号码不能为空");
+                this.ErrorProvider.SetError(this.txb_Telephone, "电话号码不能为空!");
+                return;
+            }
+            bool isValid = this.DoctorBll.CheckTelephone(Telephone);
+            if (!isValid)
+            {
+                this.ErrorProvider.SetError(this.txb_Telephone, $"电话号码格式不正确!");
+                return;
+            }
+            bool isExisting = this.DoctorBll.CheckExistTelephone(Telephone);
+            if (isExisting)
+            {
+                this.ErrorProvider.SetError(this.txb_Telephone, "该电话号码已被绑定!");
                 return;
             }
             this.ErrorProvider.SetError(this.txb_Telephone, "");
@@ -64,7 +86,7 @@ namespace OutpatientClinicDoctorModule
             bool isEmpty = string.IsNullOrEmpty(password);
             if (isEmpty)
             {
-                this.ErrorProvider.SetError(this.txb_Password, "密码不能为空");
+                this.ErrorProvider.SetError(this.txb_Password, "密码不能为空!");
                 return;
             }
             bool IsVaild = this.DoctorBll.CheckPassword(password);
@@ -89,7 +111,7 @@ namespace OutpatientClinicDoctorModule
             bool isEmpty = string.IsNullOrEmpty(No);
             if (isEmpty)
             {
-                this.ErrorProvider.SetError(this.txb_No, "工号不能为空");
+                this.ErrorProvider.SetError(this.txb_No, "工号不能为空!");
                 return;
             }
             bool isLengthValid = (No.Length == this.DoctorBll.NoLength);
@@ -102,11 +124,10 @@ namespace OutpatientClinicDoctorModule
             bool isExisting = this.DoctorBll.CheckExist(No);
             if (isExisting)
             {
-                this.ErrorProvider.SetError(this.txb_No, "工号已存在");
+                this.ErrorProvider.SetError(this.txb_No, "工号已存在!");
                 return;
             }
         }
-
         /// <summary>
         /// 点击注册按钮
         /// </summary>

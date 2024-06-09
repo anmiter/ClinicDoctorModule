@@ -38,8 +38,15 @@
             this.btn_SearchByName = new System.Windows.Forms.Button();
             this.txb_Name = new System.Windows.Forms.TextBox();
             this.btn_SearchByNo = new System.Windows.Forms.Button();
-            this.txb_No = new System.Windows.Forms.TextBox();
+            this.dgv_Examinations = new System.Windows.Forms.DataGridView();
+            this.btn_Remove = new System.Windows.Forms.Button();
+            this.btn_Add = new System.Windows.Forms.Button();
+            this.btn_Submit = new System.Windows.Forms.Button();
+            this.lbl_Price = new System.Windows.Forms.Label();
+            this.nud_No = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Examination)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Examinations)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_No)).BeginInit();
             this.SuspendLayout();
             // 
             // dgv_Examination
@@ -49,7 +56,7 @@
             this.dgv_Examination.Name = "dgv_Examination";
             this.dgv_Examination.RowHeadersWidth = 62;
             this.dgv_Examination.RowTemplate.Height = 30;
-            this.dgv_Examination.Size = new System.Drawing.Size(1428, 619);
+            this.dgv_Examination.Size = new System.Drawing.Size(630, 570);
             this.dgv_Examination.TabIndex = 39;
             // 
             // lbl_Tip
@@ -108,7 +115,7 @@
             // btn_Load
             // 
             this.btn_Load.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.btn_Load.Location = new System.Drawing.Point(1168, 690);
+            this.btn_Load.Location = new System.Drawing.Point(1168, 639);
             this.btn_Load.Name = "btn_Load";
             this.btn_Load.Size = new System.Drawing.Size(137, 58);
             this.btn_Load.TabIndex = 59;
@@ -147,20 +154,78 @@
             this.btn_SearchByNo.UseVisualStyleBackColor = true;
             this.btn_SearchByNo.Click += new System.EventHandler(this.btn_SearchByNo_Click);
             // 
-            // txb_No
+            // dgv_Examinations
             // 
-            this.txb_No.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txb_No.Location = new System.Drawing.Point(117, 658);
-            this.txb_No.Margin = new System.Windows.Forms.Padding(4);
-            this.txb_No.Name = "txb_No";
-            this.txb_No.Size = new System.Drawing.Size(272, 39);
-            this.txb_No.TabIndex = 55;
+            this.dgv_Examinations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Examinations.Location = new System.Drawing.Point(780, 0);
+            this.dgv_Examinations.Name = "dgv_Examinations";
+            this.dgv_Examinations.RowHeadersWidth = 62;
+            this.dgv_Examinations.RowTemplate.Height = 30;
+            this.dgv_Examinations.Size = new System.Drawing.Size(630, 570);
+            this.dgv_Examinations.TabIndex = 65;
+            // 
+            // btn_Remove
+            // 
+            this.btn_Remove.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btn_Remove.Location = new System.Drawing.Point(646, 377);
+            this.btn_Remove.Name = "btn_Remove";
+            this.btn_Remove.Size = new System.Drawing.Size(118, 49);
+            this.btn_Remove.TabIndex = 67;
+            this.btn_Remove.Text = "<<";
+            this.btn_Remove.UseVisualStyleBackColor = true;
+            this.btn_Remove.Click += new System.EventHandler(this.btn_Remove_Click);
+            // 
+            // btn_Add
+            // 
+            this.btn_Add.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btn_Add.Location = new System.Drawing.Point(646, 157);
+            this.btn_Add.Name = "btn_Add";
+            this.btn_Add.Size = new System.Drawing.Size(118, 49);
+            this.btn_Add.TabIndex = 66;
+            this.btn_Add.Text = ">>";
+            this.btn_Add.UseVisualStyleBackColor = true;
+            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
+            // 
+            // btn_Submit
+            // 
+            this.btn_Submit.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btn_Submit.Location = new System.Drawing.Point(1168, 724);
+            this.btn_Submit.Name = "btn_Submit";
+            this.btn_Submit.Size = new System.Drawing.Size(137, 58);
+            this.btn_Submit.TabIndex = 68;
+            this.btn_Submit.Text = "确定";
+            this.btn_Submit.UseVisualStyleBackColor = true;
+            this.btn_Submit.Click += new System.EventHandler(this.btn_Submit_Click);
+            // 
+            // lbl_Price
+            // 
+            this.lbl_Price.AutoSize = true;
+            this.lbl_Price.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lbl_Price.ForeColor = System.Drawing.Color.Red;
+            this.lbl_Price.Location = new System.Drawing.Point(784, 573);
+            this.lbl_Price.Name = "lbl_Price";
+            this.lbl_Price.Size = new System.Drawing.Size(0, 31);
+            this.lbl_Price.TabIndex = 69;
+            // 
+            // nud_No
+            // 
+            this.nud_No.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.nud_No.Location = new System.Drawing.Point(117, 659);
+            this.nud_No.Name = "nud_No";
+            this.nud_No.Size = new System.Drawing.Size(272, 39);
+            this.nud_No.TabIndex = 70;
             // 
             // frm_Examination
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1428, 840);
+            this.Controls.Add(this.nud_No);
+            this.Controls.Add(this.lbl_Price);
+            this.Controls.Add(this.btn_Submit);
+            this.Controls.Add(this.btn_Remove);
+            this.Controls.Add(this.btn_Add);
+            this.Controls.Add(this.dgv_Examinations);
             this.Controls.Add(this.lbl_Tip);
             this.Controls.Add(this.lbl_Pinyin);
             this.Controls.Add(this.txb_Pinyin);
@@ -170,11 +235,12 @@
             this.Controls.Add(this.btn_SearchByName);
             this.Controls.Add(this.txb_Name);
             this.Controls.Add(this.btn_SearchByNo);
-            this.Controls.Add(this.txb_No);
             this.Controls.Add(this.dgv_Examination);
             this.Name = "frm_Examination";
             this.Text = "检查项目";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Examination)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Examinations)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_No)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,6 +258,11 @@
         private System.Windows.Forms.Button btn_SearchByName;
         private System.Windows.Forms.TextBox txb_Name;
         private System.Windows.Forms.Button btn_SearchByNo;
-        private System.Windows.Forms.TextBox txb_No;
+        private System.Windows.Forms.DataGridView dgv_Examinations;
+        private System.Windows.Forms.Button btn_Remove;
+        private System.Windows.Forms.Button btn_Add;
+        private System.Windows.Forms.Button btn_Submit;
+        private System.Windows.Forms.Label lbl_Price;
+        private System.Windows.Forms.NumericUpDown nud_No;
     }
 }

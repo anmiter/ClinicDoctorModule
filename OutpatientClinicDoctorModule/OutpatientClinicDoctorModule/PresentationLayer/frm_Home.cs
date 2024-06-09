@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -31,6 +32,10 @@ namespace OutpatientClinicDoctorModule
         /// </summary>
         private bool IsReadCard;
         /// <summary>
+        /// SQL助手
+        /// </summary>
+        private SqlHelper SqlHelper { get; set; }
+        /// <summary>
         /// 构造函数
         /// </summary>
         public frm_Home()
@@ -47,9 +52,10 @@ namespace OutpatientClinicDoctorModule
         {
             this.Doctor = doctor;
             this.DBType = dbType;
+            this.SqlHelper = new SqlHelper();
             this.lbl_Name.Text = this.Doctor.Name;
             this.lbl_No.Text = this.Doctor.No;
-            if (this.Doctor.Telephone == null || this.Doctor.Name == null || this.Doctor.QQEmail == null || this.Doctor.IDCardNo == null || this.Doctor.Avatar == null)
+            if (this.Doctor.Telephone == null || this.Doctor.Name == null || this.Doctor.QQEmail == null || this.Doctor.IDCardNo == null || this.Doctor.Avatar.Length == 0)
             {
                 frm_PersonalCenter frm_PersonalCenter = new frm_PersonalCenter(this.Doctor, this.DBType);
                 MessageBox.Show("请完善个人信息！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -58,7 +64,7 @@ namespace OutpatientClinicDoctorModule
             if (Doctor.Avatar.Length != 0)
             {
                 byte[] photoBytes = Doctor.Avatar;
-                MemoryStream memoryStream = new MemoryStream(photoBytes);//内存流
+                MemoryStream memoryStream = new MemoryStream(photoBytes);
                 this.ptb_Avatar.Image = Image.FromStream(memoryStream);
             }
         }
@@ -70,6 +76,7 @@ namespace OutpatientClinicDoctorModule
         public frm_Home(Doctor doctor, Patient patient, string keyNo) : this()
         {
             this.Doctor = doctor;
+            this.SqlHelper = new SqlHelper();
             this.lbl_Name.Text = this.Doctor.Name;
             this.lbl_No.Text = this.Doctor.No;
             byte[] photoBytes = Doctor.Avatar;
@@ -109,7 +116,7 @@ namespace OutpatientClinicDoctorModule
             if (this.Patient != null)
             {
                 this.IsReadCard = true;
-                MessageBox.Show("读卡成功！");
+                MessageBox.Show("读卡成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
@@ -125,7 +132,7 @@ namespace OutpatientClinicDoctorModule
         {
             if (!this.IsReadCard)
             {
-                MessageBox.Show("请先读卡！");
+                MessageBox.Show("请先读卡！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
@@ -142,7 +149,7 @@ namespace OutpatientClinicDoctorModule
         {
             if (!this.IsReadCard)
             {
-                MessageBox.Show("请先读卡！");
+                MessageBox.Show("请先读卡！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
@@ -159,7 +166,7 @@ namespace OutpatientClinicDoctorModule
         {
             if (!this.IsReadCard)
             {
-                MessageBox.Show("请先读卡！");
+                MessageBox.Show("请先读卡！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
@@ -167,22 +174,71 @@ namespace OutpatientClinicDoctorModule
                 frm_Examination.ShowDialog();
             }
         }
-
+        /// <summary>
+        /// 单击病历按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_TreatRecord_Click(object sender, EventArgs e)
         {
-
+            if (!this.IsReadCard)
+            {
+                MessageBox.Show("请先读卡！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                frm_TreatRecord frm_TreatRecord = new frm_TreatRecord(this.Patient);
+                frm_TreatRecord.ShowDialog();
+            }
         }
-
+        /// <summary>
+        /// 单击确定按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_Sure_Click(object sender, EventArgs e)
         {
-
+            int rowAffected = 0;
+            int state = 0;
+            if (rdb_End.Checked)
+            {
+                state = 4;
+            }
+            else if (rdb_ExaminationWait.Checked)
+            {
+                state = 3;
+            }
+            else if (rdb_NotReaction.Checked)
+            {
+                state = 5;
+            }
+            else
+            {
+                MessageBox.Show("请选择就诊状态！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            this.SqlHelper.NewCommand($@"UPDATE tb_Queue SET StateNo=@StateNo
+                                                    WHERE DoctorNo=@DoctorNo
+                                                    AND HealthCardNo=@HealthCardNo
+                                                    AND Date=@Date");
+            this.SqlHelper.NewParameter("@StateNo", state);
+            this.SqlHelper.NewParameter("@DoctorNo", this.Doctor.No);
+            this.SqlHelper.NewParameter("@HealthCardNo", this.Patient.HealthCardNo);
+            this.SqlHelper.NewParameter("@Date", DateTime.Now.Date);
+            rowAffected = this.SqlHelper.NonQuery();
+            if (rowAffected == 1)
+            {
+                lbl_Tip.Text = "修改成功！";
+            }
+            else
+            {
+                lbl_Tip.Text = "修改失败！";
+            }
         }
-
-        private void btn_ModifyPrice_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_SearchPrice_Click(object sender, EventArgs e)
         {
 
