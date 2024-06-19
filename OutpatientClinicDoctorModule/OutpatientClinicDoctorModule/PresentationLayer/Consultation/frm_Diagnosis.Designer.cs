@@ -44,6 +44,7 @@
             this.lbl_No = new System.Windows.Forms.Label();
             this.ErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btn_Modify = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -182,11 +183,23 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // btn_Modify
+            // 
+            this.btn_Modify.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.btn_Modify.Location = new System.Drawing.Point(1206, 136);
+            this.btn_Modify.Name = "btn_Modify";
+            this.btn_Modify.Size = new System.Drawing.Size(113, 60);
+            this.btn_Modify.TabIndex = 224;
+            this.btn_Modify.Text = "修改";
+            this.btn_Modify.UseVisualStyleBackColor = true;
+            this.btn_Modify.Click += new System.EventHandler(this.btn_Modify_Click);
+            // 
             // frm_Diagnosis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1428, 840);
+            this.Controls.Add(this.btn_Modify);
             this.Controls.Add(this.btn_Load);
             this.Controls.Add(this.txb_No);
             this.Controls.Add(this.btn_Save);
@@ -226,5 +239,6 @@
         private System.Windows.Forms.Label lbl_No;
         private System.Windows.Forms.ErrorProvider ErrorProvider;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Button btn_Modify;
     }
 }

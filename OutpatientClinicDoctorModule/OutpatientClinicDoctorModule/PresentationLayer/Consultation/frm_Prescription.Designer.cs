@@ -45,6 +45,7 @@
             this.btn_SearchDrugByNo = new System.Windows.Forms.Button();
             this.dgv_Drug = new System.Windows.Forms.DataGridView();
             this.tp_Herb = new System.Windows.Forms.TabPage();
+            this.lbl_HerbPrice = new System.Windows.Forms.Label();
             this.nud_HerbNo = new System.Windows.Forms.NumericUpDown();
             this.btn_Submit = new System.Windows.Forms.Button();
             this.btn_RemoveHerb = new System.Windows.Forms.Button();
@@ -62,7 +63,6 @@
             this.dgv_Herb = new System.Windows.Forms.DataGridView();
             this.tc_Prescription = new System.Windows.Forms.TabControl();
             this.lbl_DrugPrice = new System.Windows.Forms.Label();
-            this.lbl_HerbPrice = new System.Windows.Forms.Label();
             this.tp_Drug.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_DrugNo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Prescription)).BeginInit();
@@ -281,6 +281,17 @@
             this.tp_Herb.TabIndex = 0;
             this.tp_Herb.Text = "药材";
             this.tp_Herb.UseVisualStyleBackColor = true;
+            this.tp_Herb.Click += new System.EventHandler(this.tp_Herb_Click);
+            // 
+            // lbl_HerbPrice
+            // 
+            this.lbl_HerbPrice.AutoSize = true;
+            this.lbl_HerbPrice.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lbl_HerbPrice.ForeColor = System.Drawing.Color.Red;
+            this.lbl_HerbPrice.Location = new System.Drawing.Point(785, 573);
+            this.lbl_HerbPrice.Name = "lbl_HerbPrice";
+            this.lbl_HerbPrice.Size = new System.Drawing.Size(0, 31);
+            this.lbl_HerbPrice.TabIndex = 74;
             // 
             // nud_HerbNo
             // 
@@ -458,16 +469,6 @@
             this.lbl_DrugPrice.Size = new System.Drawing.Size(0, 31);
             this.lbl_DrugPrice.TabIndex = 73;
             // 
-            // lbl_HerbPrice
-            // 
-            this.lbl_HerbPrice.AutoSize = true;
-            this.lbl_HerbPrice.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lbl_HerbPrice.ForeColor = System.Drawing.Color.Red;
-            this.lbl_HerbPrice.Location = new System.Drawing.Point(785, 573);
-            this.lbl_HerbPrice.Name = "lbl_HerbPrice";
-            this.lbl_HerbPrice.Size = new System.Drawing.Size(0, 31);
-            this.lbl_HerbPrice.TabIndex = 74;
-            // 
             // frm_Prescription
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -526,7 +527,7 @@
         private System.Windows.Forms.Button btn_Submit;
         private System.Windows.Forms.NumericUpDown nud_DrugNo;
         private System.Windows.Forms.NumericUpDown nud_HerbNo;
-        private System.Windows.Forms.Label lbl_DrugPrice;
         private System.Windows.Forms.Label lbl_HerbPrice;
+        private System.Windows.Forms.Label lbl_DrugPrice;
     }
 }

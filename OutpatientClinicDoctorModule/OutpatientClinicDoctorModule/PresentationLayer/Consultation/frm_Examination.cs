@@ -158,12 +158,15 @@ namespace OutpatientClinicDoctorModule
         public void LoadExamination()
         {
             SqlConnection sqlConnection = new SqlConnection();
-            sqlConnection.ConnectionString =
-                ConfigurationManager.ConnectionStrings["Sql"].ConnectionString;
+            sqlConnection.ConnectionString = ConfigurationManager.ConnectionStrings["Sql"].ConnectionString;
             SqlCommand sqlCommand = sqlConnection.CreateCommand();
             sqlCommand.Connection = sqlConnection;
             sqlCommand.CommandText = $@"SELECT E.No,E.Name,E.Price,T.Type,E.Introduction,E.Pinyin
-	                                        FROM tb_Examination AS E JOIN tb_ExaminationType AS T ON E.TypeNo=T.No";
+	                                        FROM tb_Examination AS E JOIN tb_ExaminationType AS T ON E.TypeNo=T.No
+	                                        WHERE E.No NOT IN
+		                                        (SELECT ExaminationNo FROM tb_Examinations
+			                                        WHERE No=@No)";
+            sqlCommand.Parameters.AddWithValue("@No", "3" + this.KeyNo);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
             sqlDataAdapter.SelectCommand = sqlCommand;
             DataTable ExaminationTable = new DataTable("ExaminationTable");
@@ -228,7 +231,9 @@ namespace OutpatientClinicDoctorModule
         {
             DataRowView selectedExamination = this.dgv_Examinations.CurrentRow.DataBoundItem as DataRowView;
             DataRow selectedExaminationRow = selectedExamination.Row;
-            DataRow deletedExaminationRow = this._ExaminationTable.Select($"No='{selectedExaminationRow["No"]}'", "", DataViewRowState.Deleted)[0];
+            int no = (int)selectedExaminationRow["No"];
+
+            DataRow deletedExaminationRow = this._ExaminationTable.Select($"No={no}", "", DataViewRowState.Deleted)[0];
             deletedExaminationRow.RejectChanges();
             this.ExaminationsTable.Rows.Remove(selectedExaminationRow);
             lbl_Price.Text = "总价为：" + this.ExaminationsTable.Compute("SUM(Price)", "").ToString();
@@ -241,8 +246,7 @@ namespace OutpatientClinicDoctorModule
         private void btn_Submit_Click(object sender, EventArgs e)
         {
             SqlConnection sqlConnection = new SqlConnection();
-            sqlConnection.ConnectionString =
-                ConfigurationManager.ConnectionStrings["Sql"].ConnectionString;
+            sqlConnection.ConnectionString = ConfigurationManager.ConnectionStrings["Sql"].ConnectionString;
             SqlCommand insertCommand = sqlConnection.CreateCommand();
             insertCommand.Connection = sqlConnection;
             insertCommand.CommandText = $@"INSERT INTO tb_Examinations
@@ -254,19 +258,27 @@ namespace OutpatientClinicDoctorModule
             insertCommand.Parameters.AddWithValue("@HealthCardNo", this.Patient.HealthCardNo);
             insertCommand.Parameters.AddWithValue("@Date", DateTime.Now);
             insertCommand.Parameters.Add("@ExaminationNo", SqlDbType.Char, 4, "No");
+            SqlCommand deleteCommand = new SqlCommand();
+            deleteCommand.Connection = sqlConnection;
+            deleteCommand.CommandText = $@"DELETE tb_Examinations WHERE No=@No AND ExaminationNo=@ExaminationNo";
+            deleteCommand.Parameters.AddWithValue("@No", "3" + this.KeyNo);
+            deleteCommand.Parameters.Add("@ExaminationNo", SqlDbType.Char, 4, "No");
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
             sqlDataAdapter.InsertCommand = insertCommand;
+            sqlDataAdapter.DeleteCommand = deleteCommand;
             sqlConnection.Open();
             int rowAffection = sqlDataAdapter.Update(this.ExaminationsTable);
             sqlConnection.Close();
             this.SqlHelper
             .NewCommand($@"UPDATE tb_TreatRecord
 	                            SET ExaminationPrice=@ExaminationPrice
+                                    ,ExaminationsNo=@ExaminationsNo
 	                            WHERE Date=@Date
 		                            AND HealthCardNo=@HealthCardNo
 		                            AND DoctorNo=@DoctorNo")
-            .NewParameter("@ExaminationPrice", this.ExaminationsTable.Compute("SUM(Price)", ""))
-            .NewParameter("@Date", DateTime.Now)
+            .NewParameter("@ExaminationPrice", this.lbl_Price.Text.Substring(4))
+            .NewParameter("@ExaminationsNo", "3" + this.KeyNo)
+            .NewParameter("@Date", DateTime.Now.Date)
             .NewParameter("@HealthCardNo", this.Patient.HealthCardNo)
             .NewParameter("@DoctorNo", this.Doctor.No)
             .NonQuery();

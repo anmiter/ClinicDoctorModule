@@ -235,13 +235,14 @@ namespace OutpatientClinicDoctorModule
             }
         }
         /// <summary>
-        /// 
+        /// 单击查询价目按钮
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btn_SearchPrice_Click(object sender, EventArgs e)
         {
-
+            frm_SearchPrice frm_SearchPrice = new frm_SearchPrice();
+            frm_SearchPrice.ShowDialog();
         }
         /// <summary>
         /// 单击退出登录按钮

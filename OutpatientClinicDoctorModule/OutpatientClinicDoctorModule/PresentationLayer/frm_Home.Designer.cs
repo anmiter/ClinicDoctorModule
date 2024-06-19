@@ -33,7 +33,6 @@
             this.rdb_ExaminationWait = new System.Windows.Forms.RadioButton();
             this.rdb_End = new System.Windows.Forms.RadioButton();
             this.rdb_NotReaction = new System.Windows.Forms.RadioButton();
-            this.btn_SearchPrice = new System.Windows.Forms.Button();
             this.btn_LogOut = new System.Windows.Forms.Button();
             this.btn_ReadCard = new System.Windows.Forms.Button();
             this.btn_CallNumber = new System.Windows.Forms.Button();
@@ -50,6 +49,7 @@
             this.lbl_Name1 = new System.Windows.Forms.Label();
             this.lbl_No = new System.Windows.Forms.Label();
             this.lbl_Tip = new System.Windows.Forms.Label();
+            this.btn_SearchPrice = new System.Windows.Forms.Button();
             this.gpb_State.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptb_Avatar)).BeginInit();
             this.SuspendLayout();
@@ -110,17 +110,6 @@
             this.rdb_NotReaction.TabStop = true;
             this.rdb_NotReaction.Text = "无应诊";
             this.rdb_NotReaction.UseVisualStyleBackColor = true;
-            // 
-            // btn_SearchPrice
-            // 
-            this.btn_SearchPrice.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.btn_SearchPrice.Location = new System.Drawing.Point(634, 622);
-            this.btn_SearchPrice.Name = "btn_SearchPrice";
-            this.btn_SearchPrice.Size = new System.Drawing.Size(169, 66);
-            this.btn_SearchPrice.TabIndex = 201;
-            this.btn_SearchPrice.Text = "查询价目";
-            this.btn_SearchPrice.UseVisualStyleBackColor = true;
-            this.btn_SearchPrice.Click += new System.EventHandler(this.btn_SearchPrice_Click);
             // 
             // btn_LogOut
             // 
@@ -286,6 +275,17 @@
             this.lbl_Tip.Size = new System.Drawing.Size(0, 27);
             this.lbl_Tip.TabIndex = 204;
             // 
+            // btn_SearchPrice
+            // 
+            this.btn_SearchPrice.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.btn_SearchPrice.Location = new System.Drawing.Point(634, 622);
+            this.btn_SearchPrice.Name = "btn_SearchPrice";
+            this.btn_SearchPrice.Size = new System.Drawing.Size(169, 66);
+            this.btn_SearchPrice.TabIndex = 201;
+            this.btn_SearchPrice.Text = "查询价目";
+            this.btn_SearchPrice.UseVisualStyleBackColor = true;
+            this.btn_SearchPrice.Click += new System.EventHandler(this.btn_SearchPrice_Click);
+            // 
             // frm_Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -327,7 +327,6 @@
         private System.Windows.Forms.RadioButton rdb_ExaminationWait;
         private System.Windows.Forms.RadioButton rdb_End;
         private System.Windows.Forms.RadioButton rdb_NotReaction;
-        private System.Windows.Forms.Button btn_SearchPrice;
         private System.Windows.Forms.Button btn_LogOut;
         private System.Windows.Forms.Button btn_ReadCard;
         private System.Windows.Forms.Button btn_CallNumber;
@@ -344,5 +343,6 @@
         private System.Windows.Forms.Label lbl_Name1;
         private System.Windows.Forms.Label lbl_No;
         private System.Windows.Forms.Label lbl_Tip;
+        private System.Windows.Forms.Button btn_SearchPrice;
     }
 }

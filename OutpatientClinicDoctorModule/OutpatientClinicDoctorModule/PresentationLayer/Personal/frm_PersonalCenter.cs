@@ -193,8 +193,12 @@ namespace OutpatientClinicDoctorModule
                 this.Doctor.TitleNo = (int)this.cmb_Title.SelectedValue;
                 this.Doctor.Introduction = this.txb_Introduction.Text.Trim();
                 this.Doctor.Avatar = photoBytes;
-                this.DoctorDal.Update(this.Doctor);
+                int result = this.DoctorDal.Update(this.Doctor);
+                if(result==1)
+                {
                 MessageBox.Show("更新成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                }
                 return;
             }
             else

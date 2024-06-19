@@ -39,12 +39,11 @@
             this.nud_Age = new System.Windows.Forms.NumericUpDown();
             this.txt_Doctor = new System.Windows.Forms.TextBox();
             this.lbl_Result = new System.Windows.Forms.Label();
-            this.txt_Discription = new System.Windows.Forms.TextBox();
-            this.lbl_Discription = new System.Windows.Forms.Label();
+            this.txt_Description = new System.Windows.Forms.TextBox();
+            this.lbl_Description = new System.Windows.Forms.Label();
             this.txt_Result = new System.Windows.Forms.TextBox();
             this.lbl_Doctor = new System.Windows.Forms.Label();
-            this.btn_SearchPrescription = new System.Windows.Forms.Button();
-            this.btn_SearchExaminations = new System.Windows.Forms.Button();
+            this.btn_Show = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Age)).BeginInit();
             this.SuspendLayout();
             // 
@@ -148,24 +147,24 @@
             this.lbl_Result.TabIndex = 276;
             this.lbl_Result.Text = "诊断结果：";
             // 
-            // txt_Discription
+            // txt_Description
             // 
-            this.txt_Discription.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txt_Discription.Location = new System.Drawing.Point(645, 351);
-            this.txt_Discription.Multiline = true;
-            this.txt_Discription.Name = "txt_Discription";
-            this.txt_Discription.Size = new System.Drawing.Size(745, 197);
-            this.txt_Discription.TabIndex = 275;
+            this.txt_Description.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.txt_Description.Location = new System.Drawing.Point(645, 351);
+            this.txt_Description.Multiline = true;
+            this.txt_Description.Name = "txt_Description";
+            this.txt_Description.Size = new System.Drawing.Size(745, 197);
+            this.txt_Description.TabIndex = 275;
             // 
-            // lbl_Discription
+            // lbl_Description
             // 
-            this.lbl_Discription.AutoSize = true;
-            this.lbl_Discription.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.lbl_Discription.Location = new System.Drawing.Point(505, 359);
-            this.lbl_Discription.Name = "lbl_Discription";
-            this.lbl_Discription.Size = new System.Drawing.Size(134, 31);
-            this.lbl_Discription.TabIndex = 274;
-            this.lbl_Discription.Text = "病情描述：";
+            this.lbl_Description.AutoSize = true;
+            this.lbl_Description.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lbl_Description.Location = new System.Drawing.Point(505, 359);
+            this.lbl_Description.Name = "lbl_Description";
+            this.lbl_Description.Size = new System.Drawing.Size(134, 31);
+            this.lbl_Description.TabIndex = 274;
+            this.lbl_Description.Text = "病情描述：";
             // 
             // txt_Result
             // 
@@ -186,40 +185,28 @@
             this.lbl_Doctor.TabIndex = 278;
             this.lbl_Doctor.Text = "医生：";
             // 
-            // btn_SearchPrescription
+            // btn_Show
             // 
-            this.btn_SearchPrescription.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.btn_SearchPrescription.Location = new System.Drawing.Point(1203, 250);
-            this.btn_SearchPrescription.Name = "btn_SearchPrescription";
-            this.btn_SearchPrescription.Size = new System.Drawing.Size(137, 55);
-            this.btn_SearchPrescription.TabIndex = 280;
-            this.btn_SearchPrescription.Text = "查看药方";
-            this.btn_SearchPrescription.UseVisualStyleBackColor = true;
-            this.btn_SearchPrescription.Click += new System.EventHandler(this.btn_SearchPrescription_Click);
-            // 
-            // btn_SearchExaminations
-            // 
-            this.btn_SearchExaminations.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.btn_SearchExaminations.Location = new System.Drawing.Point(929, 250);
-            this.btn_SearchExaminations.Name = "btn_SearchExaminations";
-            this.btn_SearchExaminations.Size = new System.Drawing.Size(191, 55);
-            this.btn_SearchExaminations.TabIndex = 281;
-            this.btn_SearchExaminations.Text = "查看检查项目";
-            this.btn_SearchExaminations.UseVisualStyleBackColor = true;
-            this.btn_SearchExaminations.Click += new System.EventHandler(this.btn_SearchExaminations_Click);
+            this.btn_Show.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.btn_Show.Location = new System.Drawing.Point(1010, 237);
+            this.btn_Show.Name = "btn_Show";
+            this.btn_Show.Size = new System.Drawing.Size(283, 55);
+            this.btn_Show.TabIndex = 282;
+            this.btn_Show.Text = "查看药方和检查项目";
+            this.btn_Show.UseVisualStyleBackColor = true;
+            this.btn_Show.Click += new System.EventHandler(this.btn_Show_Click);
             // 
             // frm_TreatRecord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1428, 840);
-            this.Controls.Add(this.btn_SearchExaminations);
-            this.Controls.Add(this.btn_SearchPrescription);
+            this.Controls.Add(this.btn_Show);
             this.Controls.Add(this.lbl_Doctor);
             this.Controls.Add(this.txt_Result);
             this.Controls.Add(this.lbl_Result);
-            this.Controls.Add(this.txt_Discription);
-            this.Controls.Add(this.lbl_Discription);
+            this.Controls.Add(this.txt_Description);
+            this.Controls.Add(this.lbl_Description);
             this.Controls.Add(this.txt_Doctor);
             this.Controls.Add(this.lbl_Age);
             this.Controls.Add(this.lbl_Birthdate);
@@ -252,11 +239,10 @@
         private System.Windows.Forms.NumericUpDown nud_Age;
         private System.Windows.Forms.TextBox txt_Doctor;
         private System.Windows.Forms.Label lbl_Result;
-        private System.Windows.Forms.TextBox txt_Discription;
-        private System.Windows.Forms.Label lbl_Discription;
+        private System.Windows.Forms.TextBox txt_Description;
+        private System.Windows.Forms.Label lbl_Description;
         private System.Windows.Forms.TextBox txt_Result;
         private System.Windows.Forms.Label lbl_Doctor;
-        private System.Windows.Forms.Button btn_SearchPrescription;
-        private System.Windows.Forms.Button btn_SearchExaminations;
+        private System.Windows.Forms.Button btn_Show;
     }
 }

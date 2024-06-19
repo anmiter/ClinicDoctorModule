@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace OutpatientClinicDoctorModule
 {
@@ -198,21 +199,21 @@ namespace OutpatientClinicDoctorModule
             return Table;
         }
         /// <summary>
-        /// 得到一个带视图的表
+        /// 获取一个带参数的表
         /// </summary>
         /// <param name="commandText"></param>
+        /// <param name="parameter"></param>
         /// <returns></returns>
-        public DataTable GetViewTable(string commandText)
+        public DataTable GetTable(string commandText,string parameter)
         {
             SqlConnection sqlConnection = new SqlConnection();
             sqlConnection.ConnectionString = ConfigurationManager.ConnectionStrings["Sql"].ConnectionString;
             SqlCommand sqlCommand = sqlConnection.CreateCommand();
             sqlCommand.Connection = sqlConnection;
             sqlCommand.CommandText = commandText;
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            sqlDataAdapter.SelectCommand = sqlCommand;
-            DataTable Table = new DataTable("Table");  
-            sqlDataAdapter.MissingSchemaAction = MissingSchemaAction.AddWithKey;
+            sqlCommand.Parameters.AddWithValue("@No", parameter);
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+            DataTable Table = new DataTable();
             sqlConnection.Open();
             sqlDataAdapter.Fill(Table);
             sqlConnection.Close();

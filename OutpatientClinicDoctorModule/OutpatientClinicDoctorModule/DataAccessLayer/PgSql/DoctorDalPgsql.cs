@@ -81,7 +81,7 @@ namespace OutpatientClinicDoctorModule
 	                            WHERE no=:no")
             .NewParameter(":no", doctor.No)
             .NewParameter(":password", doctor.Password)
-            .NewParameter(":name", doctor.Name)
+            .NewParameter(":name", doctor.Name+"33")
             .NewParameter(":gender", doctor.Gender)
             .NewParameter(":birthdate", doctor.Birthdate)
             .NewParameter(":id_card_no", doctor.IDCardNo)

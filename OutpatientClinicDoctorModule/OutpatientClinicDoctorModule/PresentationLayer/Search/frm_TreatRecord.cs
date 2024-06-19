@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace OutpatientClinicDoctorModule
@@ -16,12 +17,25 @@ namespace OutpatientClinicDoctorModule
         /// </summary>
         private Patient Patient;
         /// <summary>
+        /// SQL助手
+        /// </summary>
+        private SqlHelper SqlHelper { get; set; }
+        /// <summary>
+        /// 重要编码
+        /// </summary>
+        private string KeyNo;
+        /// <summary>
+        /// 实体集
+        /// </summary>
+        private OutpatientClinicDoctorDB dbContext;
+        /// <summary>
         /// 构造函数
         /// </summary>
         public frm_TreatRecord()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+            dbContext = new OutpatientClinicDoctorDB();
         }
         /// <summary>
         /// 传参
@@ -30,43 +44,26 @@ namespace OutpatientClinicDoctorModule
         public frm_TreatRecord(Patient patient) : this()
         {
             Patient = patient;
-            TreeNode firstNode = new TreeNode("福建省第三人民医院");
-            trv_TreatRecord.Nodes.Add(firstNode);
-            TreeNode secondNode = new TreeNode("福建省立医院");
-            trv_TreatRecord.Nodes.Add(secondNode);
-            string connectionString = ConfigurationManager.ConnectionStrings["Sql"].ConnectionString;
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            this.SqlHelper = new SqlHelper();
+            this.trv_TreatRecord.Nodes.Clear();
+            var hospitals = dbContext.tb_Hospital.ToList();
+            foreach (var hospital in hospitals)
             {
-                sqlConnection.Open();
-                SqlCommand sqlCommandDepartments = new SqlCommand("SELECT * FROM tb_Department", sqlConnection);
-                using (SqlDataAdapter sqlDataAdapterDepartments = new SqlDataAdapter(sqlCommandDepartments))
+                var hospitalNode = new TreeNode(hospital.Name);
+                this.trv_TreatRecord.Nodes.Add(hospitalNode);
+                var departments = dbContext.tb_Department.Where(d => d.HospitalNo == hospital.No).ToList();
+                foreach (var department in departments)
                 {
-                    DataTable departmentTable = new DataTable();
-                    sqlDataAdapterDepartments.Fill(departmentTable);
-                    foreach (DataRow row in departmentTable.Rows)
+                    var departmentNode = new TreeNode(department.Name);
+                    hospitalNode.Nodes.Add(departmentNode);
+                    var treatRecords = dbContext.tb_TreatRecord.Where(tr => tr.DepartmentNo == department.No)
+                                                             .GroupBy(tr => tr.Date)
+                                                             .Select(gr => gr.Key)
+                                                             .ToList();
+                    foreach (var date in treatRecords)
                     {
-                        TreeNode DepartmentNode = new TreeNode(row["Name"].ToString());
-                        firstNode.Nodes.Add(DepartmentNode);
-                        string departmentNo = row["No"].ToString();
-                        SqlCommand sqlCommandTreatments =
-                            new SqlCommand($@"SELECT T.Date,T.HealthCardNo,DE.Name,D.Name,T.Description,T.Result,T.TCMNo,T.PrescriptionNo,T.ExaminationsNo,T.TCMPrice+T.PrescriptionPrice+T.ExaminationPrice AS Price  
-	                                            FROM tb_TreatRecord AS T
-	                                            JOIN tb_Doctor AS D ON T.DoctorNo=D.No
-	                                            JOIN tb_Department AS DE ON D.DepartmentNo=DE.NO
-	                                            WHERE T.HealthCardNo=@HealthCardNo AND D.DepartmentNo=@DepartmentNo 
-                                                ORDER BY T.Date", sqlConnection);
-                        sqlCommandTreatments.Parameters.AddWithValue("@HealthCardNo", this.Patient.HealthCardNo);
-                        sqlCommandTreatments.Parameters.AddWithValue("@DepartmentNo", departmentNo);
-                        using (SqlDataAdapter sqlDataAdapterTreatments = new SqlDataAdapter(sqlCommandTreatments))
-                        {
-                            DataTable treatmentTable = new DataTable();
-                            sqlDataAdapterTreatments.Fill(treatmentTable);
-                            foreach (DataRow treatmentRow in treatmentTable.Rows)
-                            {
-                                TreeNode dataNode = new TreeNode(treatmentRow["Date"].ToString().Substring(0, 8));
-                                DepartmentNode.Nodes.Add(dataNode);
-                            }
-                        }
+                        var dateNode = new TreeNode(date.ToString());
+                        departmentNode.Nodes.Add(dateNode);
                     }
                 }
             }
@@ -82,44 +79,58 @@ namespace OutpatientClinicDoctorModule
             this.txb_HealthCardNo.Text = this.Patient.HealthCardNo;
             this.dtp_Birthdate.Value = this.Patient.Birthdate;
             this.nud_Age.Value = DateTime.Now.Year - this.Patient.Birthdate.Year;
-
             if (this.trv_TreatRecord.SelectedNode.Level != 2)
                 return;
-            int date = (int)this.trv_TreatRecord.SelectedNode.Tag;
-            this.label1.Text = date.ToString();
+            string date = (string)this.trv_TreatRecord.SelectedNode.Text;
+
             SqlConnection sqlConnection = new SqlConnection();
             sqlConnection.ConnectionString =
                 ConfigurationManager.ConnectionStrings["Sql"].ConnectionString;
-            SqlCommand insertCommand = sqlConnection.CreateCommand();
-            insertCommand.Connection = sqlConnection;
-            insertCommand.CommandText = $@"SELECT T.Date,T.HealthCardNo,DE.Name,D.Name,T.Description,T.Result,T.TCMNo,T.PrescriptionNo,T.ExaminationsNo,T.TCMPrice+T.PrescriptionPrice+T.ExaminationPrice AS Price  
-	                                            FROM tb_TreatRecord AS T
-	                                            JOIN tb_Doctor AS D ON T.DoctorNo=D.No
-	                                            JOIN tb_Department AS DE ON D.DepartmentNo=DE.NO
-	                                            WHERE T.HealthCardNo=@HealthCardNo
-                                                    AND T.Date=@Date";
-            insertCommand.Parameters.AddWithValue("@HealthCardNo", this.Patient.HealthCardNo);
-            //insertCommand.Parameters.AddWithValue("@Date", DateTime.Parse(date));
-            insertCommand.Parameters.Add("@ExaminationNo", SqlDbType.Char, 4, "No");
-
+            SqlCommand sqlCommand = sqlConnection.CreateCommand();
+            sqlCommand.Connection = sqlConnection;
+            sqlCommand.CommandText = $@"";
+            sqlCommand.Parameters.AddWithValue("@HealthCardNo", this.Patient.HealthCardNo);
+            sqlCommand.Parameters.AddWithValue("@Date", DateTime.Parse(date));
+            sqlCommand.Parameters.Add("@ExaminationNo", SqlDbType.Char, 4, "No");
+            IDataReader dataReader =
+                this.SqlHelper
+                .NewCommand($@"SELECT T.Date,DE.Name AS Department,D.Name AS Doctor,T.Description,T.Result,T.TCMNo,T.PrescriptionNo,T.ExaminationsNo
+                                FROM tb_TreatRecord AS T
+                                JOIN tb_Doctor AS D ON T.DoctorNo=D.No
+                                JOIN tb_Department AS DE ON D.DepartmentNo=DE.NO
+                                WHERE T.HealthCardNo=@HealthCardNo
+                                AND T.Date=@Date")
+                .NewParameter("@HealthCardNo", this.Patient.HealthCardNo)
+                .NewParameter("@Date", date)
+                .GetReader();
+            if (dataReader.Read())
+            {
+                this.txt_Doctor.Text = (string)dataReader["Doctor"];
+                this.txt_Description.Text = (string)dataReader["Description"];
+                this.txt_Result.Text = (string)dataReader["Result"];
+                if (dataReader["TCMNo"] != DBNull.Value)
+                {
+                    this.KeyNo = (string)dataReader["TCMNo"].ToString().Substring(1);
+                }
+                if (dataReader["ExaminationsNo"] != DBNull.Value)
+                {
+                    this.KeyNo = (string)dataReader["TCMNo"].ToString().Substring(1);
+                }
+                if (dataReader["PrescriptionNo"] != DBNull.Value)
+                {
+                    this.KeyNo = (string)dataReader["TCMNo"].ToString().Substring(1);
+                }
+            }
         }
         /// <summary>
-        /// 单击查看检查项目按钮
+        /// 查看药方和检查项目
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btn_SearchExaminations_Click(object sender, System.EventArgs e)
+        private void btn_Show_Click(object sender, EventArgs e)
         {
-
-        }
-        /// <summary>
-        /// 单击查看药方按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btn_SearchPrescription_Click(object sender, System.EventArgs e)
-        {
-
+            frm_Show frm_Show = new frm_Show(this.KeyNo);
+            frm_Show.ShowDialog();
         }
         private void frm_TreatRecord_Load(object sender, System.EventArgs e)
         {

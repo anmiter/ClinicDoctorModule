@@ -265,7 +265,11 @@ namespace OutpatientClinicDoctorModule
             SqlCommand sqlCommand = sqlConnection.CreateCommand();
             sqlCommand.Connection = sqlConnection;
             sqlCommand.CommandText = $@"SELECT H.No,H.Name,H.Price,T.Category,H.Pinyin,H.Efficacy 
-                                            FROM tb_Herb AS H JOIN tb_HerbCategory AS T ON H.CategoryNo=T.No";
+	                                        FROM tb_Herb AS H JOIN tb_HerbCategory AS T ON H.CategoryNo=T.No
+	                                        WHERE H.No NOT IN
+		                                        (SELECT HerbNo FROM tb_TCM
+			                                        WHERE No=@No)";
+            sqlCommand.Parameters.AddWithValue("@No", "1" + this.KeyNo);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
             sqlDataAdapter.SelectCommand = sqlCommand;
             DataTable HerbTable = new DataTable("HerbTable");
@@ -299,21 +303,24 @@ namespace OutpatientClinicDoctorModule
             this.dgv_TCM.Columns["Price"].HeaderText = "售价/g";
             this.dgv_TCM.Columns["Efficacy"].HeaderText = "功效";
             this.dgv_TCM.Columns["Total"].HeaderText = "价格";
-            lbl_HerbPrice.Text = "总价为：" + this.TCMTable.Compute("SUM(Total)", "").ToString();
         }
         /// <summary>
         /// 载入药品
         /// </summary>
         public void LoadDrug()
         {
+            DataTable unitTable = this.SqlHelper.GetTable("SELECT * FROM tb_Unit");
             SqlConnection sqlConnection = new SqlConnection();
             sqlConnection.ConnectionString =
                 ConfigurationManager.ConnectionStrings["Sql"].ConnectionString;
-
             SqlCommand sqlCommand = sqlConnection.CreateCommand();
             sqlCommand.Connection = sqlConnection;
             sqlCommand.CommandText = $@"SELECT D.No,D.ChineseName,D.Price,U.Name,D.Treat,D.Pinyin,D.EnglishName
-	                                        FROM tb_Drug AS D JOIN tb_Unit AS U ON D.UnitNo=U.No";
+	                                        FROM tb_Drug AS D JOIN tb_Unit AS U ON D.UnitNo=U.No
+	                                        WHERE D.No NOT IN
+		                                        (SELECT DrugNo FROM tb_Prescription
+			                                        WHERE No=@No)";
+            sqlCommand.Parameters.AddWithValue("@No", "2" + this.KeyNo);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
             sqlDataAdapter.SelectCommand = sqlCommand;
             DataTable DrugTable = new DataTable("DrugTable");
@@ -350,7 +357,17 @@ namespace OutpatientClinicDoctorModule
             this.dgv_Prescription.Columns["Price"].HeaderText = "售价";
             this.dgv_Prescription.Columns["Treat"].HeaderText = "主治";
             this.dgv_Prescription.Columns["Total"].HeaderText = "价格";
-            lbl_DrugPrice.Text = "总价为：" + this.PrescriptionTable.Compute("SUM(Total)", "").ToString();
+            DataGridViewComboBoxColumn unitColumn = new DataGridViewComboBoxColumn();
+            this.dgv_Prescription.Columns.Add(unitColumn);
+            unitColumn.Name = "Unit";
+            unitColumn.HeaderText = "单位";
+            unitColumn.DataSource = unitTable;
+            unitColumn.DisplayMember = "Name";
+            unitColumn.ValueMember = "No";
+            unitColumn.DisplayIndex = 4;
+            unitColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            this.dgv_Prescription.Columns[this.dgv_Prescription.Columns.Count - 2].AutoSizeMode =
+                DataGridViewAutoSizeColumnMode.Fill;
         }
         /// <summary>
         /// 单击选择药材按钮
@@ -374,7 +391,6 @@ namespace OutpatientClinicDoctorModule
             selectedHerbRow["Usage"] = DBNull.Value;
             currentHerbRow.Delete();
             this.TCMTable.Rows.Add(selectedHerbRow);
-            lbl_HerbPrice.Text = "总价为：" + this.TCMTable.Compute("SUM(Total)", "").ToString();
         }
         /// <summary>
         /// 单击移除药材按钮
@@ -388,7 +404,6 @@ namespace OutpatientClinicDoctorModule
             DataRow deletedHerbRow = this._HerbTable.Select($"No='{selectedHerbRow["No"]}'", "", DataViewRowState.Deleted)[0];
             deletedHerbRow.RejectChanges();
             this.TCMTable.Rows.Remove(selectedHerbRow);
-            lbl_HerbPrice.Text = "总价为：" + this.TCMTable.Compute("SUM(Total)", "").ToString();
         }
         /// <summary>
         /// 单击选择药品按钮
@@ -413,7 +428,6 @@ namespace OutpatientClinicDoctorModule
             selectedDrugRow["Treat"] = currentRowView["Treat"];
             currentDrugRow.Delete();
             this.PrescriptionTable.Rows.Add(selectedDrugRow);
-            lbl_DrugPrice.Text = "总价为：" + this.PrescriptionTable.Compute("SUM(Total)", "").ToString();
         }
         /// <summary>
         /// 单击移除药品按钮
@@ -427,7 +441,6 @@ namespace OutpatientClinicDoctorModule
             DataRow deletedDrugRow = this._DrugTable.Select($"No='{selectedDrugRow["No"]}'", "", DataViewRowState.Deleted)[0];
             deletedDrugRow.RejectChanges();
             this.PrescriptionTable.Rows.Remove(selectedDrugRow);
-            lbl_DrugPrice.Text = "总价为：" + this.PrescriptionTable.Compute("SUM(Total)", "").ToString();
         }
         /// <summary>
         /// 单击按钮提交中药药方
@@ -441,29 +454,62 @@ namespace OutpatientClinicDoctorModule
                 ConfigurationManager.ConnectionStrings["Sql"].ConnectionString;
             SqlCommand insertCommand = sqlConnection.CreateCommand();
             insertCommand.Connection = sqlConnection;
-            insertCommand.CommandText = $@"INSERT INTO tb_TCM
-	                                            (No,Date,HealthCardNo,DoctorNo,HerbNo,Usage)
-	                                            VALUES
-	                                            (@No,@Date,@HealthCardNo,@DoctorNo,@HerbNo,@Usage)";
+            insertCommand.CommandText = 
+                $@"INSERT INTO tb_TCM
+                        (No,Date,HealthCardNo,DoctorNo,HerbNo,Usage)
+                        VALUES
+                        (@No,@Date,@HealthCardNo,@DoctorNo,@HerbNo,@Usage)";
             insertCommand.Parameters.AddWithValue("@No", "1" + this.KeyNo);
             insertCommand.Parameters.AddWithValue("@Date", DateTime.Now);
             insertCommand.Parameters.AddWithValue("@HealthCardNo", this.Patient.HealthCardNo);
             insertCommand.Parameters.AddWithValue("@DoctorNo", this.Doctor.No);
             insertCommand.Parameters.Add("@HerbNo", SqlDbType.Char, 4, "No");
             insertCommand.Parameters.Add("@Usage", SqlDbType.Char, 4, "Usage");
+            SqlCommand updateCommand = new SqlCommand();
+            updateCommand.Connection = sqlConnection;
+            updateCommand.CommandText = $@"UPDATE tb_TCM
+	                                            SET HerbNo=@HerbNo
+		                                            ,Usage=@Usage
+	                                            WHERE No=@No
+		                                            AND HerbNo=@OldHerbNo";
+            updateCommand.Parameters.Add("@HerbNo", SqlDbType.Int, 4, "No");
+            updateCommand.Parameters.Add("@Usage", SqlDbType.Int, 4, "Usage");
+            updateCommand.Parameters.AddWithValue("@No", "1" + this.KeyNo);
+            updateCommand.Parameters.Add("@OldHerbNo", SqlDbType.Int, 4, "No");
+            updateCommand.Parameters["@OldHerbNo"].SourceVersion = DataRowVersion.Original;
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
             sqlDataAdapter.InsertCommand = insertCommand;
+            sqlDataAdapter.UpdateCommand = updateCommand;
             sqlConnection.Open();
             int rowAffection = sqlDataAdapter.Update(this.TCMTable);
             sqlConnection.Close();
+            decimal price = 0;
+            IDataReader dataReader =
+                this.SqlHelper
+                .NewCommand($@"SELECT * FROM
+			                            (SELECT No,SUM(Total) AS Total
+				                            FROM 
+				                            (SELECT T.No,T.Date,T.HealthCardNo,T.DoctorNo,H.Name,H.Price*T.Usage AS Total 
+					                            FROM tb_TCM AS T JOIN tb_Herb AS H ON T.HerbNo=H.No) AS T
+				                            GROUP BY T.No) AS T
+		                            WHERE T.No=@No")
+                .NewParameter("@No", "1" + this.KeyNo)
+                .GetReader();
+            if (dataReader.Read())
+            {
+                price = (decimal)dataReader["Total"];
+            }
+            this.lbl_HerbPrice.Text = "总价为：" + price.ToString();
             this.SqlHelper
             .NewCommand($@"UPDATE tb_TreatRecord
 	                            SET TCMPrice=@TCMPrice
+                                    ,TCMNo=@TCMNo
 	                            WHERE Date=@Date
 		                            AND HealthCardNo=@HealthCardNo
 		                            AND DoctorNo=@DoctorNo")
-            .NewParameter("@TCMPrice", this.TCMTable.Compute("SUM(Total)", ""))
-            .NewParameter("@Date", DateTime.Now)
+            .NewParameter("@TCMPrice", this.lbl_HerbPrice.Text.Substring(4))
+            .NewParameter("@TCMNo", "1" + this.KeyNo)
+            .NewParameter("@Date", DateTime.Now.Date)
             .NewParameter("@HealthCardNo", this.Patient.HealthCardNo)
             .NewParameter("@DoctorNo", this.Doctor.No)
             .NonQuery();
@@ -492,23 +538,62 @@ namespace OutpatientClinicDoctorModule
             insertCommand.Parameters.Add("@DrugNo", SqlDbType.Char, 4, "No");
             insertCommand.Parameters.Add("@Number", SqlDbType.Char, 4, "Number");
             insertCommand.Parameters.Add("@Usage", SqlDbType.Char, 4, "Usage");
+            SqlCommand updateCommand = new SqlCommand();
+            updateCommand.Connection = sqlConnection;
+            updateCommand.CommandText = $@"UPDATE tb_Prescription
+	                                            SET DrugNo=@DrugNo
+													,Number=@Number
+		                                            ,Usage=@Usage
+	                                            WHERE No=@No
+		                                            AND DrugNo=@OldDrugNo";
+            updateCommand.Parameters.Add("@DrugNo", SqlDbType.Char, 4, "No");
+            updateCommand.Parameters.Add("@Usage", SqlDbType.Char, 4, "Usage");
+            updateCommand.Parameters.Add("@Number", SqlDbType.Char, 4, "Number");
+            updateCommand.Parameters.AddWithValue("@No", "2" + this.KeyNo);
+            updateCommand.Parameters.Add("@OldDrugNo", SqlDbType.Char, 4, "No");
+            updateCommand.Parameters["@OldDrugNo"].SourceVersion = DataRowVersion.Original;
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
             sqlDataAdapter.InsertCommand = insertCommand;
+            sqlDataAdapter.UpdateCommand = updateCommand;
             sqlConnection.Open();
             int rowAffection = sqlDataAdapter.Update(this.PrescriptionTable);
             sqlConnection.Close();
+            decimal price = 0;
+            IDataReader dataReader =
+                this.SqlHelper
+                .NewCommand($@"SELECT * FROM
+			                            (SELECT No,SUM(Total) AS Total
+				                            FROM 
+				                            (SELECT P.No,P.Date,P.HealthCardNo,P.DoctorNo,D.ChineseName,D.Price*P.Number AS Total
+					                            FROM tb_Prescription AS P JOIN tb_Drug AS D ON P.DrugNo=D.No) AS T
+				                            GROUP BY T.No) AS T
+		                            WHERE T.No=@No")
+                .NewParameter("@No", "2" + this.KeyNo)
+                .GetReader();
+            if (dataReader.Read())
+            {
+                price = (decimal)dataReader["Total"];
+            }
+            this.lbl_DrugPrice.Text = "总价为：" + price.ToString();
             this.SqlHelper
             .NewCommand($@"UPDATE tb_TreatRecord
 	                            SET PrescriptionPrice=@PrescriptionPrice
+                                    ,PrescriptionNo=@PrescriptionNo
 	                            WHERE Date=@Date
 		                            AND HealthCardNo=@HealthCardNo
 		                            AND DoctorNo=@DoctorNo")
-            .NewParameter("@PrescriptionPrice", this.PrescriptionTable.Compute("SUM(Total)", ""))
-            .NewParameter("@Date", DateTime.Now)
+            .NewParameter("@PrescriptionPrice", price)
+            .NewParameter("@PrescriptionNo", "2" + this.KeyNo)
+            .NewParameter("@Date", DateTime.Now.Date)
             .NewParameter("@HealthCardNo", this.Patient.HealthCardNo)
             .NewParameter("@DoctorNo", this.Doctor.No)
             .NonQuery();
             MessageBox.Show($@"成功提交{rowAffection}个药品！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void tp_Herb_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

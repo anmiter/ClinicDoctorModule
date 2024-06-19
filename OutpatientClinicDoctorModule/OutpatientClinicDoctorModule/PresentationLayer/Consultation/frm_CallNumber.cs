@@ -35,6 +35,10 @@ namespace OutpatientClinicDoctorModule
         /// </summary>
         public string KeyNo { get; set; }
         /// <summary>
+        /// 当前号数
+        /// </summary>
+        private int CurrentNumber;
+        /// <summary>
         /// 构造函数
         /// </summary>
         public frm_CallNumber()
@@ -44,6 +48,38 @@ namespace OutpatientClinicDoctorModule
             this.dgv_Queue.AllowUserToAddRows = false;
             this.dgv_Queue.BackgroundColor = Color.White;
             this.dgv_Queue.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+        /// <summary>
+        /// 排号循序比大小
+        /// </summary>
+        /// <returns></returns>
+        private bool CompareSmall()
+        {
+            if (this.dgv_Queue.Columns.Contains("Number"))
+            {
+                int columnIndex = this.dgv_Queue.Columns["Number"].Index;  
+                foreach (DataGridViewRow row in this.dgv_Queue.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        object cellValue = row.Cells[columnIndex].Value;
+                        if (cellValue != null && cellValue is IComparable)
+                        {
+                            int cellIntValue = (int)cellValue; 
+                            if (cellIntValue < this.CurrentNumber)
+                            {
+                                row.Cells[columnIndex].Style.BackColor = Color.LightGreen;
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("指定的列不存在！");
+            }
+            return true;
         }
         /// <summary>
         /// 传参
@@ -61,7 +97,8 @@ namespace OutpatientClinicDoctorModule
 	                                                    JOIN tb_QueueState AS QS ON Q.StateNo=QS.No
 	                                                    WHERE Q.DoctorNo='1989001'
 	                                                    AND CAST(Q.Date AS DATE) = CAST(GETDATE() AS DATE)
-                                                        AND Q.StateNo=1");
+                                                        AND Q.StateNo=1
+														ORDER BY Q.Number");
             this.dgv_Queue.Columns.Clear();
             this.dgv_Queue.DataSource = this.QueueTable;
             this.dgv_Queue.Columns["DoctorNo"].Visible = false;
@@ -87,21 +124,28 @@ namespace OutpatientClinicDoctorModule
             }
             else
             {
-                this.SqlHelper.NewCommand($@"UPDATE tb_Queue SET StateNo=2
+                if (CompareSmall())
+                {
+                    this.SqlHelper.NewCommand($@"UPDATE tb_Queue SET StateNo=2
                                                     WHERE DoctorNo=@DoctorNo
                                                     AND HealthCardNo=@HealthCardNo
                                                     AND Date=@Date");
-                this.SqlHelper.NewParameter("@DoctorNo", this.Doctor.No);
-                this.SqlHelper.NewParameter("@HealthCardNo", this.Patient.HealthCardNo);
-                this.SqlHelper.NewParameter("@Date", DateTime.Now.Date);
-                int rowAffected = this.SqlHelper.NonQuery();
-                if (rowAffected == 1)
-                {
-                    MessageBox.Show("叫号成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.SqlHelper.NewParameter("@DoctorNo", this.Doctor.No);
+                    this.SqlHelper.NewParameter("@HealthCardNo", this.Patient.HealthCardNo);
+                    this.SqlHelper.NewParameter("@Date", DateTime.Now.Date);
+                    int rowAffected = this.SqlHelper.NonQuery();
+                    if (rowAffected == 1)
+                    {
+                        MessageBox.Show("叫号成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    this.KeyNo = this.PatientBll.KeyNo(this.Doctor, this.Patient);
+                    frm_Home frm_Home = new frm_Home(this.Doctor, this.Patient, this.KeyNo);
+                    frm_Home.ShowDialog();
                 }
-                this.KeyNo = this.PatientBll.KeyNo(this.Doctor, this.Patient);
-                frm_Home frm_Home = new frm_Home(this.Doctor, this.Patient, this.KeyNo);
-                frm_Home.ShowDialog();
+                else
+                {
+                    MessageBox.Show("要按顺序叫号！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
         /// <summary>
@@ -118,6 +162,7 @@ namespace OutpatientClinicDoctorModule
             DataRowView currentPatientRowView = this.dgv_Queue.CurrentRow.DataBoundItem as DataRowView;
             DataRow currentPatientRow = currentPatientRowView.Row;
             string HealthCardNo = currentPatientRow["HealthCardNo"].ToString();
+            CurrentNumber = (int)currentPatientRow["Number"];
             this.Patient = this.PatientBll.Select(HealthCardNo);
             if (this.Patient != null)
             {

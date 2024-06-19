@@ -34,10 +34,6 @@ namespace OutpatientClinicDoctorModule
         /// </summary>
         string KeyNo;
         /// <summary>
-        /// 输入是否符合要求
-        /// </summary>
-        private bool IsValid;
-        /// <summary>
         /// SQL助手
         /// </summary>
         private SqlHelper SqlHelper { get; set; }
@@ -57,11 +53,23 @@ namespace OutpatientClinicDoctorModule
             this.cmb_Department.DataSource = departmentTable;
             this.cmb_Department.DisplayMember = "Name";
             this.cmb_Department.ValueMember = "No";
+            this.cmb_Department.SelectedValue = this.Doctor.DepartmentNo;
             this.txb_No.Text = this.Doctor.No;
             this.txb_HealthCardNo.Text = this.Patient.HealthCardNo;
-            this.cmb_Department.SelectedItem = this.Doctor.DepartmentNo;
             this.txb_Description.Validating += Txb_Description_Validating;
             this.txb_Result.Validating += Txb_Result_Validating;
+            IDataReader dataReader =
+                this.SqlHelper
+                .NewCommand("SELECT * FROM tb_TreatRecord WHERE Date=@Date AND DoctorNo=@DoctorNo AND HealthCardNo=@HealthCardNo")
+                .NewParameter("@Date", DateTime.Now.Date)
+                .NewParameter("@HealthCardNo", Patient.HealthCardNo)
+                .NewParameter("@DoctorNo", Doctor.No)
+                .GetReader();
+            if (dataReader.Read())
+            {
+                this.txb_Description.Text = (string)dataReader["Description"];
+                this.txb_Result.Text = (string)dataReader["Result"];
+            }
         }
         /// <summary>
         /// 检查诊断结果
@@ -75,11 +83,9 @@ namespace OutpatientClinicDoctorModule
             if (this.txb_Result.Text.Length > 500)
             {
                 this.ErrorProvider.SetError(this.txb_Result, "字数不能大于500！");
-                this.IsValid = false;
                 return;
             }
             this.ErrorProvider.SetError(this.txb_Result, "");
-            this.IsValid = true;
         }
         /// <summary>
         /// 检查病情描述
@@ -93,11 +99,9 @@ namespace OutpatientClinicDoctorModule
             if (this.txb_Description.Text.Length > 500)
             {
                 this.ErrorProvider.SetError(this.txb_Description, "字数不能大于500！");
-                this.IsValid = false;
                 return;
             }
             this.ErrorProvider.SetError(this.txb_Description, "");
-            this.IsValid = true;
         }
         /// <summary>  
         /// 保存数据到文件（使用JSON格式）  
@@ -162,12 +166,14 @@ namespace OutpatientClinicDoctorModule
         private void btn_Submit_Click(object sender, EventArgs e)
         {
             this.SqlHelper.NewCommand($@"INSERT INTO tb_TreatRecord
-	                                        (Date,HealthCardNo,DoctorNo,Description,Result)
-	                                        VALUES
-	                                        (@Date,@HealthCardNo,@DoctorNo,@Description,@Result)");
-            this.SqlHelper.NewParameter("@Date", DateTime.Now);
+	                                            (No,Date,HealthCardNo,DoctorNo,DepartmentNo,Description,Result)
+	                                            VALUES
+	                                            (@No,@Date,@HealthCardNo,@DoctorNo,@DepartmentNo,@Description,@Result)");
+            this.SqlHelper.NewParameter("@No", this.KeyNo);
+            this.SqlHelper.NewParameter("@Date", DateTime.Now.Date);
             this.SqlHelper.NewParameter("@HealthCardNo", Patient.HealthCardNo);
             this.SqlHelper.NewParameter("@DoctorNo", Doctor.No);
+            this.SqlHelper.NewParameter("@DepartmentNo", this.Doctor.DepartmentNo);
             this.SqlHelper.NewParameter("@Description", this.txb_Description.Text.Trim());
             this.SqlHelper.NewParameter("@Result", this.txb_Result.Text.Trim());
             int rowAffected = this.SqlHelper.NonQuery();
@@ -178,6 +184,35 @@ namespace OutpatientClinicDoctorModule
             else
             {
                 MessageBox.Show("提交失败！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        /// <summary>
+        /// 单击修改按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_Modify_Click(object sender, EventArgs e)
+        {
+            this.SqlHelper.NewCommand($@"UPDATE tb_TreatRecord
+	                                            SET Description=@Description,
+		                                            Result=@Result
+	                                            WHERE
+		                                            Date=@Date
+		                                            AND DoctorNo=@DoctorNo
+		                                            AND HealthCardNo=@HealthCardNo");
+            this.SqlHelper.NewParameter("@Date", DateTime.Now.Date);
+            this.SqlHelper.NewParameter("@HealthCardNo", Patient.HealthCardNo);
+            this.SqlHelper.NewParameter("@DoctorNo", Doctor.No);
+            this.SqlHelper.NewParameter("@Description", this.txb_Description.Text.Trim());
+            this.SqlHelper.NewParameter("@Result", this.txb_Result.Text.Trim());
+            int rowAffected = this.SqlHelper.NonQuery();
+            if (rowAffected == 1)
+            {
+                MessageBox.Show("修改成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("修改失败！原因可能是病历还未提交。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
